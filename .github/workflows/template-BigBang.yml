@@ -12,6 +12,12 @@ on:
         managementGroupParameters:
             default: ./BigBang/parameters/managementGroups.bicepparam
             type: string
+        AzureIdentityMainBicep:
+            default: ./BigBang/bicep/main-identity.bicep
+            type: string
+        AzureIdentityParameters:
+            default: ./BigBang/parameters/identity.bicepparam
+            type: string
         deploymentName:
             default: bigBang
             type: string
@@ -75,3 +81,31 @@ jobs:
                --parameters environment=${{ inputs.environment }} \
                --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }} \
                --parameters managementSubscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
+
+        - name: init Azure identity
+          id: azureIdentity
+          uses: azure/cli@v1
+          with:
+            inlineScript: |
+              az account set --subscription ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
+
+              deployment=$(az stack sub create \
+                --name identity-${{ inputs.environment}} \
+                --location ${{  vars.AZURE_DEFAULT_LOCATION }}} \
+                --template-file ${{ inputs.AzureIdentityMainBicep }} \
+                --parameters ${{ inputs.AzureIdentityParameters }} \
+                --parameters environment=${{ inputs.environment }} \
+                --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --deny-settings-mode None \
+                --action-on-unmanage deleteAll \
+                --yes)
+
+              readOutputs=$(echo $deployment | jq '.outputs')
+              echo "Deployment Outputs: $readOutputs"
+              keyValuePairs=$(echo $readOutputs | jq -r 'to_entries[] | "\(.key)=\(.value.value)"')
+              IFS=$'\n'
+              for output in $keyValuePairs
+              do
+                echo $output
+                echo "$output" >> $GITHUB_ENV
+              done
