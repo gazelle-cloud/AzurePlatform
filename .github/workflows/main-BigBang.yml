@@ -27,7 +27,7 @@ jobs:
         github.ref != 'refs/heads/main'
     uses: ./.github/workflows/template-BigBang.yml
     with:
-      environment: test
+      environment: test-BigBang
     secrets: inherit
 
   prod:
@@ -35,5 +35,5 @@ jobs:
          github.event.pull_request.merged == true
     uses: ./.github/workflows/template-BigBang.yml
     with:
-      environment: prod
+      environment: prod-BigBang
     secrets: inherit
