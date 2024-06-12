@@ -1,6 +1,6 @@
 targetScope = 'subscription'
 
-param workloadName string
+param workloadName string = 'Identity'
 param environment string
 param location string
 

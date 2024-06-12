@@ -41,7 +41,7 @@ jobs:
                --role "Contributor" \
                --scope /subscriptions/${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
 
-        - name: init AzureIdentity
+        - name: config UserAssignedIdentity
           id: azureIdentity
           uses: azure/cli@v1
           with:
