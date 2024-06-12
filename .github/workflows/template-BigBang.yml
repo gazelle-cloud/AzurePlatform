@@ -91,7 +91,7 @@ jobs:
 
               deployment=$(az stack sub create \
                 --name identity-${{ inputs.environment}} \
-                --location ${{  vars.AZURE_DEFAULT_LOCATION }}} \
+                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.AzureIdentityMainBicep }} \
                 --parameters ${{ inputs.AzureIdentityParameters }} \
                 --parameters environment=${{ inputs.environment }} \
