@@ -126,4 +126,4 @@ jobs:
               gh variable set AzureIdentity_client_Id \
               --body ${{ env.azureIdentityClientId }} \
               --env ${{ inputs.environment }} \
-              -R gazelle-cloud/AzurePltform
+              -R gazelle-cloud/AzurePlatform
