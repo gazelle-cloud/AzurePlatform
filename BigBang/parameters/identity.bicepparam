@@ -6,7 +6,7 @@ param federatedCredentials = {
   AzureIdentity: {
     org: 'gazelle-cloud'
     repo: 'azurePlatform'
-    env: '${environment}-identity'
+    env: '${environment}-Identity'
   }
 }
 
