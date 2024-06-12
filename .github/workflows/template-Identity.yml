@@ -73,12 +73,12 @@ jobs:
             GH_TOKEN: ${{ steps.github-token.outputs.token }}
           run: |
               gh variable set Policy_client_Id \
-              --body ${{ env.PolicyClientId }} \
+              --body ${{ env.policyClientId }} \
               --env ${{ inputs.environment}}-Policy \
               -R gazelle-cloud/AzurePlatform
            
               gh variable set Landingzone_client_Id \
-              --body ${{ env.LandingzoneClientId }} \
+              --body ${{ env.landingzoneClientId }} \
               --env ${{ inputs.environment}}-Landingzone \
               -R gazelle-cloud/AzurePlatform
 
