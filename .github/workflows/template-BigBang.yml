@@ -114,7 +114,7 @@ jobs:
           uses: azure/cli@v1
           with:
             inlineScript: |
-              az role assignment create --assignee-object-id ${{ env.managementIdentityObjectId  }} \
+              az role assignment create --assignee-object-id ${{ env.azureIdentityObjectId  }} \
                 --role "Role Based Access Control Administrator" \
                 --assignee-principal-type ServicePrincipal \
                 --scope ${{ env.topLevelManagementGroupId }}
