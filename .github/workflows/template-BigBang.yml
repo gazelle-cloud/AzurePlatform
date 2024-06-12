@@ -3,14 +3,8 @@ name: template - big bang
 on:
   workflow_call:
     inputs:
-        topLevelManagementGroupName:
-            default: ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
-            type: string
         environment:
             required: true
-            type: string
-        location:
-            default: ${{ vars.AZURE_DEFAULT_LOCATION }}
             type: string
         managementGroupMainBicep:
             default: ./BigBang/bicep/main-managementGroups.bicep
@@ -23,7 +17,7 @@ on:
             type: string
 
 env:
-  topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME}}
+  topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
 
 jobs:
     bigBang:
@@ -70,8 +64,8 @@ jobs:
             inlineScript: |
               az deployment mg create \
                --name ${{ inputs.deploymentName }}-${{ inputs.environment}} \
-               --location ${{ inputs.location }} \
-               --management-group-id ${{ inputs.topLevelManagementGroupName }} \
+               --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                --template-file ${{ inputs.managementGroupMainBicep }} \
                --parameters ${{ inputs.managementGroupParameters }} \
                --parameters environment=${{ inputs.environment }} \
