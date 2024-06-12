@@ -127,3 +127,8 @@ jobs:
               --body ${{ env.azureIdentityClientId }} \
               --env ${{ inputs.environment}}-Identity \
               -R gazelle-cloud/AzurePlatform
+
+              gh variable set MANAGEMENT_SUBSCRIPTION_ID \
+              --body ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
+              --env ${{ inputs.environment}}-Identity \
+              -R gazelle-cloud/AzurePlatform
