@@ -90,7 +90,7 @@ jobs:
               az account set --subscription ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
 
               deployment=$(az stack sub create \
-                --name identity-${{ inputs.environment}} \
+                --name AzureIdentity-${{ inputs.environment}} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.AzureIdentityMainBicep }} \
                 --parameters ${{ inputs.AzureIdentityParameters }} \
