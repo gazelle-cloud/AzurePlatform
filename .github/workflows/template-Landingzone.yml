@@ -10,7 +10,7 @@ on:
 jobs:
     Langingzone:
         runs-on: ubuntu-latest
-        environment: ${{ inputs.environment }}-Langingzone
+        environment: ${{ inputs.environment }}-Landingzone
         steps:
         - name: Checkout
           uses: actions/checkout@v4
