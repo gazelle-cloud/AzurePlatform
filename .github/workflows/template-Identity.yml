@@ -6,6 +6,9 @@ on:
         environment:
             required: true
             type: string
+        mainBicep:
+            default: ./Identity/bicep/main-managementGroups.bicep
+            type: string
 
 jobs:
     Identity:
@@ -30,11 +33,52 @@ jobs:
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
-        - name: Azure bigBang RBAC
+        - name: AzureIdentity RBAC
           uses: azure/cli@v1
           with:
             inlineScript: |
                az role assignment create --assignee ${{ vars.AZUREIDENTITY_CLIENT_ID }} \
                --role "Contributor" \
                --scope /subscriptions/${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
+
+        - name: init AzureIdentity
+          id: azureIdentity
+          uses: azure/cli@v1
+          with:
+            inlineScript: |
+              az account set --subscription ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
+
+              deployment=$(az stack sub create \
+                --name identity-${{ inputs.environment}} \
+                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --template-file ${{ inputs.mainBicep }} \
+                --parameters environment=${{ inputs.environment }} \
+                --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --deny-settings-mode None \
+                --action-on-unmanage deleteAll \
+                --yes)
+
+              readOutputs=$(echo $deployment | jq '.outputs')
+              echo "Deployment Outputs: $readOutputs"
+              keyValuePairs=$(echo $readOutputs | jq -r 'to_entries[] | "\(.key)=\(.value.value)"')
+              IFS=$'\n'
+              for output in $keyValuePairs
+              do
+                echo $output
+                echo "$output" >> $GITHUB_ENV
+              done
+
+        - name: set env variables
+          env:
+            GH_TOKEN: ${{ steps.github-token.outputs.token }}
+          run: |
+              gh variable set Policy_client_Id \
+              --body ${{ env.PolicyClientId }} \
+              --env ${{ inputs.environment}}-Policy \
+              -R gazelle-cloud/AzurePlatform
+           
+              gh variable set Landingzone_client_Id \
+              --body ${{ env.LandingzoneClientId }} \
+              --env ${{ inputs.environment}}-Landingzone \
+              -R gazelle-cloud/AzurePlatform
 
