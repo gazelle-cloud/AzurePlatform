@@ -28,7 +28,7 @@ env:
 jobs:
     bigBang:
         runs-on: ubuntu-latest
-        environment: ${{ inputs.environment }}
+        environment: ${{ inputs.environment }}-BigBang
         steps:
         - name: Checkout
           uses: actions/checkout@v4
@@ -125,5 +125,5 @@ jobs:
           run: |
               gh variable set AzureIdentity_client_Id \
               --body ${{ env.azureIdentityClientId }} \
-              --env test-Identity \
+              --env ${{ inputs.environment}}-Identity \
               -R gazelle-cloud/AzurePlatform
