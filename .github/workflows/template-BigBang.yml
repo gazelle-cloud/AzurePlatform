@@ -58,6 +58,10 @@ jobs:
                --role "Azure Deployment Stack Owner" \
                --scope ${{ env.topLevelManagementGroupId }}
 
+               az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_OBJECT_ID }} \
+               --role "Contributor" \
+               --scope /subscriptions/${{ vars.MANAGEMENT_SUBSCRIPTION_ID  }}
+
         - name: management group hierarchy
           uses: azure/cli@v1
           with:
