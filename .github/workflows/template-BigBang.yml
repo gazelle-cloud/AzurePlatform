@@ -71,9 +71,9 @@ jobs:
               az deployment mg create \
                --name ${{ inputs.deploymentName }}-${{ inputs.environment}} \
                --location ${{ inputs.location }} \
-               --management-group-id ${{ inputs.topLevelManagementGroupName }} \
+               --management-group-id ${{ env.topLevelManagementGroupId }} \
                --template-file ${{ inputs.managementGroupMainBicep }} \
                --parameters ${{ inputs.managementGroupParameters }} \
                --parameters environment=${{ inputs.environment }} \
-               --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }} \
+               --parameters topLevelManagementGroupName=${{ inputs.topLevelManagementGroupName }} \
                --parameters managementSubscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
