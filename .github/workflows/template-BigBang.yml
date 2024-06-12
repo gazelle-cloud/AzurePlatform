@@ -82,7 +82,7 @@ jobs:
                --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }} \
                --parameters managementSubscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
 
-        - name: init Azure identity
+        - name: init AzureIdentity
           id: azureIdentity
           uses: azure/cli@v1
           with:
@@ -109,3 +109,21 @@ jobs:
                 echo $output
                 echo "$output" >> $GITHUB_ENV
               done
+
+        - name: AzureIdentity RBAC
+          uses: azure/cli@v1
+          with:
+            inlineScript: |
+              az role assignment create --assignee-object-id ${{ env.managementIdentityObjectId  }} \
+                --role "Role Based Access Control Administrator" \
+                --assignee-principal-type ServicePrincipal \
+                --scope ${{ env.topLevelManagementGroupId }}
+
+        - name: set env variables
+          env:
+            GH_TOKEN: ${{ steps.github-token.outputs.token }}
+          run: |
+              gh variable set AzureIdentity_client_Id \
+              --body ${{ env.azureIdentityClientId }} \
+              --env ${{ inputs.environment }} \
+              -R gazelle-cloud/AzurePltform

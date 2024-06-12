@@ -23,10 +23,10 @@ resource IdentityRG 'Microsoft.Resources/resourceGroups@2023-07-01' = {
 }
 
 module AzureIdentity 'br/public:avm/res/managed-identity/user-assigned-identity:0.2.1' = {
-  name: 'identity-${environment}'
+  name: 'AzureIdentity-${environment}'
   scope: IdentityRG
   params: {
-    name: 'id-${workloadName}-${environment}'
+    name: 'id-AzureIdentity-${environment}'
     federatedIdentityCredentials: federatedCredentialsLoop
   }
 }
