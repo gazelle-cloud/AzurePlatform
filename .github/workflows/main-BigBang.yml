@@ -6,6 +6,7 @@ on:
       - main
     paths:
         - 'BigBang/**'
+        - '.github/workflows/template-BigBang.yml'
 
   pull_request_target:
     types:
