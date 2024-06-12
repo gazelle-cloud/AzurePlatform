@@ -125,5 +125,5 @@ jobs:
           run: |
               gh variable set AzureIdentity_client_Id \
               --body ${{ env.azureIdentityClientId }} \
-              --env ${{ inputs.environment }}-Identity \
+              --env test-Identity \
               -R gazelle-cloud/AzurePlatform
