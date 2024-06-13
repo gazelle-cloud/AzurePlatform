@@ -43,7 +43,7 @@ jobs:
       - name: replace - landingzoneName
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "replaceMe-landingzoneName"
+          find: "replaceMe-lz-landingzoneName"
           replace: "${{ env.landingzoneName }}"
           exclude: "**/template-*"
 
@@ -57,14 +57,14 @@ jobs:
       - name: replace - managementGroupName
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "replaceMe-managementGroupName"
+          find: "replaceMe-lz-managementGroupName"
           replace: "${{ env.managementGroupName }}"
           exclude: "**/template-*"
 
       - name: replace - managementGroupSuffix
         uses: jacobtomlinson/gha-find-replace@v3
         with:
-          find: "replaceMe-managementGroupSuffix"
+          find: "replaceMe-lz-managementGroupSuffix"
           replace: "${{ env.managementGroupSuffix }}"
           exclude: "**/template-*"
 

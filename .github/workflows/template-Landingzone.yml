@@ -12,7 +12,7 @@ on:
         location:
             default: ${{ vars.AZURE_DEFAULT_LOCATION }}
             type: string
-        ReadOutputsMainBicep:
+        deploymentInputsMainBicep:
             default: ./Landingzone/bicep/readOutputs.bicep
             type: string
         mainBicep:
@@ -53,15 +53,15 @@ jobs:
                 echo "JSON content: $params"
                 
                 deployment=$(az deployment mg create \
-                --name outputsFromBicep \
+                --name generateInputs \
                 --management-group-id ${{ env.managementGroup }} \
                 --location ${{ inputs.location }} \
-                --template-file ${{ inputs.ReadOutputsMainBicep }} \
+                --template-file ${{ inputs.deploymentInputsMainBicep }} \
                 --parameters params=$params)
 
-                readOutputs=$(echo $deployment | jq '.properties.outputs')
-                echo "Deployment Outputs: $readOutputs"
-                keyValuePairs=$(echo $readOutputs | jq -r 'to_entries[] | "\(.key)=\(.value.value)"')
+                deploymentInputs=$(echo $deployment | jq '.properties.outputs')
+                echo "Deployment Outputs: $deploymentInputs"
+                keyValuePairs=$(echo $deploymentInputs | jq -r 'to_entries[] | "\(.key)=\(.value.value)"')
                 IFS=$'\n'
                 for output in $keyValuePairs
                 do

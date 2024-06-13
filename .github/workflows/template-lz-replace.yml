@@ -1,10 +1,10 @@
 
-name: replaceMe-landingzoneName
+name: replaceMe-lz-landingzoneName
 
 on:
   push:
     paths:
-      - 'Landingzone/parameters/replaceMe-landingzoneName.json'
+      - 'Landingzone/parameters/replaceMe-lz-landingzoneName.json'
 
   workflow_dispatch:
 
@@ -16,8 +16,8 @@ jobs:
   landingzone:
     uses: ./.github/workflows/template-Landingzone.yml
     with:
-      managementGroupName : replaceMe-managementGroupName
-      managementGroupSuffix: replaceMe-managementGroupSuffix
-      location: replaceMe-location
-      parameterFile: ./parameters/replaceMe-landingzoneName.json
+      managementGroupName : replaceMe-lz-managementGroupName
+      managementGroupSuffix: replaceMe-lz-managementGroupSuffix
+      location: replaceMe-lz-location
+      parameterFile: ./parameters/replaceMe-lz-landingzoneName.json
     secrets: inherit
