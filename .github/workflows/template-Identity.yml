@@ -50,7 +50,7 @@ jobs:
 
               deployment=$(az stack sub create \
                 --name identity-${{ inputs.environment}} \
-                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.mainBicep }} \
                 --parameters environment=${{ inputs.environment }} \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
@@ -79,6 +79,5 @@ jobs:
            
               gh variable set Landingzone_client_Id \
               --body ${{ env.landingzoneClientId }} \
-              --env ${{ inputs.environment}}-Landingzone \
               -R gazelle-cloud/AzurePlatform
 
