@@ -9,7 +9,7 @@ env:
 
 jobs:
   initLandingzone:
-    if: contains(github.event.issue.labels.*.name, 'newLandingzone')
+    if: (github.event.issue.labels.*.name =='newLandingzone' && github.event.issue.labels.*.name == 'newLandingzoneTest')
     runs-on: ubuntu-latest
     environment: ${{ contains(github.event.issue.labels.*.name, 'newLandingzoneTest') && 'test' || 'prod' }}-LandingZone
     steps:
