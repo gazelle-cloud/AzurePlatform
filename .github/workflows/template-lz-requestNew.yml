@@ -9,7 +9,7 @@ env:
 
 jobs:
   initLandingzone:
-    if: (github.event.issue.labels.*.name =='newLandingzone' && github.event.issue.labels.*.name == 'newLandingzoneTest')
+    if: contains(github.event.issue.labels.*.name, 'newLandingzone' )
     runs-on: ubuntu-latest
     environment: ${{ contains(github.event.issue.labels.*.name, 'newLandingzoneTest') && 'test' || 'prod' }}-LandingZone
     steps:
@@ -70,7 +70,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: "replaceMe-lz-managementGroupSuffix"
-          replace: "${{ env.managementGroupSuffix }}"
+          replace: "${{ env.environmentSuffix }}"
           exclude: "**/template-*"
 
       - name: push param file
