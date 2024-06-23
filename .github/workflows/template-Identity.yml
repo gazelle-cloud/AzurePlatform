@@ -74,10 +74,5 @@ jobs:
           run: |
               gh variable set Policy_client_Id \
               --body ${{ env.policyClientId }} \
-              --env ${{ inputs.environment}}-Policy \
-              -R gazelle-cloud/AzurePlatform
-           
-              gh variable set Landingzone_client_Id \
-              --body ${{ env.landingzoneClientId }} \
-              --env ${{ inputs.environment}}-Landingzone \
+              --env ${{ inputs.environment}}-Management \
               -R gazelle-cloud/AzurePlatform
