@@ -17,12 +17,10 @@ on:
   
   workflow_dispatch:
 
+
 permissions:
   id-token: write
   contents: read
-
-env:
-  mainBicep: ./Identity/bicep/main-identity.bicep
 
 jobs:
   test:
