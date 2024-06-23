@@ -13,7 +13,7 @@ on:
 jobs:
     Identity:
         runs-on: ubuntu-latest
-        environment: ${{ inputs.environment }}-Identity
+        environment: ${{ inputs.environment }}-BigBang
         steps:
         - name: Checkout
           uses: actions/checkout@v4
@@ -81,4 +81,3 @@ jobs:
               --body ${{ env.landingzoneClientId }} \
               --env ${{ inputs.environment}}-Landingzone \
               -R gazelle-cloud/AzurePlatform
-
