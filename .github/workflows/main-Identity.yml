@@ -21,6 +21,9 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  mainBicep: ./Identity/bicep/main-identity.bicep
+
 jobs:
   test:
     if: (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main') ||
