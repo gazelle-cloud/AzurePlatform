@@ -54,7 +54,7 @@ jobs:
               deployment=$(az stack mg create \
                 --name AzureIdentity-${{ inputs.environment}} \
                 --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
-                --management-group-id gazelle-test ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}-${{ inputs.environment}} \
+                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}-${{ inputs.environment}} \
                 --template-file ${{ inputs.mainBicep }} \
                 --parameters './Identity/parameters/AzureIdentity.bicepparam' \
                 --parameters subscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
