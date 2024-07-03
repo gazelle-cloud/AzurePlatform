@@ -14,8 +14,8 @@ on:
           type: string
 
 env:
-  topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ inputs.topLevelManagementGroupName }}-${{ inputs.environment }}
-
+  topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
+  
 jobs:
     Identity:
         runs-on: ubuntu-latest
