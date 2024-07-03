@@ -10,8 +10,9 @@ on:
             required: true
             type: string
         mainBicep:
-            default: ./Identity/bicep/AzureIdentity.bicep
-            type: string
+          default: ./Identity/bicep/AzureIdentity.bicep
+          type: string
+
 env:
   topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ inputs.topLevelManagementGroupName }}-${{ inputs.environment }}
 
@@ -58,6 +59,7 @@ jobs:
                 --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
                 --management-group-id ${{ env.topLevelManagementGroupId }} \
                 --template-file ${{ inputs.mainBicep }} \
+                --parameters './Identity/parameters/AzureIdentity.bicepparam' \
                 --parameters subscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
                 --parameters environment=${{ inputs.environment }} \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \

@@ -1,8 +1,9 @@
-using '../bicep/main-identity.bicep'
+using '../bicep/AzureIdentity.bicep'
 
 param location = 'francecentral'
 param environment = 'tst'
 param workloadName = 'identity'
+param subscriptionId = ''
 param identity = {
   alert: {
     federatedCredentials: {

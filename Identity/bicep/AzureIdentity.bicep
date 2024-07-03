@@ -3,7 +3,7 @@ targetScope = 'managementGroup'
 param workloadName string
 param environment string
 param location string
-param subscriptionId string = '7e88dc1f-a45d-47dc-b986-785db0fea339'
+param subscriptionId string
 param identity object
 
 var resourceGroupName = '${workloadName}-${environment}'
