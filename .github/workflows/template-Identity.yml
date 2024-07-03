@@ -3,9 +3,6 @@ name: template - Identity
 on:
   workflow_call:
     inputs:
-        topLevelManagementGroupName:
-          default: ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
-          type: string
         environment:
             required: true
             type: string
@@ -15,7 +12,7 @@ on:
 
 env:
   topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
-  
+
 jobs:
     Identity:
         runs-on: ubuntu-latest
@@ -57,7 +54,7 @@ jobs:
               deployment=$(az stack mg create \
                 --name AzureIdentity-${{ inputs.environment}} \
                 --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
-                --management-group-id ${{ env.topLevelManagementGroupId }} \
+                --management-group-id gazelle-test ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}-${{ inputs.environment}} \
                 --template-file ${{ inputs.mainBicep }} \
                 --parameters './Identity/parameters/AzureIdentity.bicepparam' \
                 --parameters subscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
