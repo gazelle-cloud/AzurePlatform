@@ -4,14 +4,11 @@ on:
   workflow_call:
     inputs:
         environment:
-            required: true
-            type: string
+          required: true
+          type: string
         mainBicep:
           default: ./Identity/bicep/AzureIdentity.bicep
           type: string
-
-env:
-  topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
 
 jobs:
     Identity:
@@ -54,7 +51,7 @@ jobs:
               deployment=$(az stack mg create \
                 --name AzureIdentity-${{ inputs.environment}} \
                 --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
-                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}-${{ inputs.environment}} \
+                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --template-file ${{ inputs.mainBicep }} \
                 --parameters './Identity/parameters/AzureIdentity.bicepparam' \
                 --parameters subscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
