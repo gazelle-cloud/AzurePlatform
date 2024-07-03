@@ -3,12 +3,17 @@ name: template - Identity
 on:
   workflow_call:
     inputs:
+        topLevelManagementGroupName:
+          default: ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
+          type: string
         environment:
             required: true
             type: string
         mainBicep:
-            default: ./Identity/bicep/main-identity.bicep
+            default: ./Identity/bicep/AzureIdentity.bicep
             type: string
+env:
+  topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ inputs.topLevelManagementGroupName }}-${{ inputs.environment }}
 
 jobs:
     Identity:
@@ -48,10 +53,12 @@ jobs:
             inlineScript: |
               az account set --subscription ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
 
-              deployment=$(az stack sub create \
-                --name identity-${{ inputs.environment}} \
+              deployment=$(az stack mg create \
+                --name AzureIdentity-${{ inputs.environment}} \
                 --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
+                --management-group-id ${{ env.topLevelManagementGroupId }} \
                 --template-file ${{ inputs.mainBicep }} \
+                --parameters subscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
                 --parameters environment=${{ inputs.environment }} \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --deny-settings-mode None \
