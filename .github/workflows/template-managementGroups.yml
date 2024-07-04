@@ -53,20 +53,16 @@ jobs:
           with:
             inlineScript: |
               az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_OBJECT_ID }} \
-               --role "Management Group Contributor" \
-               --scope ${{ env.topLevelManagementGroupId }}
-
-               az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_OBJECT_ID }} \
-               --role "Hierarchy Settings Administrator" \
-               --scope ${{ env.topLevelManagementGroupId }}
-
-               az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_OBJECT_ID }} \
-               --role "Azure Deployment Stack Owner" \
-               --scope ${{ env.topLevelManagementGroupId }}
-
-               az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_OBJECT_ID }} \
                --role "Contributor" \
-               --scope /subscriptions/${{ vars.MANAGEMENT_SUBSCRIPTION_ID  }}
+               --scope ${{ env.topLevelManagementGroupId }}
+
+               az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_OBJECT_ID }} \
+               --role "User Access Administrator" \
+               --scope ${{ env.topLevelManagementGroupId }}
+
+              #  az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_OBJECT_ID }} \
+              #  --role "Contributor" \
+              #  --scope /subscriptions/${{ vars.MANAGEMENT_SUBSCRIPTION_ID  }}
 
         - name: management group hierarchy
           uses: azure/cli@v1
@@ -82,53 +78,53 @@ jobs:
                --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }} \
                --parameters managementSubscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
 
-        - name: init AzureIdentity
-          id: azureIdentity
-          uses: azure/cli@v1
-          with:
-            inlineScript: |
-              az account set --subscription ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
+        # - name: init AzureIdentity
+        #   id: azureIdentity
+        #   uses: azure/cli@v1
+        #   with:
+        #     inlineScript: |
+        #       az account set --subscription ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
 
-              deployment=$(az stack sub create \
-                --name AzureIdentity-${{ inputs.environment}} \
-                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --template-file ${{ inputs.AzureIdentityMainBicep }} \
-                --parameters ${{ inputs.AzureIdentityParameters }} \
-                --parameters environment=${{ inputs.environment }} \
-                --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --deny-settings-mode None \
-                --action-on-unmanage deleteAll \
-                --yes)
+        #       deployment=$(az stack sub create \
+        #         --name AzureIdentity-${{ inputs.environment}} \
+        #         --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+        #         --template-file ${{ inputs.AzureIdentityMainBicep }} \
+        #         --parameters ${{ inputs.AzureIdentityParameters }} \
+        #         --parameters environment=${{ inputs.environment }} \
+        #         --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
+        #         --deny-settings-mode None \
+        #         --action-on-unmanage deleteAll \
+        #         --yes)
 
-              readOutputs=$(echo $deployment | jq '.outputs')
-              echo "Deployment Outputs: $readOutputs"
-              keyValuePairs=$(echo $readOutputs | jq -r 'to_entries[] | "\(.key)=\(.value.value)"')
-              IFS=$'\n'
-              for output in $keyValuePairs
-              do
-                echo $output
-                echo "$output" >> $GITHUB_ENV
-              done
+        #       readOutputs=$(echo $deployment | jq '.outputs')
+        #       echo "Deployment Outputs: $readOutputs"
+        #       keyValuePairs=$(echo $readOutputs | jq -r 'to_entries[] | "\(.key)=\(.value.value)"')
+        #       IFS=$'\n'
+        #       for output in $keyValuePairs
+        #       do
+        #         echo $output
+        #         echo "$output" >> $GITHUB_ENV
+        #       done
 
-        - name: AzureIdentity RBAC
-          uses: azure/cli@v1
-          with:
-            inlineScript: |
-              az role assignment create --assignee-object-id ${{ env.azureIdentityObjectId  }} \
-                --role "Role Based Access Control Administrator" \
-                --assignee-principal-type ServicePrincipal \
-                --scope ${{ env.topLevelManagementGroupId }}
+        # - name: AzureIdentity RBAC
+        #   uses: azure/cli@v1
+        #   with:
+        #     inlineScript: |
+        #       az role assignment create --assignee-object-id ${{ env.azureIdentityObjectId  }} \
+        #         --role "Role Based Access Control Administrator" \
+        #         --assignee-principal-type ServicePrincipal \
+        #         --scope ${{ env.topLevelManagementGroupId }}
 
-        - name: set env variables
-          env:
-            GH_TOKEN: ${{ steps.github-token.outputs.token }}
-          run: |
-              gh variable set AzureIdentity_client_Id \
-              --body ${{ env.azureIdentityClientId }} \
-              --env ${{ inputs.environment}}-Management \
-              -R gazelle-cloud/AzurePlatform
+        # - name: set env variables
+        #   env:
+        #     GH_TOKEN: ${{ steps.github-token.outputs.token }}
+        #   run: |
+        #       gh variable set AzureIdentity_client_Id \
+        #       --body ${{ env.azureIdentityClientId }} \
+        #       --env ${{ inputs.environment}}-Management \
+        #       -R gazelle-cloud/AzurePlatform
 
-              # gh variable set MANAGEMENT_SUBSCRIPTION_ID \
-              # --body ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
-              # --env ${{ inputs.environment}}-Identity \
-              # -R gazelle-cloud/AzurePlatform
+        #       # gh variable set MANAGEMENT_SUBSCRIPTION_ID \
+        #       # --body ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
+        #       # --env ${{ inputs.environment}}-Identity \
+        #       # -R gazelle-cloud/AzurePlatform
