@@ -61,14 +61,20 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --yes)
 
-              readOutputs=$(echo $deployment | jq '.outputs')
-              echo "Deployment Outputs: $readOutputs"
-              keyValuePairs=$(echo $readOutputs | jq -r 'to_entries[] | "\(.key)=\(.value.value)"')
-              IFS=$'\n'
-              for output in $keyValuePairs
-              do
-                echo $output
-                echo "$output" >> $GITHUB_ENV
+              envVariables=$(echo $deployment | jq '.gitHubEnviromentVariables.value')
+              # Iterate over each object in the array
+              for obj in $(echo "${envVariables}" | jq -r '.[] | @base64'); do
+                  # Decode the base64 object
+                  _jq() {
+                      echo ${obj} | base64 --decode | jq -r ${1}
+                  }
+              
+                  # Extract key-value pairs from the object
+                  for key in $(_jq 'keys_unsorted[]'); do
+                      value=$(_jq ".${key}")
+                      echo "${key}=${value}"
+                      echo "${key}=${value}" >> $GITHUB_ENV
+                  done
               done
 
         - name: set env variables
