@@ -64,18 +64,13 @@ jobs:
               envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
               echo "Deployment Outputs: $envVariables"
 
-              for obj in $(echo "${envVariables}" | jq -r '.[] | @base64'); do
-                  # Decode the base64 object
-                  _jq() {
-                      echo ${obj} | base64 --decode | jq -r ${1}
-                  }
-              
-                  # Extract key-value pairs from the object
-                  for key in $(_jq 'keys_unsorted[]'); do
-                      value=$(_jq ".${key}")
-                      echo "${key}=${value}"
-                      echo "${key}=${value}" >> $GITHUB_ENV
-                  done
+              objects=$(echo $envVariables | jq -c '.[]')
+              for obj in $objects; do
+                keys=$(echo $obj | jq -r 'keys[]')
+                for key in $keys; do
+                  value=$(echo $obj | jq --arg k "$key" -r '.[$k]')
+                  echo "$key=$value" >> $GITHUB_ENV
+                done
               done
 
         - name: set env variables
