@@ -72,7 +72,7 @@ jobs:
                   # Use gh variable set command to set the environment variable
                   gh variable set $key \
                     --body "$value" \
-                    --env "${{ inputs.environment }}-Management" \
+                    --env "${{ inputs.environment }}-management" \
                     -R gazelle-cloud/AzurePlatform
                 done
               done
