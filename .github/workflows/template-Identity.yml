@@ -61,7 +61,7 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --yes)
 
-              readOutputs=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables')
+              readOutputs=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
               echo "Deployment Outputs: $readOutputs"
 
         - name: set env variables
