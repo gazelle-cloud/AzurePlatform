@@ -41,7 +41,7 @@ jobs:
                --role "Contributor" \
                --scope /subscriptions/${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
 
-        - name: config UserAssignedIdentity
+        - name: AzureIdentity
           id: azureIdentity
           uses: azure/cli@v1
           with:
@@ -61,18 +61,8 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --yes)
 
-              envVariables=$(echo $deployment | jq '.Outputs.gitHubEnviromentVariables.value')
-              echo "Deployment Outputs: $envVariables"
-              for obj in $(echo "${envVariables}" | jq -r '.[] | @base64'); do
-                  _jq() {
-                      echo ${obj} | base64 --decode | jq -r ${1}
-                  }              
-                  for key in $(_jq 'keys_unsorted[]'); do
-                      value=$(_jq ".${key}")
-                      echo "${key}=${value}"
-                      echo "${key}=${value}" >> $GITHUB_ENV
-                  done
-              done
+              readOutputs=$(echo $deployment | jq '.outputs')
+              echo "Deployment Outputs: $readOutputs"
 
         - name: set env variables
           env:
