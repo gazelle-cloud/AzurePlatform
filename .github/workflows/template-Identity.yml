@@ -61,7 +61,7 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --yes)
 
-              envVariables=$(echo $deployment | jq '.gitHubEnviromentVariables.value')
+              envVariables=$(echo $deployment | jq '.Outputs.gitHubEnviromentVariables.value')
               echo "Deployment Outputs: $envVariables"
               for obj in $(echo "${envVariables}" | jq -r '.[] | @base64'); do
                   _jq() {
