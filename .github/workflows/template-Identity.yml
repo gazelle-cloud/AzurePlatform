@@ -64,23 +64,23 @@ jobs:
               envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
               echo "Deployment Outputs: $envVariables"
               echo "AzureIdentity=$(echo $envVariables | jq -c .)" >> $GITHUB_ENV
-
-              # objects=$(echo $envVariables | jq -c '.[]')
-              # for obj in $objects; do
-              #   keys=$(echo $obj | jq -r 'keys[]')
-              #   for key in $keys; do
-              #     value=$(echo $obj | jq --arg k "$key" -r '.[$k]')
-              #     echo "$key=$value" >> $GITHUB_ENV
-              #   done
-              # done
-              
+         
         - name: set env variables
           env:
             GH_TOKEN: ${{ steps.github-token.outputs.token }}
           run: |
               deploymentOutputs=$(echo $AzureIdentity | jq .)
               echo "Deployment Outputs: $deploymentOutputs"
-              # gh variable set Policy_client_Id \
-              # --body ${{ env.policyClientId }} \
-              # --env ${{ inputs.environment}}-Management \
-              # -R gazelle-cloud/AzurePlatform
+              
+              objects=$(echo $deploymentOutputs | jq -c '.[]')
+              for obj in $objects; do
+                keys=$(echo $obj | jq -r 'keys[]')
+                for key in $keys; do
+                  value=$(echo $obj | jq --arg k "$key" -r '.[$k]')
+                  # Use gh variable set command to set the environment variable
+                  gh variable set $key \
+                    --body "$value" \
+                    --env "${{ inputs.environment }}-Management" \
+                    -R gazelle-cloud/AzurePlatform
+                done
+              done
