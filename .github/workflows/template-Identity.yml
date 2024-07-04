@@ -33,14 +33,6 @@ jobs:
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
-        - name: AzureIdentity RBAC
-          uses: azure/cli@v1
-          with:
-            inlineScript: |
-               az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_CLIENT_ID }} \
-               --role "Contributor" \
-               --scope /subscriptions/${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
-
         - name: AzureIdentity
           id: azureIdentity
           uses: azure/cli@v1
