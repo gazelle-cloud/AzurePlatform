@@ -44,6 +44,8 @@ jobs:
         - name: AzureIdentity
           id: azureIdentity
           uses: azure/cli@v1
+          env:
+            GH_TOKEN: ${{ steps.github-token.outputs.token }}
           with:
             inlineScript: |
               az account set --subscription ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
@@ -69,15 +71,10 @@ jobs:
                 keys=$(echo $obj | jq -r 'keys[]')
                 for key in $keys; do
                   value=$(echo $obj | jq --arg k "$key" -r '.[$k]')
-                  echo "$key=$value" >> $GITHUB_ENV
+                  # Use gh variable set command to create an environment variable
+                  gh variable set $key \
+                  --body "$value" \
+                  --env "${{ inputs.environment }}-Management" \
+                  -R gazelle-cloud/AzurePlatform
                 done
               done
-
-        - name: set env variables
-          env:
-            GH_TOKEN: ${{ steps.github-token.outputs.token }}
-          run: |
-              gh variable set Policy_client_Id \
-              --body ${{ env.policyClientId }} \
-              --env ${{ inputs.environment}}-Management \
-              -R gazelle-cloud/AzurePlatform
