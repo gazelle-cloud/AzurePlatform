@@ -1,4 +1,4 @@
-name: template - big bang
+name: template - managementGroups
 
 on:
   workflow_call:
@@ -56,9 +56,9 @@ jobs:
                --role "Contributor" \
                --scope ${{ env.topLevelManagementGroupId }}
 
-               az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_OBJECT_ID }} \
-               --role "User Access Administrator" \
-               --scope ${{ env.topLevelManagementGroupId }}
+              #  az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_OBJECT_ID }} \
+              #  --role "User Access Administrator" \
+              #  --scope ${{ env.topLevelManagementGroupId }}
 
               #  az role assignment create --assignee ${{ vars.APP_AZURE_BIGBANG_OBJECT_ID }} \
               #  --role "Contributor" \

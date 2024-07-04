@@ -1,4 +1,4 @@
-name: az - BigBang
+name: az - managementGroups
 
 on:
   push:
