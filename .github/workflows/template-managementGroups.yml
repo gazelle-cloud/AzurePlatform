@@ -20,7 +20,7 @@ env:
   topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
 
 jobs:
-    init:
+    managementGroups:
         runs-on: ubuntu-latest
         environment: ${{ inputs.environment }}-azurePlatform
         steps:
