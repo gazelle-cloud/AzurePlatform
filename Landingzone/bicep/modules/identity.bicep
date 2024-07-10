@@ -36,8 +36,8 @@ module rbacAdmin 'roleAssignments.bicep' = {
   params: {
     principalId: identity.outputs.principalId
     rbacId: [
-      '/providers/Microsoft.Authorization/roleDefinitions/f58310d9-a9f6-439a-9e8d-f62e7b41a168'
       '/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c'
+      '/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9'
     ]
   }
 }

@@ -14,7 +14,7 @@ var resourceTags = {
 }
 
 module identity 'modules/identity.bicep' = {
-  name: 'lz-identity-${subscriptionId}'
+  name: 'lz-serviceConnectionIdentity'
   scope: subscription(subscriptionId)
   params: {
     labName: params.labName
@@ -27,7 +27,7 @@ module identity 'modules/identity.bicep' = {
 
 module tags 'modules/policyAssignment.bicep' = [
   for item in items(resourceTags): {
-    name: 'tag-${item.key}'
+    name: 'lz-tag-${item.key}'
     scope: subscription(subscriptionId)
     params: {
       name: 'tag-${item.key}'
