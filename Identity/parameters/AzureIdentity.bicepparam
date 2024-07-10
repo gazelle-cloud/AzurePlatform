@@ -7,7 +7,6 @@ param subscriptionId = ''
 param identity = {
   policy: {
     federatedCredentials: {}
-    RBAC: {}
   }
   // landingzone: {
   //   federatedCredentials: {
