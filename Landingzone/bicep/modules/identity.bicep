@@ -42,14 +42,6 @@ module rbacAdmin 'roleAssignments.bicep' = {
   }
 }
 
-// = {
-//   name: 'rbac-administrator-£'
-//   params: {
-//     principalId: identity.outputs.principalId
-//     rbacId: '/providers/Microsoft.Authorization/roleDefinitions/f58310d9-a9f6-439a-9e8d-f62e7b41a168'
-//   }
-// }
-
 output clientId string = identity.outputs.clientId
 output principalId string = identity.outputs.principalId
 output resourceId string = identity.outputs.resourceId

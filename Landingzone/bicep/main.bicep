@@ -34,6 +34,7 @@ module tagsOnSubscription 'br/public:avm/ptn/authorization/policy-assignment:0.1
       location: params.location
       policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/61a4d60b-7326-440e-8051-9f94394d4dd1'
       userAssignedIdentityId: identity.outputs.resourceId
+      subscriptionId: subscriptionId
       parameters: {
         tagName: {
           value: item.key
