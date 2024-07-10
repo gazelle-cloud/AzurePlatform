@@ -14,7 +14,7 @@ resource identityResourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' =
 
 module identity 'br/public:avm/res/managed-identity/user-assigned-identity:0.2.1' = {
   scope: identityResourceGroup
-  name: 'abc'
+  name: 'managedIdentity-${labName}'
   params: {
     name: 'id-${labName}-${environment}'
     location: location
@@ -32,7 +32,7 @@ module identity 'br/public:avm/res/managed-identity/user-assigned-identity:0.2.1
 }
 
 module rbacAdmin 'roleAssignments.bicep' = {
-  name: 'rbac-subscriptionIdentity'
+  name: 'rbac-administrator-${labName}'
   params: {
     principalId: identity.outputs.principalId
     rbacId: '/providers/Microsoft.Authorization/roleDefinitions/f58310d9-a9f6-439a-9e8d-f62e7b41a168'

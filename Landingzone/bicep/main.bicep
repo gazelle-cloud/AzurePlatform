@@ -14,7 +14,7 @@ var resourceTags = {
 }
 
 module identity 'modules/identity.bicep' = {
-  name: 'lz-identity'
+  name: 'lz-identity-${subscriptionId}'
   scope: subscription(subscriptionId)
   params: {
     labName: params.labName
@@ -30,7 +30,7 @@ module tagsOnSubscription 'br/public:avm/ptn/authorization/policy-assignment:0.1
     name: 'tag-${item.key}'
     params: {
       name: 'tag-${item.key}'
-      displayName: 'tag: ${item.key} - ${item.value}'
+      displayName: 'tag: ${item.key}'
       location: params.location
       policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/61a4d60b-7326-440e-8051-9f94394d4dd1'
       userAssignedIdentityId: identity.outputs.resourceId
@@ -51,7 +51,7 @@ module tagsOnResources 'br/public:avm/ptn/authorization/policy-assignment:0.1.0'
     name: 'tag-${item.key}'
     params: {
       name: 'tag-${item.key}'
-      displayName: 'tag: ${item.key} - ${item.value}'
+      displayName: 'tag: ${item.key}'
       location: params.location
       policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/4f9dc7db-30c1-420c-b61a-e1d640128d26'
       userAssignedIdentityId: identity.outputs.resourceId
@@ -68,7 +68,7 @@ module tagsOnResources 'br/public:avm/ptn/authorization/policy-assignment:0.1.0'
 ]
 
 module securityContacts 'modules/securityContacts.bicep' = {
-  name: 'security-contacts'
+  name: 'security-contacts-${subscriptionId}'
   scope: subscription(subscriptionId)
 }
 
