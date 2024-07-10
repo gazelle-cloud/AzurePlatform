@@ -33,15 +33,14 @@ jobs:
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
-        - name: AzureIdentity
-          id: azureIdentity
+        - name: managedIdentities
           uses: azure/cli@v1
           with:
             inlineScript: |
               az account set --subscription ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
 
               deployment=$(az stack mg create \
-                --name AzureIdentity-${{ inputs.environment}} \
+                --name managedIdentities-${{ inputs.environment}} \
                 --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --template-file ${{ inputs.mainBicep }} \
