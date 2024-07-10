@@ -32,6 +32,7 @@ module identity 'br/public:avm/res/managed-identity/user-assigned-identity:0.2.1
 }
 
 module rbacAdmin 'roleAssignments.bicep' = {
+  name: 'rbac-administrator'
   params: {
     principalId: identity.outputs.principalId
     rbacId: [
