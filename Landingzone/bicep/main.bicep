@@ -1,6 +1,7 @@
 targetScope = 'managementGroup'
 
 param params object
+param subscriptionId string
 
 var subscriptionTags = {
   owner: params.ownerEmail
@@ -14,7 +15,7 @@ var resourceTags = {
 
 module identity 'modules/identity.bicep' = {
   name: 'lz-identity'
-  scope: subscription(params.subscriptionId)
+  scope: subscription(subscriptionId)
   params: {
     labName: params.labName
     environment: params.environment
@@ -68,7 +69,7 @@ module tagsOnResources 'br/public:avm/ptn/authorization/policy-assignment:0.1.0'
 
 module securityContacts 'modules/securityContacts.bicep' = {
   name: 'security-contacts'
-  scope: subscription(params.subscriptionId)
+  scope: subscription(subscriptionId)
 }
 
 output clientId string = identity.outputs.clientId
