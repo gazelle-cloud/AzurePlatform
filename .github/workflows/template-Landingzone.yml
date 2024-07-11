@@ -59,12 +59,7 @@ jobs:
                 do
                   echo $item
                   echo "$item" >> $GITHUB_ENV
-                done
-             
-                subscriptionName=${{ env.labName }}
-                echo $subscriptionName
-                echo "$subscriptionName" >> $GITHUB_ENV
-  
+                done  
 
         - name: create subscription
           uses: azure/cli@v1
@@ -74,11 +69,11 @@ jobs:
                 echo "JSON content: $params"
                 
                 deployment=$(az deployment mg create \
-                --name "lz-${{ env.subscriptionName }}" \
+                --name "lz-${{ env.labname }}-${{ env.environment}}" \
                 --management-group-id ${{ env.managementGroupName }} \
                 --location ${{ inputs.location }} \
                 --template-file './Landingzone/bicep/modules/aliases.bicep' \
-                --parameters subscriptionName=${{ env.subscriptionName }} \
+                --parameters subscriptionName="${{ env.labname }}-${{ env.environment}}" \
                 --parameters billingScope=${{  secrets.BILLINGPROFILES_PLATFORM }})
 
                 readOutputs=$(echo $deployment | jq '.properties.outputs')
