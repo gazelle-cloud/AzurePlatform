@@ -53,7 +53,7 @@ jobs:
           uses: azure/cli@v1
           with:
             inlineScript: |
-                params=$(jq -r 'to_entries[] | "\(.key)=\(.value.value)"' ${{ inputs.parameterFile }})
+                params=$(jq -r 'to_entries[] | "\(.key)=\(.value)"' ${{ inputs.parameterFile }})
                 IFS=$'\n'
                 for item in $params
                 do
