@@ -52,27 +52,12 @@ jobs:
         - name: generate inputs
           uses: azure/cli@v1
           with:
-              inlineScript: |
-                params=$(jq -c . < ${{ inputs.parameterFile }})
-                echo "JSON content: $params"
-                
-                deployment=$(az deployment mg create \
-                --name generateInputs \
-                --management-group-id gazelle-prod \
-                --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
-                --template-file ${{ inputs.deploymentInputsMainBicep }} \
-                --parameters params=$params)
-
-                deploymentInputs=$(echo $deployment | jq '.properties.outputs')
-                echo "Deployment Outputs: $deploymentInputs"
-                keyValuePairs=$(echo $deploymentInputs | jq -r 'to_entries[] | "\(.key)=\(.value.value)"')
-                IFS=$'\n'
-                for output in $keyValuePairs
-                do
-                  echo $output
-                  echo "$output" >> $GITHUB_ENV
+            inlineScript: |
+                params=$(jq -r 'to_entries[] | "\(.key)=\(.value)"' ${{ inputs.parameterFile }})
+                for param in $params; do
+                  echo "Key-Value Pair: $param"
                 done
-
+  
 
         - name: create subscription
           uses: azure/cli@v1
