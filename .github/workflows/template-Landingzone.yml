@@ -49,7 +49,7 @@ jobs:
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
-        - name: generate inputs
+        - name: fetch JSON values
           uses: azure/cli@v1
           with:
             inlineScript: |
@@ -69,7 +69,7 @@ jobs:
                 echo "JSON content: $params"
                 
                 deployment=$(az deployment mg create \
-                --name "lz-${{ env.labname }}-${{ env.environment}}" \
+                --name "lz-${{ env.labName }}-${{ env.environment}}" \
                 --management-group-id ${{ env.managementGroupName }} \
                 --location ${{ inputs.location }} \
                 --template-file './Landingzone/bicep/modules/aliases.bicep' \
