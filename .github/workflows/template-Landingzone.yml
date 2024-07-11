@@ -53,15 +53,15 @@ jobs:
           uses: azure/cli@v1
           with:
             inlineScript: |
-                params=$(jq -r 'to_entries[] | "\(.key)=\(.value)"' ${{ inputs.parameterFile }})
-                keyValuePairs=$(echo $readOutputs | jq -r 'to_entries[] | "\(.key)=\(.value.value)"')
-
-                for param in $params; do
-                  echo $param
-                  echo "$param" >> $GITHUB_ENV
+                params=$(jq -r 'to_entries[] | "\(.key)=\(.value.value)"' ${{ inputs.parameterFile }})
+                IFS=$'\n'
+                for item in $params
+                do
+                  echo $item
+                  echo "$item" >> $GITHUB_ENV
                 done
-                
-                subscriptionName=$(echo $params | jq -r '.labName')
+             
+                subscriptionName=${{ env.labName }}
                 echo $subscriptionName
                 echo "$subscriptionName" >> $GITHUB_ENV
   
