@@ -73,7 +73,7 @@ jobs:
                 --management-group-id ${{ env.managementGroupName }} \
                 --location ${{ inputs.location }} \
                 --template-file './Landingzone/bicep/modules/aliases.bicep' \
-                --parameters subscriptionName="${{ env.labname }}-${{ env.environment}}" \
+                --parameters subscriptionName="${{ env.labName }}-${{ env.environment}}" \
                 --parameters billingScope=${{  secrets.BILLINGPROFILES_PLATFORM }})
 
                 readOutputs=$(echo $deployment | jq '.properties.outputs')
