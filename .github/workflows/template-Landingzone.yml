@@ -54,16 +54,18 @@ jobs:
           with:
             inlineScript: |
                 params=$(jq -r 'to_entries[] | "\(.key)=\(.value)"' ${{ inputs.parameterFile }})
+                keyValuePairs=$(echo $readOutputs | jq -r 'to_entries[] | "\(.key)=\(.value.value)"')
+
                 for param in $params; do
                   echo $param
                   echo "$param" >> $GITHUB_ENV
                 done
                 
-                foo=$labName
+                foo=${{ vars.labName }}
                 echo $foo
-                subscriptionName=$labName-$environment
-                echo $subscriptionName
-                echo "$subscriptionName" >> $GITHUB_ENV
+                # subscriptionName=$labName-$environment
+                # echo $subscriptionName
+                # echo "$subscriptionName" >> $GITHUB_ENV
   
 
         - name: create subscription
