@@ -61,7 +61,7 @@ jobs:
                   echo "$param" >> $GITHUB_ENV
                 done
                 
-                subscriptionName=${{ vars.labName }}
+                subscriptionName=$(echo $params | jq -r '.labName')
                 echo $subscriptionName
                 echo "$subscriptionName" >> $GITHUB_ENV
   
