@@ -59,7 +59,9 @@ jobs:
                   echo "$param" >> $GITHUB_ENV
                 done
                 
-                subscriptionName="${{ env.labName }}-${{ env.environment }}"
+                foo=$labName
+                echo $foo
+                subscriptionName=$labName-$environment
                 echo $subscriptionName
                 echo "$subscriptionName" >> $GITHUB_ENV
   
