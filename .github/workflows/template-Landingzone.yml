@@ -60,6 +60,10 @@ jobs:
                   echo $item
                   echo "$item" >> $GITHUB_ENV
                 done  
+        
+        - name: manipulate values
+          run: |
+            echo "mgmtPreffix=$(echo ${{ env.managementGroupName }} | cut -d'-' -f1)" >> $GITHUB_ENV
 
         - name: create subscription
           uses: azure/cli@v1
@@ -70,7 +74,7 @@ jobs:
                 mgmtPreffix=$(echo ${{ env.managementGroupName }} | cut -d'-' -f1)
                 
                 deployment=$(az deployment mg create \
-                --name "lz-$mgmtPreffix-${{ env.labName }}-${{ env.environment}}" \
+                --name "lz-${{ env.mgmtPreffix }}-${{ env.labName }}-${{ env.environment}}" \
                 --management-group-id ${{ env.managementGroupName }} \
                 --location ${{ inputs.location }} \
                 --template-file './Landingzone/bicep/modules/aliases.bicep' \
