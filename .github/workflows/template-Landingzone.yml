@@ -67,9 +67,10 @@ jobs:
               inlineScript: |
                 params=$(jq -c . < ${{ inputs.parameterFile }})
                 echo "JSON content: $params"
+                mgmtPreffix=$(echo ${{ env.managementGroupName }} | cut -d'-' -f1)
                 
                 deployment=$(az deployment mg create \
-                --name "lz-${{ env.labName }}-${{ env.environment}}" \
+                --name "lz-${{env.mgmtPreffix}}-${{ env.labName }}-${{ env.environment}}" \
                 --management-group-id ${{ env.managementGroupName }} \
                 --location ${{ inputs.location }} \
                 --template-file './Landingzone/bicep/modules/aliases.bicep' \
@@ -94,7 +95,7 @@ jobs:
                 echo "JSON content: $params"
                 
                 deployment=$(az stack mg create \
-                --name "lz-${{ env.subscriptionName }}" \
+                --name "lz-${{ env.labName }}-${{ env.environment}}" \
                 --management-group-id ${{ env.managementGroupName }} \
                 --location ${{ inputs.location }} \
                 --template-file ${{ inputs.mainBicep }} \
