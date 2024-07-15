@@ -71,7 +71,6 @@ jobs:
               inlineScript: |
                 params=$(jq -c . < ${{ inputs.parameterFile }})
                 echo "JSON content: $params"
-                mgmtPreffix=$(echo ${{ env.managementGroupName }} | cut -d'-' -f1)
                 
                 deployment=$(az deployment mg create \
                 --name "lz-${{ env.mgmtPreffix }}-${{ env.labName }}-${{ env.environment}}" \
@@ -91,7 +90,7 @@ jobs:
                   echo "$output" >> $GITHUB_ENV
                 done
 
-        - name: rename subscription
+        - name: move subscription
           uses: azure/cli@v1
           with:
               inlineScript: |
