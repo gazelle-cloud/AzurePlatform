@@ -100,12 +100,3 @@ body:
       placeholder: foo@gazelle.cloud
     validations:
       required: true
-
-  - type: input
-    id: subscriptionId
-    attributes:
-      label: subscription id
-      description: build landingzone on top of existing subscription
-      placeholder: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-    validations:
-      required: false
