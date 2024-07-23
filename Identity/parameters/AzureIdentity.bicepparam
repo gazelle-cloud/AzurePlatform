@@ -10,7 +10,7 @@ param identity = {
     RBAC: {
       scope: 'gazelle-${environment}'
       roleDefinitions: [
-        '/providers/Microsoft.Authorization/roleDefinitions/7f951dda-4ed3-4680-a7ca-43fe172d538d'
+        '/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c'
       ]
     }
   }
