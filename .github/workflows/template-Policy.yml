@@ -49,6 +49,8 @@ jobs:
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.templateFile }} \
                 --parameters ${{ inputs.templateParameters }} \
+                --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --parameters POLICY_RESOURCE_ID=${{  vars.POLICY_RESOURCE_ID }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
