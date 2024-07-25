@@ -19,7 +19,7 @@ on:
 jobs:
     Policy:
         runs-on: ubuntu-latest
-        environment: ${{ inputs.environment }}-Policy
+        environment: ${{ inputs.environment }}-azurePlatform
         steps:
         - name: Checkout
           uses: actions/checkout@v4
