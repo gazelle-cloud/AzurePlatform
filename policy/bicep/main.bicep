@@ -4,6 +4,7 @@ param scopes array
 param location string
 param policies array
 param identityResoruceId string
+param environment string
 
 module ass 'assignment.bicep' = [
   for item in scopes: {

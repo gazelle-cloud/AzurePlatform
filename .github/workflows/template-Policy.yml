@@ -51,6 +51,7 @@ jobs:
                 --parameters ${{ inputs.templateParameters }} \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
+                --parameters environment=${{ inputs.environment }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
