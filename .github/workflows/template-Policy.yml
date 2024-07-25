@@ -46,7 +46,7 @@ jobs:
                 deployment=$(az stack mg create \
                 --name ${{ inputs.deploymentName }} \
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
-                --location ${{ inputs.location }} \
+                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.templateFile }} \
                 --parameters ${{ inputs.templateParameters }} \
                 --deny-settings-mode None \
