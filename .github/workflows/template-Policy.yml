@@ -45,7 +45,7 @@ jobs:
               inlineScript: |
                 deployment=$(az stack mg create \
                 --name ${{ inputs.deploymentName }} \
-                --management-group-id ${{ env.managementGroupName }} \
+                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --location ${{ inputs.location }} \
                 --template-file ${{ inputs.templateFile }} \
                 --parameters ${{ inputs.templateParameters }} \
