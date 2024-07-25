@@ -1,8 +1,8 @@
 using '../bicep/AzureIdentity.bicep'
 
+param workloadName = 'identity'
 param location = readEnvironmentVariable('AZURE_DEFAULT_LOCATION', '')
 param environment = readEnvironmentVariable('environment', '')
-param workloadName = 'identity'
 param subscriptionId = readEnvironmentVariable('MANAGEMENT_SUBSCRIPTION_ID', '')
 param identity = {
   policy: {

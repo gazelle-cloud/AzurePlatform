@@ -6,6 +6,15 @@ on:
         environment:
             required: true
             type: string
+        templateFile:
+          default: ./policy/bicep/main.bicep
+          type: string
+        templateParameters:
+            default: ./policy/parameters/policy.bicepparam
+            type: string
+        deploymentName:
+            default: azurePolicies
+            type: string
 
 jobs:
     Policy:
@@ -29,4 +38,18 @@ jobs:
             tenant-id: ${{ vars.AZURE_TENANT_ID}}
             allow-no-subscriptions: true
             enable-AzPSSession: false
+
+        - name: create landingzone
+          uses: azure/cli@v1
+          with:
+              inlineScript: |
+                deployment=$(az stack mg create \
+                --name ${{ inputs.deploymentName }} \
+                --management-group-id ${{ env.managementGroupName }} \
+                --location ${{ inputs.location }} \
+                --template-file ${{ inputs.templateFile }} \
+                --parameters ${{ inputs.templateParameters }} \
+                --deny-settings-mode None \
+                --action-on-unmanage deleteAll \
+                --yes)
 
