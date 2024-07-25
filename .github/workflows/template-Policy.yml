@@ -34,12 +34,12 @@ jobs:
         - name: Azure login
           uses: azure/login@v1
           with:
-            client-id: ${{ vars.POLICY_CLIENT_ID }}
+            client-id: ${{ vars.APP_AZURE_PLATFORM_CLIENT_ID }}
             tenant-id: ${{ vars.AZURE_TENANT_ID}}
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
-        - name: create landingzone
+        - name: policies
           uses: azure/cli@v1
           with:
               inlineScript: |
