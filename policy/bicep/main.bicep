@@ -1,18 +1,18 @@
 targetScope = 'managementGroup'
 
-param policies array
+param scopes array
 param location string
+param policies array
 param identityResoruceId string
 
-module assinments 'modules/policy.bicep' = [
-  for item in policies: {
-    name: 'policy-${item.name}'
-    scope: managementGroup('online-test')
+module ass 'assignment.bicep' = [
+  for item in scopes: {
+    name: 'policy-${item}'
+    scope: managementGroup(item)
     params: {
+      identityResoruceId: identityResoruceId
       location: location
-      identityResourceId: identityResoruceId
-      policyName: item.name
-      policyProperties: item.properties
+      policies: policies
     }
   }
 ]
