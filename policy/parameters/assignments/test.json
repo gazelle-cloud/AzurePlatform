@@ -21,7 +21,7 @@
                 "policyDefinitionId": "{{topLevel}}/providers/Microsoft.Authorization/policyDefinitions/st_vnetAclrRules",
                 "policyDefinitionReferenceId": "st_vnetAclrRules",
                 "parameters": {
-                    "st_vnetAclrRules": {
+                    "effect": {
                         "value": "[parameters('st_vnetAclrRules')]"
                     }
                 }
@@ -30,7 +30,7 @@
                 "policyDefinitionId": "{{topLevel}}/providers/Microsoft.Authorization/policyDefinitions/st_crossTenantReplication",
                 "policyDefinitionReferenceId": "st_vnetAclrRules",
                 "parameters": {
-                    "st_crossTenantReplication": {
+                    "effect": {
                         "value": "[parameters('st_crossTenantReplication')]"
                     }
                 }
