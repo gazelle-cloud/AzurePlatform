@@ -28,7 +28,7 @@
             },
             {
                 "policyDefinitionId": "{{topLevel}}/providers/Microsoft.Authorization/policyDefinitions/st_crossTenantReplication",
-                "policyDefinitionReferenceId": "st_vnetAclrRules",
+                "policyDefinitionReferenceId": "st_crossTenantReplication",
                 "parameters": {
                     "effect": {
                         "value": "[parameters('st_crossTenantReplication')]"
