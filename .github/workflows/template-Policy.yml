@@ -141,7 +141,7 @@ jobs:
                 --name ${{ inputs.deploymentName }} \
                 --management-group-id ${{ env.deploymentScope }}-${{ inputs.environment }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --template-file ${{ inputs.templateFile }} \
+                --template-file ${{ inputs.assignmentsTemplateFile }} \
                 --parameters ./policy/parameters/${{ env.deploymentScope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
