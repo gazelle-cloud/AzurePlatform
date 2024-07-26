@@ -1,9 +1,14 @@
 targetScope = 'managementGroup'
 
-param name string
-param properties object
+param customName string?
+param customProperties object?
 
-resource definitions 'Microsoft.Authorization/policyDefinitions@2023-04-01' = {
-  name: name
-  properties: properties
+resource definition 'Microsoft.Authorization/policyDefinitions@2023-04-01' = {
+  name: customName
+  properties: customProperties
+}
+output foo  object = {
+  policyDefinitionId: definition.id
+  policyDefinitionReferenceId: definition.name
+  parameters: definition.properties.parameters
 }

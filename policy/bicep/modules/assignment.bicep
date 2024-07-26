@@ -8,15 +8,19 @@ param identityResourceId string
 param customName string
 param customProperties object
 
-resource definition 'Microsoft.Authorization/policyDefinitions@2023-04-01' = {
-  name: customName
-  properties: customProperties
+module def 'definitions.bicep' = {
+  name: 'customPolicy'
+  params: {
+    customName: customName
+    customProperties: customProperties
+  }
 }
 
+var mix = union(def.outputs.foo, builtInProperties)
 
 resource setdefinition 'Microsoft.Authorization/policySetDefinitions@2023-04-01' = {
   name: policyName
-  properties: builtInProperties
+  properties: mix
 }
 
 resource assignment 'Microsoft.Authorization/policyAssignments@2024-04-01' = {
