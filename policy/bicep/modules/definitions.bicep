@@ -10,5 +10,4 @@ resource definition 'Microsoft.Authorization/policyDefinitions@2023-04-01' = {
 output foo  object = {
   policyDefinitionId: definition.id
   policyDefinitionReferenceId: definition.name
-  parameters: definition.properties.parameters
 }
