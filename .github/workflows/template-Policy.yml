@@ -39,16 +39,33 @@ jobs:
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
-        - name: policies
+        - name: policies-online
           uses: azure/cli@v1
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name ${{ inputs.deploymentName }} \
+                --name ${{ inputs.deploymentName }}-online \
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.templateFile }} \
-                --parameters ${{ inputs.templateParameters }} \
+                --parameters ./policy/parameters/online.bicepparam \
+                --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
+                --parameters environment=${{ inputs.environment }} \
+                --deny-settings-mode None \
+                --action-on-unmanage deleteAll \
+                --yes)
+
+        - name: policies-platform
+          uses: azure/cli@v1
+          with:
+              inlineScript: |
+                deployment=$(az stack mg create \
+                --name ${{ inputs.deploymentName }}-platform \
+                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
+                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --template-file ${{ inputs.templateFile }} \
+                --parameters ./policy/parameters/platform.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
                 --parameters environment=${{ inputs.environment }} \

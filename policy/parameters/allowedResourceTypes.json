@@ -4,7 +4,7 @@
         "displayName": "Allowed resource types",
         "metadata": {
             "category": "General",
-            "description": "Allowed (whitelisted) resource types"
+            "description": "Allowed (whitelisted) Azure resources"
         },
         "parameters": {
             "listOfResourceTypesAllowed": {
