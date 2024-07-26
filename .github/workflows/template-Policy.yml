@@ -10,7 +10,7 @@ on:
           default: ./policy/bicep/main.bicep
           type: string
         deploymentName:
-            default: azurePolicies
+            default: az-Policies
             type: string
 
 jobs:
@@ -53,6 +53,40 @@ jobs:
         environment: ${{ inputs.environment }}-azurePlatform
         env:
           deploymentScope: platform
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Azure login
+          uses: azure/login@v1
+          with:
+            client-id: ${{ vars.APP_AZURE_PLATFORM_CLIENT_ID }}
+            tenant-id: ${{ vars.AZURE_TENANT_ID}}
+            allow-no-subscriptions: true
+            enable-AzPSSession: false
+
+        - name: policies-platform
+          uses: azure/cli@v1
+          with:
+              inlineScript: |
+                deployment=$(az stack mg create \
+                --name ${{ inputs.deploymentName }} \
+                --management-group-id ${{ env.deploymentScope }}-${{ inputs.environment }} \
+                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --template-file ${{ inputs.templateFile }} \
+                --parameters ./policy/parameters/${{ env.deploymentScope }}.bicepparam \
+                --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
+                --parameters environment=${{ inputs.environment }} \
+                --deny-settings-mode None \
+                --action-on-unmanage deleteAll \
+                --yes)
+                
+    playground:
+        runs-on: ubuntu-latest
+        environment: ${{ inputs.environment }}-azurePlatform
+        env:
+          deploymentScope: playground
         steps:
         - name: Checkout
           uses: actions/checkout@v4
