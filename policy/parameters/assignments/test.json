@@ -21,7 +21,7 @@
                 "policyDefinitionId": "{{topLevel}}/providers/Microsoft.Authorization/policyDefinitions/st_vnetAclrRules",
                 "policyDefinitionReferenceId": "st_vnetAclrRules",
                 "parameters": {
-                    "listOfResourceTypesAllowed": {
+                    "st_vnetAclrRules": {
                         "value": "[parameters('st_vnetAclrRules')]"
                     }
                 }
