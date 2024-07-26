@@ -1,4 +1,4 @@
-using '../bicep/main.bicep'
+using '../bicep/main-assignments.bicep'
 
 param identityResoruceId = readEnvironmentVariable('POLICY_RESOURCE_ID', '')
 param location = readEnvironmentVariable('AZURE_DEFAULT_LOCATION', '')
