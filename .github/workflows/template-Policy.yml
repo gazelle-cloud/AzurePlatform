@@ -76,9 +76,6 @@ jobs:
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.assignmentsTemplateFile }} \
                 --parameters ./policy/parameters/${{ env.deploymentScope }}.bicepparam \
-                --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
-                --parameters environment=${{ inputs.environment }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
