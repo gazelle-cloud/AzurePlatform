@@ -9,9 +9,12 @@ on:
         templateFile:
           default: ./policy/bicep/main.bicep
           type: string
-        templateParameters:
-            default: ./policy/parameters/policy.bicepparam
-            type: string
+        # onlineParameters:
+        #     default: ./policy/parameters/online.bicepparam
+        #     type: string
+        # platformParameters:
+        #     default: ./policy/parameters/platform.bicepparam
+        #     type: string
         deploymentName:
             default: azurePolicies
             type: string
@@ -20,6 +23,8 @@ jobs:
     Policy-online:
         runs-on: ubuntu-latest
         environment: ${{ inputs.environment }}-azurePlatform
+        env:
+          deploymentScope: online
         steps:
         - name: Checkout
           uses: actions/checkout@v4
@@ -39,16 +44,16 @@ jobs:
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
-        - name: policies-online
+        - name: Deploy policies
           uses: azure/cli@v1
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name ${{ inputs.deploymentName }}-online \
-                --management-group-id online-${{ inputs.environment  }} \
+                --name ${{ inputs.deploymentName }} \
+                --management-group-id ${{ env.deploymentScope }}-${{ inputs.environment }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.templateFile }} \
-                --parameters ./policy/parameters/online.bicepparam \
+                --parameters ./policy/parameters/${{ env.deploymentScope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
                 --parameters environment=${{ inputs.environment }} \
@@ -59,6 +64,8 @@ jobs:
     Policy-platform:
         runs-on: ubuntu-latest
         environment: ${{ inputs.environment }}-azurePlatform
+        env:
+          deploymentScope: platform
         steps:
         - name: Checkout
           uses: actions/checkout@v4
@@ -83,11 +90,11 @@ jobs:
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name ${{ inputs.deploymentName }}-platform \
-                --management-group-id platform-${{ inputs.environment  }} \
+                --name ${{ inputs.deploymentName }} \
+                --management-group-id ${{ env.deploymentScope }}-${{ inputs.environment }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.templateFile }} \
-                --parameters ./policy/parameters/platform.bicepparam \
+                --parameters ./policy/parameters/${{ env.deploymentScope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
                 --parameters environment=${{ inputs.environment }} \
