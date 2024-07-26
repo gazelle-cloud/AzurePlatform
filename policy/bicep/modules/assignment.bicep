@@ -16,11 +16,9 @@ module def 'definitions.bicep' = {
   }
 }
 
-var mix = union(def.outputs.foo, builtInProperties)
-
 resource setdefinition 'Microsoft.Authorization/policySetDefinitions@2023-04-01' = {
   name: policyName
-  properties: mix
+  properties: builtInProperties
 }
 
 resource assignment 'Microsoft.Authorization/policyAssignments@2024-04-01' = {

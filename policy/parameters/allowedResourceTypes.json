@@ -21,6 +21,10 @@
                         "value": "[parameters('listOfResourceTypesAllowed')]"
                     }
                 }
+            },
+            {
+                "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/online-test/providers/Microsoft.Authorization/policyDefinitions/st_vnetAclrRules",
+                "policyDefinitionReferenceId": "st_vnetAclrRules"
             }
         ]
     },
