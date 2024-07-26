@@ -17,7 +17,7 @@ on:
             type: string
 
 jobs:
-    Policy:
+    Policy-online:
         runs-on: ubuntu-latest
         environment: ${{ inputs.environment }}-azurePlatform
         steps:
@@ -56,6 +56,28 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --yes)
 
+    Policy-platform:
+        runs-on: ubuntu-latest
+        environment: ${{ inputs.environment }}-azurePlatform
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: get github token
+          id: github-token
+          uses: actions/create-github-app-token@v1
+          with:
+            app-id: ${{ vars.APP_GITHUB_BIGBANG_ID }}
+            private-key: ${{ secrets.APP_GITHUB_BIGBANG }}
+
+        - name: Azure login
+          uses: azure/login@v1
+          with:
+            client-id: ${{ vars.APP_AZURE_PLATFORM_CLIENT_ID }}
+            tenant-id: ${{ vars.AZURE_TENANT_ID}}
+            allow-no-subscriptions: true
+            enable-AzPSSession: false
+
         - name: policies-platform
           uses: azure/cli@v1
           with:
@@ -72,4 +94,5 @@ jobs:
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
+
 
