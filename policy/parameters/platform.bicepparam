@@ -5,6 +5,5 @@ param location = readEnvironmentVariable('AZURE_DEFAULT_LOCATION', '')
 param environment = readEnvironmentVariable('environment', '')
 
 param policies = [
-  loadJsonContent('allowedLocations.json')
-  loadJsonContent('allowedResourceTypes.json')
+
 ]

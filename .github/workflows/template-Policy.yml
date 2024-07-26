@@ -23,13 +23,6 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v4
 
-        - name: get github token
-          id: github-token
-          uses: actions/create-github-app-token@v1
-          with:
-            app-id: ${{ vars.APP_GITHUB_BIGBANG_ID }}
-            private-key: ${{ secrets.APP_GITHUB_BIGBANG }}
-
         - name: Azure login
           uses: azure/login@v1
           with:
@@ -63,13 +56,6 @@ jobs:
         steps:
         - name: Checkout
           uses: actions/checkout@v4
-
-        # - name: get github token
-        #   id: github-token
-        #   uses: actions/create-github-app-token@v1
-        #   with:
-        #     app-id: ${{ vars.APP_GITHUB_BIGBANG_ID }}
-        #     private-key: ${{ secrets.APP_GITHUB_BIGBANG }}
 
         - name: Azure login
           uses: azure/login@v1
