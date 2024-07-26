@@ -21,5 +21,7 @@ resource ass 'Microsoft.Authorization/policyAssignments@2024-04-01' = {
   location: location
   properties: {
     policyDefinitionId: setdefinition.id
+    displayName: setdefinition.properties.displayName
+    metadata: setdefinition.properties.metadata
   }
 }
