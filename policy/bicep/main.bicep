@@ -12,7 +12,7 @@ module assinments 'modules/policy.bicep' = [
       location: location
       identityResourceId: identityResoruceId
       policyName: item.name
-      policyProperties: item.properties
+      policyProperties: item.builtIn
     }
   }
 ]

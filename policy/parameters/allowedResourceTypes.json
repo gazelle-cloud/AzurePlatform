@@ -1,6 +1,6 @@
 {
     "name": "allowedResources",
-    "properties": {
+    "builtIn": {
         "displayName": "Allowed resource types",
         "metadata": {
             "category": "General",
