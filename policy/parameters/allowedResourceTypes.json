@@ -21,51 +21,7 @@
                         "value": "[parameters('listOfResourceTypesAllowed')]"
                     }
                 }
-            },
-            {
-                "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/online-test/providers/Microsoft.Authorization/policyDefinitions/st_vnetAclrRules",
-                "policyDefinitionReferenceId": "st_vnetAclrRules"
             }
         ]
-    },
-    "custom": {
-        "name": "st_vnetAclrRules",
-        "properties": {
-            "DisplayName": "Disable your storage accounts from potential threats using virtual network rules",
-            "mode": "All",
-            "metadata": {
-                "category": "Storage"
-            },
-            "parameters": {
-                "effect": {
-                    "type": "String",
-                    "allowedValues": [
-                        "Audit",
-                        "Deny",
-                        "Disabled"
-                    ],
-                    "defaultValue": "Deny"
-                }
-            },
-            "policyRule": {
-                "if": {
-                    "allOf": [
-                        {
-                            "field": "type",
-                            "equals": "Microsoft.Storage/storageAccounts"
-                        },
-                        {
-                            "count": {
-                                "field": "Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*]"
-                            },
-                            "notEquals": 0
-                        }
-                    ]
-                },
-                "then": {
-                    "effect": "[parameters('effect')]"
-                }
-            }
-        }
     }
 }

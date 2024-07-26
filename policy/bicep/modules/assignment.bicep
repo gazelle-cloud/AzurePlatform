@@ -5,17 +5,6 @@ param policyName string
 param builtInProperties object
 param identityResourceId string
 
-param customName string
-param customProperties object
-
-module def 'definitions.bicep' = {
-  name: 'customPolicy'
-  params: {
-    customName: customName
-    customProperties: customProperties
-  }
-}
-
 resource setdefinition 'Microsoft.Authorization/policySetDefinitions@2023-04-01' = {
   name: policyName
   properties: builtInProperties

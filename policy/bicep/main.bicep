@@ -14,8 +14,6 @@ module assinments 'modules/assignment.bicep' = [
       identityResourceId: identityResoruceId
       policyName: item.name
       builtInProperties: item.builtIn
-      customName: item.custom.name
-      customProperties: item.custom.properties
     }
   }
 ]
