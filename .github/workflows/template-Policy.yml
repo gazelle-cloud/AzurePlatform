@@ -9,18 +9,12 @@ on:
         templateFile:
           default: ./policy/bicep/main.bicep
           type: string
-        # onlineParameters:
-        #     default: ./policy/parameters/online.bicepparam
-        #     type: string
-        # platformParameters:
-        #     default: ./policy/parameters/platform.bicepparam
-        #     type: string
         deploymentName:
             default: azurePolicies
             type: string
 
 jobs:
-    Policy-online:
+    online:
         runs-on: ubuntu-latest
         environment: ${{ inputs.environment }}-azurePlatform
         env:
@@ -61,7 +55,7 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --yes)
 
-    Policy-platform:
+    platform:
         runs-on: ubuntu-latest
         environment: ${{ inputs.environment }}-azurePlatform
         env:
@@ -70,12 +64,12 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v4
 
-        - name: get github token
-          id: github-token
-          uses: actions/create-github-app-token@v1
-          with:
-            app-id: ${{ vars.APP_GITHUB_BIGBANG_ID }}
-            private-key: ${{ secrets.APP_GITHUB_BIGBANG }}
+        # - name: get github token
+        #   id: github-token
+        #   uses: actions/create-github-app-token@v1
+        #   with:
+        #     app-id: ${{ vars.APP_GITHUB_BIGBANG_ID }}
+        #     private-key: ${{ secrets.APP_GITHUB_BIGBANG }}
 
         - name: Azure login
           uses: azure/login@v1
