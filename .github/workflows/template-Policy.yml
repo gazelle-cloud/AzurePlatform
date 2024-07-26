@@ -12,8 +12,8 @@ on:
         assignmentsTemplateFile:
           default: ./policy/bicep/main-assignments.bicep
           type: string
-        deploymentName:
-            default: az-policyAssignments
+        deploymentNameForAssignments:
+            default: policyAssignments
             type: string
 
 jobs:
@@ -37,7 +37,7 @@ jobs:
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name az-policyDefinitions \
+                --name policyDefinitions \
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.customDefinitionsTemplateFile }} \
@@ -68,7 +68,7 @@ jobs:
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name ${{ inputs.deploymentName }} \
+                --name ${{ inputs.deploymentNameForAssignments }} \
                 --management-group-id ${{ env.deploymentScope }}-${{ inputs.environment }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.assignmentsTemplateFile }} \
@@ -103,7 +103,7 @@ jobs:
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name ${{ inputs.deploymentName }} \
+                --name ${{ inputs.deploymentNameForAssignments }} \
                 --management-group-id ${{ env.deploymentScope }}-${{ inputs.environment }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.assignmentsTemplateFile }} \
@@ -138,7 +138,7 @@ jobs:
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name ${{ inputs.deploymentName }} \
+                --name ${{ inputs.deploymentNameForAssignments }} \
                 --management-group-id ${{ env.deploymentScope }}-${{ inputs.environment }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.assignmentsTemplateFile }} \
