@@ -5,6 +5,8 @@ param location string
 param identityResoruceId string
 #disable-next-line no-unused-params
 param environment string
+#disable-next-line no-unused-params
+param topLevelManagementGroupName string
 
 module assinments 'modules/assignment.bicep' = [
   for item in policies: {

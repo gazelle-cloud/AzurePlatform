@@ -76,6 +76,7 @@ jobs:
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
                 --parameters environment=${{ inputs.environment }} \
+                --parameters topLevelManagementGroupName=${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
@@ -111,6 +112,7 @@ jobs:
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
                 --parameters environment=${{ inputs.environment }} \
+                --parameters topLevelManagementGroupName=${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
@@ -146,6 +148,7 @@ jobs:
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
                 --parameters environment=${{ inputs.environment }} \
+                --parameters topLevelManagementGroupName=${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
