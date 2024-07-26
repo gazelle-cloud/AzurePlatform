@@ -13,7 +13,7 @@ on:
           default: ./policy/bicep/main-assignments.bicep
           type: string
         deploymentName:
-            default: az-Policies
+            default: az-policyAssignments
             type: string
 
 jobs:
@@ -37,7 +37,7 @@ jobs:
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name ${{ inputs.deploymentName }} \
+                --name az-policyDefinitions \
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.customDefinitionsTemplateFile }} \
