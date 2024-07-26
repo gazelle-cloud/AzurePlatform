@@ -45,7 +45,7 @@ jobs:
               inlineScript: |
                 deployment=$(az stack mg create \
                 --name ${{ inputs.deploymentName }}-online \
-                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
+                --management-group-id online-${{ inputs.environment  }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.templateFile }} \
                 --parameters ./policy/parameters/online.bicepparam \
@@ -62,7 +62,7 @@ jobs:
               inlineScript: |
                 deployment=$(az stack mg create \
                 --name ${{ inputs.deploymentName }}-platform \
-                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
+                --management-group-id platform-${{ inputs.environment  }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ${{ inputs.templateFile }} \
                 --parameters ./policy/parameters/platform.bicepparam \
