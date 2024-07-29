@@ -33,7 +33,7 @@ jobs:
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
-        - name: managedIdentities
+        - name: logAnalytics
           uses: azure/cli@v1
           with:
             inlineScript: |
