@@ -12,7 +12,8 @@
                 "defaultValue": [
                     "Microsoft.ManagedIdentity/userAssignedIdentities",
                     "Microsoft.ManagedIdentity/userAssignedIdentities/federatedIdentityCredentials",
-                    "Microsoft.OperationalInsights/workspaces"
+                    "Microsoft.OperationalInsights/workspaces",
+                    "Microsoft.Resources/resourceGroups"
                 ]
             }
         },
