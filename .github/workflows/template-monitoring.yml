@@ -61,10 +61,10 @@ jobs:
               deploymentOutputs=$(echo $monitoring | jq .)
               echo "Deployment Outputs: $deploymentOutputs"
               
-              items=$(echo $deploymentOutputs | jq -r 'keys[]')
-              for item in $items; do
+              keys=$(echo $deploymentOutputs | jq -r 'keys[]')
+              for key in $keys; do
                 value=$(echo $deploymentOutputs | jq --arg k "$key" -r '.[$k]')
-                gh variable set $item \
+                gh variable set $key \
                   --body "$value" \
                   --env "${{ inputs.environment }}-azurePlatform" \
                   -R gazelle-cloud/AzurePlatform
