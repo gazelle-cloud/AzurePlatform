@@ -19,7 +19,7 @@ module la 'br/public:avm/res/operational-insights/workspace:0.4.0' = {
   }
 }
 
-output monitoring object = {
+output gitHubEnviromentVariables object = {
   logAnalytics_Resource_Id: la.outputs.resourceId
   logAnalytics_Workspace_Id: la.outputs.logAnalyticsWorkspaceId
 }
