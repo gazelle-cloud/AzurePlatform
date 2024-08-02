@@ -1,7 +1,6 @@
 targetScope  = 'subscription'
 
 param params object
-param subscriptionId string
 
 var resourceTags = {
   labName: params.labName
@@ -44,7 +43,6 @@ module resourceLevelTags 'modules/policyAssignment.bicep' = [
 
 module securityContacts 'modules/securityContacts.bicep' = {
   name: 'lz-security-contacts'
-  scope: subscription(subscriptionId)
 }
 
 output clientId string = identity.outputs.clientId
