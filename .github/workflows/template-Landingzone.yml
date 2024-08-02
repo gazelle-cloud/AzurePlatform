@@ -133,6 +133,6 @@ jobs:
                 value=$(echo $deploymentOutputs | jq --arg k "$key" -r '.[$k]')
                 gh variable set $key \
                   --body "$value" \
-                  --env "${{ inputs.environment }}-azurePlatform" \
-                  -R gazelle-cloud/AzurePlatform
+                  --env "${{ env.environment }}-${{ env.githubRepoName }}" \
+                  -R gazelle-cloud/${{ env.githubRepoName }} \
               done
