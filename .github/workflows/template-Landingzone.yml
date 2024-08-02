@@ -134,5 +134,5 @@ jobs:
                 gh variable set $key \
                   --body "$value" \
                   --env "${{ env.environment }}-${{ env.githubRepoName }}" \
-                  -R gazelle-cloud/${{ env.githubRepoName }} \
+                  -R gazelle-cloud/${{ env.githubRepoName }}
               done
