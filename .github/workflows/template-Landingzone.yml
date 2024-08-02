@@ -108,7 +108,7 @@ jobs:
                 
                 az account set --subscription ${{ env.subscriptionId }}
 
-                actions=("Microsoft.Network/virtualNetworks/subnets/write" "Microsoft.Network/virtualNetworks/subnets/delete")
+                actions=('Microsoft.Network/virtualNetworks/subnets/write Microsoft.Network/virtualNetworks/subnets/delete')
 
                 deployment=$(az stack sub create \
                 --name "landingzone-init" \
@@ -118,7 +118,7 @@ jobs:
                 --deny-settings-mode 'denyWriteAndDelete' \
                 --action-on-unmanage 'deleteAll' \
                 --deny-settings-excluded-principals ${{ vars.APP_AZURE_PLATFORM_OBJECT_ID }} \
-                --deny-settings-excluded-actions "${actions[@]}" \
+                --deny-settings-excluded-actions ${actions[@]} \
                 --deny-settings-apply-to-child-scopes $true \
                 --yes)
 
