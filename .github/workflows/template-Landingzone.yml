@@ -106,12 +106,12 @@ jobs:
                 params=$(jq -c . < ${{ inputs.parameterFile }})
                 echo "JSON content: $params"
                 
-                deployment=$(az stack mg create \
-                --name "lz-${{ env.labName }}-${{ env.environment}}" \
-                --management-group-id ${{ env.managementGroupName }} \
+                az account set --subscription ${{ env.subscriptionId }}
+
+                deployment=$(az stack sub create \
+                --name "landingzone-init" \
                 --location ${{ inputs.location }} \
                 --template-file ${{ inputs.mainBicep }} \
-                --parameters subscriptionId=${{ env.subscriptionId }} \
                 --parameters params=$params \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
