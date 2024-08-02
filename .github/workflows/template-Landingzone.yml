@@ -117,7 +117,7 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --deny-settings-excluded-actions ${{ vars.APP_AZURE_PLATFORM_OBJECT_ID }} \
                 --DenySettingsExcludedAction Microsoft.Network/virtualNetworks/subnets/write \
-                ----deny-settings-apply-to-child-scopes true \
+                --deny-settings-apply-to-child-scopes true \
                 --yes)
 
                 envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
