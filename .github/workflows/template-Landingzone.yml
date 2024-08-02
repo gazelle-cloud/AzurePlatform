@@ -108,8 +108,7 @@ jobs:
                 
                 az account set --subscription ${{ env.subscriptionId }}
 
-                actions='Microsoft.Network/virtualNetworks/subnets/write Microsoft.Network/virtualNetworks/subnets/delete'
-
+                actions=("Microsoft.Network/virtualNetworks/subnets/write" "Microsoft.Network/virtualNetworks/subnets/delete")
 
                 deployment=$(az stack sub create \
                 --name "landingzone-init" \
