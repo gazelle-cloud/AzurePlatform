@@ -45,4 +45,6 @@ module securityContacts 'modules/securityContacts.bicep' = {
   name: 'lz-security-contacts'
 }
 
-output clientId string = identity.outputs.clientId
+output gitHubEnviromentVariables object = {
+  serviceConnection_client_Id: identity.outputs.clientId
+}
