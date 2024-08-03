@@ -118,7 +118,7 @@ jobs:
                 --deny-settings-mode 'denyWriteAndDelete' \
                 --action-on-unmanage 'deleteAll' \
                 --deny-settings-excluded-principals ${{ vars.APP_AZURE_PLATFORM_OBJECT_ID }} \
-                --deny-settings-excluded-actions $excludedActions  \
+                --deny-settings-excluded-actions $excludedActions \
                 --deny-settings-apply-to-child-scopes $true \
                 --yes)
 
