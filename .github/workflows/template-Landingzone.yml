@@ -118,6 +118,7 @@ jobs:
                 --deny-settings-excluded-principals ${{ vars.APP_AZURE_PLATFORM_OBJECT_ID }} \
                 --deny-settings-excluded-actions 'Microsoft.ManagedIdentity/userAssignedIdentities/*/assign/action \
                                                   Microsoft.Network/virtualNetworks/subnets/write' \
+                                                  Microsoft.Network/virtualNetworks/subnets/delete' \
                 --deny-settings-apply-to-child-scopes $true \
                 --yes)
 
