@@ -115,7 +115,7 @@ jobs:
                 --parameters params=$params \
                 --deny-settings-mode 'denyWriteAndDelete' \
                 --action-on-unmanage 'deleteAll' \
-                --deny-settings-excluded-principals '${{ vars.APP_AZURE_PLATFORM_OBJECT_ID }} 12849545-711d-448d-a763-bf6aba6a37df' \
+                --deny-settings-excluded-principals ${{ vars.APP_AZURE_PLATFORM_OBJECT_ID }} \
                 --deny-settings-excluded-actions 'Microsoft.ManagedIdentity/userAssignedIdentities/*/assign/action Microsoft.Network/virtualNetworks/subnets/write' \
                 --deny-settings-apply-to-child-scopes $true \
                 --yes)
