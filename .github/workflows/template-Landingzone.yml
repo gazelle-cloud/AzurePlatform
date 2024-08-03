@@ -108,9 +108,6 @@ jobs:
                 
                 az account set --subscription ${{ env.subscriptionId }}
 
-                excludedActions='Microsoft.ManagedIdentity/userAssignedIdentities/*/assign/action 
-                Microsoft.Network/virtualNetworks/subnets/write'
-
                 deployment=$(az stack sub create \
                 --name "landingzone-init" \
                 --location ${{ inputs.location }} \
@@ -119,7 +116,7 @@ jobs:
                 --deny-settings-mode 'denyWriteAndDelete' \
                 --action-on-unmanage 'deleteAll' \
                 --deny-settings-excluded-principals ${{ vars.APP_AZURE_PLATFORM_OBJECT_ID }} \
-                --deny-settings-excluded-actions $excludedActions \
+                --deny-settings-excluded-actions 'Microsoft.ManagedIdentity/userAssignedIdentities/*/assign/action Microsoft.Network/virtualNetworks/subnets/write' \
                 --deny-settings-apply-to-child-scopes $true \
                 --yes)
 
