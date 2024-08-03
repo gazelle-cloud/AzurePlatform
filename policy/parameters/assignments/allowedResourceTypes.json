@@ -14,7 +14,8 @@
                     "Microsoft.ManagedIdentity/userAssignedIdentities/federatedIdentityCredentials",
                     "Microsoft.OperationalInsights/workspaces",
                     "Microsoft.Resources/deploymentStacks",
-                    "Microsoft.Resources/resourceGroups"
+                    "Microsoft.Resources/resourceGroups",
+                    "Microsoft.Resources/tags"
                 ]
             }
         },
