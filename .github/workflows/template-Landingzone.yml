@@ -3,9 +3,6 @@ name: template - Langingzone
 on:
   workflow_call:
     inputs:
-        environment:
-          default: test
-          type: string
         managementGroupName:
           required: true
           type: string
@@ -26,7 +23,7 @@ on:
 jobs:
     Langingzone:
         runs-on: ubuntu-latest
-        environment: ${{ inputs.environment }}-azurePlatform
+        environment: ${{ inputs.managementGroupSuffix }}-azurePlatform
         steps:
         - name: Checkout
           uses: actions/checkout@v4
@@ -112,7 +109,7 @@ jobs:
                 --parameters params=$params \
                 --deny-settings-mode 'denyWriteAndDelete' \
                 --action-on-unmanage 'deleteAll' \
-                --deny-settings-excluded-principals '${{ vars.APP_AZURE_PLATFORM_OBJECT_ID }} ${{ vars.LANDINGZONES_OBJECT_ID }}' \
+                --deny-settings-excluded-principals ${{ vars.LANDINGZONES_OBJECT_ID  }} \
                 --deny-settings-excluded-actions 'Microsoft.ManagedIdentity/userAssignedIdentities/*/assign/action Microsoft.Network/virtualNetworks/subnets/write' \
                 --deny-settings-apply-to-child-scopes $true \
                 --yes)
