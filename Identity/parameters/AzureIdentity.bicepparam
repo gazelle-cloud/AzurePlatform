@@ -14,12 +14,12 @@ param identity = {
       ]
     }
   }
-  landingzone: {
+  landingzones: {
     federatedCredentials: {
       github: {
         audiences: ['api://AzureADTokenExchange']
         issuer: 'https://token.actions.githubusercontent.com'
-        subject: 'repo:gazelle-cloud/landingzone:environment:test'
+        subject: 'repo:gazelle-cloud/landingzones:environment:test'
       }
     }
     RBAC: {
