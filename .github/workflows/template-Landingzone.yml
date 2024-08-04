@@ -15,9 +15,6 @@ on:
         location:
             default: ${{ vars.AZURE_DEFAULT_LOCATION }}
             type: string
-        deploymentInputsMainBicep:
-            default: ./Landingzone/bicep/main-inputs.bicep
-            type: string
         mainBicep:
             default: ./Landingzone/bicep/main.bicep
             type: string
