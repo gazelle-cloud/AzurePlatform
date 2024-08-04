@@ -19,7 +19,7 @@ param identity = {
       github: {
         audiences: ['api://AzureADTokenExchange']
         issuer: 'https://token.actions.githubusercontent.com'
-        subject: 'repo:gazelle-cloud/landingzones:environment:test'
+        subject: 'repo:gazelle-cloud/AzurePlatform:environment:${environment}'
       }
     }
     RBAC: {
