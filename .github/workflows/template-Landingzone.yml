@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
         environment:
-          default: prod
+          default: test
           type: string
         managementGroupName:
           required: true
@@ -45,7 +45,7 @@ jobs:
           uses: azure/login@v1
           with:
             client-id: ${{ vars.LANDINGZONES_CLIENT_ID }}
-            tenant-id: ${{ vars.AZURE_TENANT_ID}}
+            tenant-id: ${{ vars.AZURE_TENANT_ID }}
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
