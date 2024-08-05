@@ -61,8 +61,8 @@ jobs:
               az deployment mg create \
                --name ${{ inputs.deploymentName }}-${{ inputs.environment}} \
                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                --template-file ${{ inputs.templateFile }} \
                --parameters ${{ inputs.templateParameters }} \
                --parameters environment=${{ inputs.environment }} \
-               --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }} \
-               --parameters managementSubscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
+               --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }}
