@@ -1,7 +1,6 @@
 targetScope = 'managementGroup'
 
 param childManagementGroupNames array
-param managementSubscriptionId string 
 param topLevelManagementGroupName string
 param environment string 
 
@@ -15,16 +14,16 @@ module child 'modules/managementGroups.bicep' = [
   }
 ]
 
-module moveSubscription 'modules/moveSubscription.bicep' = {
-  name: 'move-management-subscription-${environment}'
-  dependsOn: [
-    child
-  ]
-  params: {
-    managementGroupName: 'platform-${environment}'
-    subcriptionId: managementSubscriptionId
-  }
-}
+// module moveSubscription 'modules/moveSubscription.bicep' = {
+//   name: 'move-management-subscription-${environment}'
+//   dependsOn: [
+//     child
+//   ]
+//   params: {
+//     managementGroupName: 'platform-${environment}'
+//     subcriptionId: managementSubscriptionId
+//   }
+// }
 
 module defaultSettings 'modules/managementGroupSettings.bicep' = if (environment == 'prod') {
   name: 'default-managementGroup-settings'
