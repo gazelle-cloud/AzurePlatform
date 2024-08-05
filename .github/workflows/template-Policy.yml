@@ -58,7 +58,7 @@ jobs:
         - name: Azure login
           uses: azure/login@v1
           with:
-            client-id: ${{ vars.APP_PLATFORM_INIT_CLIENT_ID }}
+            client-id: ${{ vars.POLICY_PRINCIPAL_ID }}
             tenant-id: ${{ vars.AZURE_TENANT_ID}}
             allow-no-subscriptions: true
             enable-AzPSSession: false
@@ -94,7 +94,7 @@ jobs:
         - name: Azure login
           uses: azure/login@v1
           with:
-            client-id: ${{ vars.APP_PLATFORM_INIT_CLIENT_ID }}
+            client-id: ${{ vars.POLICY_PRINCIPAL_ID }}
             tenant-id: ${{ vars.AZURE_TENANT_ID}}
             allow-no-subscriptions: true
             enable-AzPSSession: false

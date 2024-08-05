@@ -14,17 +14,6 @@ module child 'modules/managementGroups.bicep' = [
   }
 ]
 
-// module moveSubscription 'modules/moveSubscription.bicep' = {
-//   name: 'move-management-subscription-${environment}'
-//   dependsOn: [
-//     child
-//   ]
-//   params: {
-//     managementGroupName: 'platform-${environment}'
-//     subcriptionId: managementSubscriptionId
-//   }
-// }
-
 module defaultSettings 'modules/managementGroupSettings.bicep' = if (environment == 'prod') {
   name: 'default-managementGroup-settings'
   dependsOn: [
