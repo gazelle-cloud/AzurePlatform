@@ -7,7 +7,7 @@ on:
             required: true
             type: string
         templateFile:
-            default: ./managementGroups/bicep/main-managementGroups.bicep
+            default: ./managementGroups/bicep/main.bicep
             type: string
         templateParameters:
             default: ./managementGroups/parameters/managementGroups.bicepparam
