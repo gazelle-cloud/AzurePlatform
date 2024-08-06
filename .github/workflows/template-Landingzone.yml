@@ -21,7 +21,7 @@ on:
     
 
 jobs:
-    part-II:
+    create-landingzone:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}-azurePlatform
         steps:
