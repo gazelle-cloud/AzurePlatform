@@ -86,7 +86,6 @@ jobs:
           uses: azure/cli@v1
           with:
               inlineScript: |
-                az account
                 az account subscription rename --id ${{ env.subscriptionId}} \
                   --name ${{ env.managementGroupName }}-${{ env.labName }}-${{ env.environment}}
                 
