@@ -21,7 +21,7 @@ on:
     
 
 jobs:
-    Langingzone:
+    part-II:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}-azurePlatform
         steps:
