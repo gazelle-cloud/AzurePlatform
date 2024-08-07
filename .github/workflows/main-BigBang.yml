@@ -14,6 +14,19 @@ jobs:
       managementGroupHierarchy: test
 
   Identity:
+    needs: mnanagementGroups
     uses: ./.github/workflows/template-Identity.yml
+    with:
+      managementGroupHierarchy: test
+
+  monitoring:
+    needs: mnanagementGroups
+    uses: ./.github/workflows/template-monitoring.yml
+    with:
+      managementGroupHierarchy: test
+
+  policies:
+    needs: Identity
+    uses: ./.github/workflows/template-monitoring.yml
     with:
       managementGroupHierarchy: test
