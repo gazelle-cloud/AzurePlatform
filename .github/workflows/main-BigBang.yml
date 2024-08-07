@@ -18,15 +18,21 @@ jobs:
     uses: ./.github/workflows/template-Identity.yml
     with:
       managementGroupHierarchy: test
+    secrets: inherit
+
 
   monitoring:
     needs: mnanagementGroups
     uses: ./.github/workflows/template-monitoring.yml
     with:
       managementGroupHierarchy: test
+    secrets: inherit
+
 
   policies:
     needs: Identity
     uses: ./.github/workflows/template-monitoring.yml
     with:
       managementGroupHierarchy: test
+    secrets: inherit
+  
