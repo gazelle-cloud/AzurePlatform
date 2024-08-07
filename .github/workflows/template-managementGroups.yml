@@ -12,9 +12,6 @@ on:
         templateParameters:
             default: ./managementGroups/parameters/managementGroups.bicepparam
             type: string
-        deploymentName:
-            default: managementGroups
-            type: string
 
 env:
   topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
@@ -52,7 +49,7 @@ jobs:
           with:
             inlineScript: |
               az deployment mg create \
-               --name ${{ inputs.deploymentName }}} \
+               --name managementGroups \
                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                --template-file ${{ inputs.templateFile }} \
