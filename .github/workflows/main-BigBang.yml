@@ -8,7 +8,12 @@ permissions:
   contents: read
 
 jobs:
-  Test:
+  mnanagementGroups:
     uses: ./.github/workflows/template-managementGroups.yml
+    with:
+      managementGroupHierarchy: test
+
+  Identity:
+    uses: ./.github/workflows/template-Identity.yml
     with:
       managementGroupHierarchy: test
