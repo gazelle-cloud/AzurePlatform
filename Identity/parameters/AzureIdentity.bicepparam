@@ -1,14 +1,14 @@
-using '../bicep/AzureIdentity.bicep'
+using '../bicep/managedIdentities.bicep'
 
 param workloadName = 'identity'
 param location = readEnvironmentVariable('AZURE_DEFAULT_LOCATION', '')
-param managementGroupHierarchy = readEnvironmentVariable('managementGroupHierarchy', '')
+param environment = readEnvironmentVariable('managementGroupHierarchy', '')
 param subscriptionId = readEnvironmentVariable('MANAGEMENT_SUBSCRIPTION_ID', '')
 param identity = {
   policy: {
     federatedCredentials: {}
     RBAC: {
-      scope: 'gazelle-${managementGroupHierarchy}'
+      scope: 'gazelle-${environment}'
       roleDefinitions: [
         '/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c'
       ]
@@ -19,11 +19,11 @@ param identity = {
       github: {
         audiences: ['api://AzureADTokenExchange']
         issuer: 'https://token.actions.githubusercontent.com'
-        subject: 'repo:gazelle-cloud/AzurePlatform:environment:${managementGroupHierarchy}'
+        subject: 'repo:gazelle-cloud/AzurePlatform:environment:${environment}'
       }
     }
     RBAC: {
-      scope: 'gazelle-${managementGroupHierarchy}'
+      scope: 'gazelle-${environment}'
       roleDefinitions: [
         '/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c'
         '/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9'

@@ -1,12 +1,12 @@
 targetScope = 'managementGroup'
 
 param workloadName string
-param managementGroupHierarchy string
+param environment string
 param location string
 param subscriptionId string
 param identity object
 
-var resourceGroupName = '${workloadName}-${managementGroupHierarchy}'
+var resourceGroupName = '${workloadName}-${environment}'
 
 module IdentityResourceGroup 'br/public:avm/res/resources/resource-group:0.2.4' = {
   scope: subscription(subscriptionId)
@@ -26,7 +26,7 @@ module managedIdentity 'modules/uami.bicep' = [
     name: 'uami-${item.key}'
     params: {
       workloadName: item.key
-      environment: managementGroupHierarchy
+      environment: environment
       federatedCredentials: item.value.federatedCredentials
     }
   }
