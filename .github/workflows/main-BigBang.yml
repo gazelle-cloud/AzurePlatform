@@ -22,12 +22,6 @@ jobs:
     with:
       managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
 
-  re-run:
-    uses: ./.github/workflows/template-managementGroups.yml
-    if: failure()
-    with:
-      managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
-
   identity:
     needs: mnanagementGroups
     uses: ./.github/workflows/template-Identity.yml
