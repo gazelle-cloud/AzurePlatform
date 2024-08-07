@@ -26,7 +26,7 @@ module managedIdentity 'modules/uami.bicep' = [
     name: 'uami-${item.key}'
     params: {
       workloadName: item.key
-      managementGroupHierarchy: managementGroupHierarchy
+      environment: managementGroupHierarchy
       federatedCredentials: item.value.federatedCredentials
     }
   }
