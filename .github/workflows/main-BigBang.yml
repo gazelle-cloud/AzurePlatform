@@ -43,4 +43,14 @@ jobs:
       managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
     secrets: inherit
 
+  managementLandinzone:
+    needs: policies
+    uses: ./.github/workflows/template-landingzone.yml
+    with:
+      managementGroupName : platform
+      managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
+      location: FranceCentral
+      parameterFile: ./Landingzone/platform-management-${{ github.event.inputs.managementGroupHierarchy }}.json
+    secrets: inherit
+
   
