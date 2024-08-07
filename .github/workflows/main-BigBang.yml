@@ -2,6 +2,15 @@ name: az - BigBang
 
 on:
   workflow_dispatch:
+    inputs:
+      managementGroupHierarchy:
+        description: 'Management Group Hierarchy'
+        required: true
+        default: 'test'
+        type: choice
+        options:
+          - 'test'
+          - 'prod'
 
 permissions:
   id-token: write
@@ -11,28 +20,27 @@ jobs:
   mnanagementGroups:
     uses: ./.github/workflows/template-managementGroups.yml
     with:
-      managementGroupHierarchy: test
+      managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
 
   Identity:
     needs: mnanagementGroups
     uses: ./.github/workflows/template-Identity.yml
     with:
-      managementGroupHierarchy: test
+      managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
     secrets: inherit
-
 
   monitoring:
     needs: mnanagementGroups
     uses: ./.github/workflows/template-monitoring.yml
     with:
-      managementGroupHierarchy: test
+      managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
     secrets: inherit
-
 
   policies:
     needs: Identity
     uses: ./.github/workflows/template-monitoring.yml
     with:
-      managementGroupHierarchy: test
+      managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
     secrets: inherit
+
   
