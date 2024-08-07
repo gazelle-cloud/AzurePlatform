@@ -9,15 +9,6 @@ permissions:
 
 jobs:
   Test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
-    - uses: ./.github/workflows/template-managementGroups.yml
-      with:
-        managementGroupHierarchy: test
-
-    - uses: ./.github/workflows/template-Identity.yml
-      with:
-        managementGroupHierarchy: test
+    uses: ./.github/workflows/template-managementGroups.yml
+    with:
+      managementGroupHierarchy: test
