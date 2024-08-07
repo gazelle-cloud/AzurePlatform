@@ -8,17 +8,13 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  triage:
     runs-on: ubuntu-latest
-    permissions: write-all
-    environment: test
     steps:
-      - name: managementGroups
-        uses: ./.github/workflows/template-managementGroups.yml
-        with:
-          managementGroupHierarchy: test
+    - uses: ./.github/workflows/template-managementGroups.yml
+      with:
+        managementGroupHierarchy: test
 
-      - name: identity
-        uses: ./.github/workflows/template-Identity.yml
-        with:
-          managementGroupHierarchy: test
+    - uses: ./.github/workflows/template-Identity.yml
+      with:
+        managementGroupHierarchy: test
