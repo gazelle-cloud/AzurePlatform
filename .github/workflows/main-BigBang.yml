@@ -22,12 +22,6 @@ jobs:
     with:
       managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
 
-  re-run:
-    uses: ./.github/workflows/template-managementGroups.yml
-    if: failure()
-    with:
-      managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
-
   identity:
     needs: mnanagementGroups
     uses: ./.github/workflows/template-Identity.yml
@@ -36,14 +30,16 @@ jobs:
     secrets: inherit
 
   monitoring:
-    needs: identity
+    needs: mnanagementGroups
     uses: ./.github/workflows/template-monitoring.yml
     with:
       managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
     secrets: inherit
 
   policies:
-    needs: monitoring
+    needs: 
+      - identity
+      - monitoring
     uses: ./.github/workflows/template-Policy.yml
     with:
       managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
