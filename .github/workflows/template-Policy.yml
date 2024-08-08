@@ -42,7 +42,7 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --yes)
                 
-    online:
+    assignment-online:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}
         env:
@@ -78,7 +78,7 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --yes)
 
-    platform:
+    assignment-platform:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}
         env:
@@ -114,7 +114,7 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --yes)
                 
-    playground:
+    assignment-playground:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}
         env:
