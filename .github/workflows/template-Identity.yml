@@ -77,16 +77,13 @@ jobs:
           uses: azure/cli@v2
           with:
             inlineScript: |
-              deployment=$(az stack mg create \
+              deployment=$(az deployment mg create \
                 --name RBAC \
                 --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --template-file './Identity/bicep/rbac.bicep' \
                 --parameters './Identity/parameters/rbac.bicepparam' \
-                --parameters environment=${{ inputs.managementGroupHierarchy }} \
-                --deny-settings-mode None \
-                --action-on-unmanage deleteAll \
-                --yes)
+                --parameters environment=${{ inputs.managementGroupHierarchy }})
 
               envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
               echo "Deployment Outputs: $envVariables"
