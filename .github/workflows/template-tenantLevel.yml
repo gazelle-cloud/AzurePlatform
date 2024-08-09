@@ -1,16 +1,10 @@
-name: template - managementGroups
+name: template - tenant level deployment
 
 on:
   workflow_call:
     inputs:
         managementGroupHierarchy:
             required: true
-            type: string
-        templateFile:
-            default: ./managementGroups/bicep/main.bicep
-            type: string
-        templateParameters:
-            default: ./managementGroups/parameters/managementGroups.bicepparam
             type: string
 
 env:
@@ -52,7 +46,7 @@ jobs:
                --name managementGroups \
                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
-               --template-file ${{ inputs.templateFile }} \
-               --parameters ${{ inputs.templateParameters }} \
+               --template-file ./tenantLevel/bicep/managementGroups.bicep \
+               --parameters ./tenantLevel/parameters/managementGroups.bicepparam \
                --parameters environment=${{ inputs.managementGroupHierarchy }} \
                --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }}
