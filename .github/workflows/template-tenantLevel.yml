@@ -78,12 +78,12 @@ jobs:
           uses: azure/cli@v2
           with:
             inlineScript: |
-              az deployment mg create \
+              deployment=$(az deployment mg create \
                --name InvoiceSections \
                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                --template-file ./tenantLevel/bicep/billing.bicep \
-               --parameters ./tenantLevel/parameters/billing.bicepparam
+               --parameters ./tenantLevel/parameters/billing.bicepparam)
 
               envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
               echo "Deployment Outputs: $envVariables"
