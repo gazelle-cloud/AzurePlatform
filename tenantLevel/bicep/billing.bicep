@@ -16,7 +16,7 @@ module invoice 'modules/invoice.bicep' = [
   }
 ]
 
-output invoiceSections array = [
+output gitHubEnviromentVariables array = [
   for (item, i) in invoiceSections: {
     '${item}_billingScope' : invoice[i].outputs.invoiceSectionResourceId
   }
