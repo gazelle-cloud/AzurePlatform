@@ -23,11 +23,3 @@ module defaultSettings 'modules/managementGroupSettings.bicep' = if (environment
     defaultManagementGroup: 'playground-${environment}'
   }
 }
-
-
-module invoice 'modules/invoice.bicep' = {
-  name: 'ghm'
-  params: {
-    invoiceSectionName: 'init'
-  }
-}
