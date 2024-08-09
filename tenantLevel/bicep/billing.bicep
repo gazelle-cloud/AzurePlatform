@@ -1,11 +1,16 @@
 targetScope = 'managementGroup'
 
+
+param billingAccountName string
+param billingProfileName string
 param invoiceSections array
 
 module invoice 'modules/invoice.bicep' = [
   for item in invoiceSections: {
     name: 'invoiceSection-${item}'
     params: {
+      billingAccountName: billingAccountName
+      billingProfileName: billingProfileName
       invoiceSectionName: item
     }
   }
@@ -13,6 +18,6 @@ module invoice 'modules/invoice.bicep' = [
 
 output invoiceSections array = [
   for (item, i) in invoiceSections: {
-    section: invoice[i].outputs.invoiceSectionResourceId
+    '${item[i]}_billingScope' : invoice[i].outputs.invoiceSectionResourceId
   }
 ]
