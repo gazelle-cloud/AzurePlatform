@@ -13,6 +13,6 @@ module invoice 'modules/invoice.bicep' = [
 
 output invoiceSections array = [
   for (item, i) in invoiceSections: {
-    section: item[i].id
+    section: item[i].invoiceSectionResourceId
   }
 ]
