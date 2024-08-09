@@ -58,6 +58,14 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v4
 
+        - name: get github token
+          id: github-token
+          uses: actions/create-github-app-token@v1
+          with:
+            app-id: ${{ vars.APP_GITHUB_BIGBANG_ID }}
+            private-key: ${{ secrets.APP_GITHUB_BIGBANG }}
+            owner: ${{ github.repository_owner }}
+
         - name: Azure login
           uses: azure/login@v2
           with:
