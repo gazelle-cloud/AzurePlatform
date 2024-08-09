@@ -85,7 +85,7 @@ jobs:
                --template-file ./tenantLevel/bicep/billing.bicep \
                --parameters ./tenantLevel/parameters/billing.bicepparam)
 
-              envVariables=$(echo $deployment')
+              envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
               echo "Deployment Outputs: $envVariables"
               echo "billing=$(echo $envVariables | jq -c .)" >> $GITHUB_ENV
 
