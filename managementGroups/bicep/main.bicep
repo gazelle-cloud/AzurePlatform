@@ -26,7 +26,6 @@ module defaultSettings 'modules/managementGroupSettings.bicep' = if (environment
 
 
 module invoice 'modules/invoice.bicep' = {
-  scope: tenant()
   name: 'ghm'
   params: {
     invoiceSectionName: 'init'
