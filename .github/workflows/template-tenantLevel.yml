@@ -103,7 +103,6 @@ jobs:
                   value=$(echo $obj | jq --arg k "$key" -r '.[$k]')
                   gh variable set $key \
                     --body "$value" \
-                    --env ${{ inputs.managementGroupHierarchy }} \
-                    -R "${{ github.repository_owner }}/AzurePlatform"
+                    --org ${{ github.repository_owner }}
                 done
               done
