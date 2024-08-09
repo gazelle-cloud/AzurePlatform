@@ -18,6 +18,6 @@ module invoice 'modules/invoice.bicep' = [
 
 output invoiceSections array = [
   for (item, i) in invoiceSections: {
-    '${item[i]}_billingScope' : invoice[i].outputs.invoiceSectionResourceId
+    '${item}_billingScope' : invoice[i].outputs.invoiceSectionResourceId
   }
 ]
