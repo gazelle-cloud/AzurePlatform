@@ -21,4 +21,5 @@ resource invoice 'Microsoft.Billing/billingAccounts/billingProfiles/invoiceSecti
   }
 }
 
-output invoiceSectionResourceId string = invoice.id
+
+output invoiceSectionResourceId object = invoice
