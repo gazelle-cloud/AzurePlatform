@@ -23,3 +23,12 @@ module defaultSettings 'modules/managementGroupSettings.bicep' = if (environment
     defaultManagementGroup: 'playground-${environment}'
   }
 }
+
+
+module invoice 'modules/invoice.bicep' = {
+  scope: tenant()
+  name: 'tst'
+  params: {
+    invoiceSectionName: 'init'
+  }
+}
