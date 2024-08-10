@@ -36,11 +36,16 @@ jobs:
                 -R "${{ github.repository_owner }}/AzurePlatform"
 
               gh variable set APP_PLATFORM_INIT_CLIENT_ID \
-                --body ${{ env.APP_PLATFORM_INIT_CLIENT_ID }} \
+                --body ${{ vars[env.APP_PLATFORM_INIT_CLIENT_ID] }} \
                 --env ${{ inputs.managementGroupHierarchy }} \
                 -R "${{ github.repository_owner }}/AzurePlatform"
 
               gh variable set APP_PLATFORM_INIT_PRINCIPAL_ID \
-                --body ${{ env.APP_PLATFORM_INIT_PRINCIPAL_ID }} \
+                --body ${{ vars[env.APP_PLATFORM_INIT_PRINCIPAL_ID ]}} \
                 --env ${{ inputs.managementGroupHierarchy }} \
                 -R "${{ github.repository_owner }}/AzurePlatform"
+
+              gh variable set TOP_LEVEL_MANAGEMENTGROUP_NAME \
+              --body ${{ vars.MANAGEMENTGROUP_HIERARCHY_NAME }} \
+              --env ${{ inputs.managementGroupHierarchy }} \
+              -R "${{ github.repository_owner }}/AzurePlatform"
