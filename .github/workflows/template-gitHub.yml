@@ -1,0 +1,43 @@
+name: template - gitHub
+
+on:
+  workflow_call:
+    inputs:
+        managementGroupHierarchy:
+            required: true
+            type: string
+
+jobs:
+    environmentVars:
+        runs-on: ubuntu-latest
+        environment: ${{ inputs.managementGroupHierarchy }}
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: get github token
+          id: github-token
+          uses: actions/create-github-app-token@v1
+          with:
+            app-id: ${{ vars.APP_GITHUB_BIGBANG_ID }}
+            private-key: ${{ secrets.APP_GITHUB_BIGBANG }}
+            owner: ${{ github.repository_owner }}
+
+        - name: set env variables
+          env:
+            GH_TOKEN: ${{ steps.github-token.outputs.token }}
+          run: |
+              gh varialbe set MANAGEMENT_SUBSCRIPTION_ID \
+                --body ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}_${{ inputs.managementGroupHierarchy }} \
+                --env ${{ inputs.managementGroupHierarchy }} \
+                -R "${{ github.repository_owner }}/AzurePlatform"
+
+              gh varialbe set APP_PLATFORM_INIT_CLIENT_ID \
+                --body ${{ vars.APP_PLATFORM_INIT_CLIENT_ID }}_${{ inputs.managementGroupHierarchy }} \
+                --env ${{ inputs.managementGroupHierarchy }} \
+                -R "${{ github.repository_owner }}/AzurePlatform"
+
+              gh varialbe set APP_PLATFORM_INIT_PRINCIPAL_ID \
+                --body ${{ vars.APP_PLATFORM_INIT_PRINCIPAL_ID }}_${{ inputs.managementGroupHierarchy }} \
+                --env ${{ inputs.managementGroupHierarchy }} \
+                -R "${{ github.repository_owner }}/AzurePlatform"
