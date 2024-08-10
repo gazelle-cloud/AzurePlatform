@@ -24,6 +24,7 @@ jobs:
     secrets: inherit
 
   tenantLevel:
+    needs: gitHub
     uses: ./.github/workflows/template-tenantLevel.yml
     with:
       managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
