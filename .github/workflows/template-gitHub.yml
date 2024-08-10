@@ -26,9 +26,9 @@ jobs:
         - name: set env variables
           env:
             GH_TOKEN: ${{ steps.github-token.outputs.token }}
-            MANAGEMENT_SUBSCRIPTION_ID: "${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}_${{ inputs.managementGroupHierarchy }}"
-            APP_PLATFORM_INIT_CLIENT_ID: "${{ vars.APP_PLATFORM_INIT_CLIENT_ID }}_${{ inputs.managementGroupHierarchy }}"
-            APP_PLATFORM_INIT_PRINCIPAL_ID: "${{ vars.APP_PLATFORM_INIT_PRINCIPAL_ID }}_${{ inputs.managementGroupHierarchy }}"
+            MANAGEMENT_SUBSCRIPTION_ID: "MANAGEMENT_SUBSCRIPTION_ID_${{ inputs.managementGroupHierarchy }}"
+            APP_PLATFORM_INIT_CLIENT_ID: "APP_PLATFORM_INIT_CLIENT_ID_${{ inputs.managementGroupHierarchy }}"
+            APP_PLATFORM_INIT_PRINCIPAL_ID: "APP_PLATFORM_INIT_PRINCIPAL_ID_${{ inputs.managementGroupHierarchy }}"
           run: |
               gh variable set MANAGEMENT_SUBSCRIPTION_ID \
                 --body ${{ env.MANAGEMENT_SUBSCRIPTION_ID }} \
