@@ -28,16 +28,16 @@ jobs:
             GH_TOKEN: ${{ steps.github-token.outputs.token }}
           run: |
               gh variable set MANAGEMENT_SUBSCRIPTION_ID \
-                --body "${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}_${{ inputs.managementGroupHierarchy }}" \
+                --body ${{ vars.MANAGEMENT_SUBSCRIPTION_ID_TEST }} \
                 --env ${{ inputs.managementGroupHierarchy }} \
                 -R "${{ github.repository_owner }}/AzurePlatform"
 
               gh variable set APP_PLATFORM_INIT_CLIENT_ID \
-                --body "${{ vars.APP_PLATFORM_INIT_CLIENT_ID }}_${{ inputs.managementGroupHierarchy }}" \
+                --body ${{ vars.APP_PLATFORM_INIT_CLIENT_ID_TEST }} \
                 --env ${{ inputs.managementGroupHierarchy }} \
                 -R "${{ github.repository_owner }}/AzurePlatform"
 
               gh variable set APP_PLATFORM_INIT_PRINCIPAL_ID \
-                --body "${{ vars.APP_PLATFORM_INIT_PRINCIPAL_ID }}_${{ inputs.managementGroupHierarchy }}" \
+                --body ${{ vars.APP_PLATFORM_INIT_PRINCIPAL_ID_TEST }} \
                 --env ${{ inputs.managementGroupHierarchy }} \
                 -R "${{ github.repository_owner }}/AzurePlatform"
