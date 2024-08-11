@@ -66,13 +66,16 @@ jobs:
         
         - name: create subscription
           if: ${{ env.subscriptionId == null }}
+          env:
+            invoiceSection: "billingScope_${{ env.billingScope }}"
+
           uses: azure/cli@v2
           with:
               inlineScript: |
                 newSubscription=$(az account alias create --workload 'Production' \
                   --name ${{ env.managementGroupName }}-${{ env.labName }}-${{ env.environment}} \
                   --display-name ${{ env.managementGroupName }}-${{ env.labName }}-${{ env.environment}} \
-                  --billing-scope ${{ env.billingScope }})
+                  --billing-scope ${{ env.invoiceSection }})
                 echo "Subscription Alias: $newSubscription"
                 subscriptionId=$(echo $newSubscription | jq -r '.properties.subscriptionId')
                 echo "subscriptionId=$subscriptionId" >> $GITHUB_ENV
