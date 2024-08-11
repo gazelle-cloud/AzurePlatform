@@ -13,7 +13,6 @@ module identity 'modules/identity.bicep' = {
     labName: params.labName
     environment: params.environment
     location: params.location
-    githubOrganizationName: params.githubOrganizationName
     githubRepoName: params.githubRepoName
   }
 }
