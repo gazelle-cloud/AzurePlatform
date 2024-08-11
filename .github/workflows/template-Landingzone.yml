@@ -72,7 +72,7 @@ jobs:
                 foo=$(az account alias create --workload 'Production' \
                   --name ${{ env.managementGroupName }}-${{ env.labName }}-${{ env.environment}} \
                   --display-name ${{ env.managementGroupName }}-${{ env.labName }}-${{ env.environment}} \
-                  --billing-scope ${{ secrets.AZURE_BILLING_WORKLOADS }})
+                  --billing-scope ${{ vars.platform_billingScope }})
                 echo "Subscription Alias: $foo"
                 subscriptionId=$(echo $foo | jq -r '.properties.subscriptionId')
                 echo "subscriptionId=$subscriptionId" >> $GITHUB_ENV
