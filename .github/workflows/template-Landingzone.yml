@@ -69,12 +69,12 @@ jobs:
           uses: azure/cli@v2
           with:
               inlineScript: |
-                foo=$(az account alias create --workload 'Production' \
+                newSubscription=$(az account alias create --workload 'Production' \
                   --name ${{ env.managementGroupName }}-${{ env.labName }}-${{ env.environment}} \
                   --display-name ${{ env.managementGroupName }}-${{ env.labName }}-${{ env.environment}} \
                   --billing-scope ${{ vars.platform_billingScope }})
-                echo "Subscription Alias: $foo"
-                subscriptionId=$(echo $foo | jq -r '.properties.subscriptionId')
+                echo "Subscription Alias: $newSubscription"
+                subscriptionId=$(echo $newSubscription | jq -r '.properties.subscriptionId')
                 echo "subscriptionId=$subscriptionId" >> $GITHUB_ENV
 
         - name: move subscription
