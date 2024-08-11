@@ -1,4 +1,4 @@
-targetScope  = 'subscription'
+targetScope = 'subscription'
 
 param params object
 
@@ -37,8 +37,6 @@ module resourceLevelTags 'modules/policyAssignment.bicep' = [
     }
   }
 ]
-
-
 
 module securityContacts 'modules/securityContacts.bicep' = {
   name: 'lz-security-contacts'

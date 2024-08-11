@@ -29,6 +29,18 @@ body:
       required: true
 
   - type: dropdown
+    id: location
+    attributes:
+      label: location
+      description: 
+      multiple: false
+      options:
+      - FranceCentral
+      default: 0
+    validations:
+      required: true
+
+  - type: dropdown
     id: billingScope
     attributes:
       label: billingScope
