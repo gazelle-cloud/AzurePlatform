@@ -1,12 +1,11 @@
 targetScope = 'managementGroup'
 
-
 param favPolicyValue string
 param laEffect string
 param diagnosticSettingName string
-param categoryGroup string 
+param categoryGroup string
 param logAnalytics string
-param identityResoruceId string 
+param identityResoruceId string
 param location string
 
 var favoriteCustomPolicy = loadJsonContent('../parameters/customDefinitions/st_vnetAclrRules.json')
@@ -49,10 +48,9 @@ module setDefinition 'modules/policySetDefinitions.bicep' = {
           logAnalytics: {
             value: logAnalytics
           }
-
         }
       }
-    ] 
+    ]
   }
 }
 

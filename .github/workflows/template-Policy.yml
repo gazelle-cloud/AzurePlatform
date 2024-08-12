@@ -33,7 +33,7 @@ jobs:
                 --name policyAssignments \
                 --management-group-id ${{ env.deploymentScope }}-${{ inputs.managementGroupHierarchy }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --template-file./policy/bicep/foo.bicep \
+                --template-file ./policy/bicep/foo.bicep \
                 --parameters ./policy/parameters/${{ env.deploymentScope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
