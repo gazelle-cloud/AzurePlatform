@@ -1,6 +1,6 @@
 {
     "name": "testCustomDefinitions",
-    "builtIn": {
+    "setDefinition": {
         "displayName": "test custom policy definitions",
         "metadata": {
             "category": "General",

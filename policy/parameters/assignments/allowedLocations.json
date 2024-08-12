@@ -1,6 +1,6 @@
 {
     "name": "allowedLocations",
-    "builtIn": {
+    "setDefinition": {
         "displayName": "Allowed locations",
         "metadata": {
             "category": "General",

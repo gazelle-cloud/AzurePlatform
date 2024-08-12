@@ -1,0 +1,48 @@
+{
+    "name": "diagnosticSettings",
+    "setDefinition": {
+        "displayName": "enable diagnostic settings",
+        "metadata": {
+            "category": "Monitoring",
+            "description": "enforce diagnostic settings on resources"
+        },
+        "parameters": {
+            "effect": {
+                "type": "string",
+                "defaultValue": "DeployIfNotExists"
+            },
+            "diagnosticSettingName": {
+                "type": "string",
+                "defaultValue": "central-log-analytics"
+            },
+            "categoryGroup": {
+                "type": "string",
+                "defaultValue": "allLogs"
+            },
+            "logAnalytics": {
+                "type": "string",
+                "defaultValue": "/subscriptions/ca29cb06-f5f6-4116-9061-493426c4d70e/resourcegroups/monitoring-test/providers/microsoft.operationalinsights/workspaces/la-monitoring-test"
+            }
+        }
+    },
+    "policyDefinitions": [
+        {
+            "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/fea83f6c-a18a-4338-8f1f-80ecba4c5643",
+            "policyDefinitionReferenceId": "logAnalytics",
+            "parameters": {
+                "effect": {
+                    "value": "[parameters('effect')]"
+                },
+                "diagnosticSettingName": {
+                    "value": "[parameters('diagnosticSettingName')]"
+                },
+                "categoryGroup": {
+                    "value": "[parameters('categoryGroup')]"
+                },
+                "logAnalytics": {
+                    "value": "[parameters('logAnalytics')]"
+                }
+            }
+        }
+    ]
+}
