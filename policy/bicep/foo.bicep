@@ -1,7 +1,7 @@
 targetScope = 'managementGroup'
 
 param favPolicyValue string
-param anotherPolicyValue string
+// param anotherPolicyValue string
 param laEffect string
 param diagnosticSettingName string
 param categoryGroup string
@@ -10,7 +10,7 @@ param identityResoruceId string
 param location string
 
 var favoriteCustomPolicy = loadJsonContent('../parameters/customDefinitions/st_vnetAclrRules.json')
-var anotherCoolPolicy = loadJsonContent('../parameters/customDefinitions/st_corssTenantReplication.json')
+// var anotherCoolPolicy = loadJsonContent('../parameters/customDefinitions/st_corssTenantReplication.json')
 
 
 module favortitePolicy 'modules/policyDefinitions.bicep' = {
@@ -21,13 +21,13 @@ module favortitePolicy 'modules/policyDefinitions.bicep' = {
   }
 }
 
-module anotherPolicy 'modules/policyDefinitions.bicep' = {
-  name: 'another-cool-policy'
-  params: {
-    policyName: anotherCoolPolicy.name
-    policyProperties: anotherCoolPolicy.properties
-  }
-}
+// module anotherPolicy 'modules/policyDefinitions.bicep' = {
+//   name: 'another-cool-policy'
+//   params: {
+//     policyName: anotherCoolPolicy.name
+//     policyProperties: anotherCoolPolicy.properties
+//   }
+// }
 
 
 module setDefinition 'modules/policySetDefinitions.bicep' = {
@@ -44,15 +44,15 @@ module setDefinition 'modules/policySetDefinitions.bicep' = {
           }
         }
       }
-      {
-        policyDefinitionReferenceId: anotherPolicy.outputs.resourcrId 
-        policyDefinitionId: anotherPolicy.outputs.name
-        parameters: {
-          effect: {
-            value: anotherPolicyValue
-          }
-        }
-      }
+      // {
+      //   policyDefinitionReferenceId: anotherPolicy.outputs.resourcrId 
+      //   policyDefinitionId: anotherPolicy.outputs.name
+      //   parameters: {
+      //     effect: {
+      //       value: anotherPolicyValue
+      //     }
+      //   }
+      // }
       {
         policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/fea83f6c-a18a-4338-8f1f-80ecba4c5643'
         policyDefinitionReferenceId: 'logAnalytics'
