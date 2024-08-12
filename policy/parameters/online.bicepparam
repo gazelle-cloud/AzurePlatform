@@ -9,5 +9,6 @@ var topLevelMgId = '${'/providers/Microsoft.Management/managementGroups/'}${topL
 
 param policies = [
   json(replace(loadTextContent('assignments/allowedResourceTypes.json'), '{{topLevel}}', topLevelMgId))
+  json(replace(loadTextContent('assignments/diagnositcSettings.json'), '{{topLevel}}', topLevelMgId))
   json(replace(loadTextContent('assignments/allowedLocations.json'), '{{topLevel}}', topLevelMgId))
 ]
