@@ -1,6 +1,7 @@
 targetScope = 'managementGroup'
 
 param favPolicyValue string
+param anotherPolicyValue string
 param laEffect string
 param diagnosticSettingName string
 param categoryGroup string
@@ -9,6 +10,8 @@ param identityResoruceId string
 param location string
 
 var favoriteCustomPolicy = loadJsonContent('../parameters/customDefinitions/st_vnetAclrRules.json')
+var anotherCoolPolicy = loadJsonContent('../parameters/customDefinitions/st_corssTenantReplication.json')
+
 
 module favortitePolicy 'modules/policyDefinitions.bicep' = {
   name: 'my-favorite-custom-policy'
@@ -17,6 +20,15 @@ module favortitePolicy 'modules/policyDefinitions.bicep' = {
     policyProperties: favoriteCustomPolicy.properties
   }
 }
+
+module anotherPolicy 'modules/policyDefinitions.bicep' = {
+  name: 'another-cool-policy'
+  params: {
+    policyName: anotherCoolPolicy.name
+    policyProperties: anotherCoolPolicy.properties
+  }
+}
+
 
 module setDefinition 'modules/policySetDefinitions.bicep' = {
   name: 'my-custom-init'
@@ -29,6 +41,15 @@ module setDefinition 'modules/policySetDefinitions.bicep' = {
         parameters: {
           effect: {
             value: favPolicyValue
+          }
+        }
+      }
+      {
+        policyDefinitionReferenceId: anotherPolicy.outputs.resourcrId 
+        policyDefinitionId: anotherPolicy.outputs.name
+        parameters: {
+          effect: {
+            value: anotherPolicyValue
           }
         }
       }
