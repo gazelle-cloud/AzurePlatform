@@ -13,6 +13,8 @@ jobs:
         environment: ${{ inputs.managementGroupHierarchy }}
         strategy:
             matrix:
+                mainBicep:
+                  - foo
                 scope: 
                   - online
                   - platform
@@ -36,7 +38,7 @@ jobs:
                 --name testMatrix-${{ matrix.scope }} \
                 --management-group-id ${{ matrix.scope }}-${{ inputs.managementGroupHierarchy }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --template-file ./policy/bicep/main.bicep \
+                --template-file ./policy/bicep/${{ matrix.scope }}.bicep \
                 --parameters ./policy/parameters/${{ matrix.scope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
