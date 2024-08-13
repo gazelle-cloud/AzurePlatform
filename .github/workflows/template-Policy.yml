@@ -21,14 +21,6 @@ jobs:
             scope: 
               - online
               - platform
-            include:
-              - policy: foo
-                scope:
-                  - online
-                  - platform
-                additional:
-                  --parameters logAnalytics=${{ vars.LOGANALYTICS_RESOURCE_ID }} \
-
             
         steps:
         - name: Checkout
@@ -43,6 +35,7 @@ jobs:
             enable-AzPSSession: false
 
         - name: Deploy policies
+          if: ${{ matrix.policy != 'foo' }}
           uses: azure/cli@v2
           with:
               inlineScript: |
@@ -54,6 +47,24 @@ jobs:
                 --parameters ./policy/${{ matrix.policy }}/${{ matrix.scope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
+                --deny-settings-mode None \
+                --action-on-unmanage deleteAll \
+                --yes)
+
+        - name: Deploy policies
+          if: ${{ matrix.policy == 'foo' }}
+          uses: azure/cli@v2
+          with:
+              inlineScript: |
+                deployment=$(az stack mg create \
+                --name policy-${{ matrix.policy }}-${{ matrix.scope }} \
+                --management-group-id ${{ matrix.scope }}-${{ inputs.managementGroupHierarchy }} \
+                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --template-file ./policy/${{ matrix.policy }}/main.bicep \
+                --parameters ./policy/${{ matrix.policy }}/${{ matrix.scope }}.bicepparam \
+                --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
+                --parameters logAnalytics=${{ vars.LOGANALYTICS_RESOURCE_ID }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
