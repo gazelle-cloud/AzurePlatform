@@ -1,4 +1,4 @@
-using '../bicep/main.bicep'
+using '../bicep/foo.bicep'
 
 param categoryGroup = 'allLogs'
 param diagnosticSettingName = 'withLoveFromBicep'
