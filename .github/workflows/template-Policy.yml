@@ -34,13 +34,13 @@ jobs:
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
-        - name: Deploy policies
+        - name: standard policies
           if: ${{ matrix.policy != 'foo' }}
           uses: azure/cli@v2
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name policy-${{ matrix.policy }}-${{ matrix.scope }} \
+                --name policy-${{ matrix.policy }} \
                 --management-group-id ${{ matrix.scope }}-${{ inputs.managementGroupHierarchy }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ./policy/${{ matrix.policy }}/main.bicep \
@@ -51,13 +51,13 @@ jobs:
                 --action-on-unmanage deleteAll \
                 --yes)
 
-        - name: Deploy policies
+        - name: additional param (log analytics)
           if: ${{ matrix.policy == 'foo' }}
           uses: azure/cli@v2
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name policy-${{ matrix.policy }}-${{ matrix.scope }} \
+                --name policy-${{ matrix.policy }} \
                 --management-group-id ${{ matrix.scope }}-${{ inputs.managementGroupHierarchy }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ./policy/${{ matrix.policy }}/main.bicep \
