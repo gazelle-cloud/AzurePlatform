@@ -11,8 +11,11 @@ jobs:
     assignment-online:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}
-        env:
-          deploymentScope: online
+        strategy:
+            matrix:
+                scope: 
+                  - online
+                  - platform
         steps:
         - name: Checkout
           uses: actions/checkout@v4
@@ -30,14 +33,14 @@ jobs:
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name policyAssignments \
-                --management-group-id ${{ env.deploymentScope }}-${{ inputs.managementGroupHierarchy }} \
+                --name testMatrix \
+                --management-group-id ${{ matrix.scope }}-${{ inputs.managementGroupHierarchy }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --template-file ./policy/bicep/foo.bicep \
-                --parameters ./policy/parameters/${{ env.deploymentScope }}.bicepparam \
+                --template-file ./policy/bicep/main.bicep \
+                --parameters ./policy/parameters/${{ matrix.scope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
-                --parameters logAnalytics=${{  vars.LOGANALYTICS_RESOURCE_ID }} \
+                --parameters logAnalytics=${{ vars.LOGANALYTICS_RESOURCE_ID }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
