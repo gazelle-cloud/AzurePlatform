@@ -12,14 +12,24 @@ jobs:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}
         strategy:
-            matrix:
-                policy:
-                  - foo
-                  - allowedLocations
-                  - allowedResourceTypes
-                scope: 
+          fail-fast: false
+          matrix:
+            policy:
+              - foo
+              - allowedLocations
+              - allowedResourceTypes
+            scope: 
+              - online
+              - platform
+            include:
+              - policy: foo
+                scope:
                   - online
                   - platform
+                additional:
+                  --parameters logAnalytics=${{ vars.LOGANALYTICS_RESOURCE_ID }} \
+
+            
         steps:
         - name: Checkout
           uses: actions/checkout@v4
@@ -44,7 +54,6 @@ jobs:
                 --parameters ./policy/${{ matrix.policy }}/${{ matrix.scope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
-                --parameters logAnalytics=${{ vars.LOGANALYTICS_RESOURCE_ID }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
