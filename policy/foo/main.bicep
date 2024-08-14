@@ -1,5 +1,4 @@
-import * as definitions from '../bicep/modules/assignment.bicep'
-import * as customPolicy from '../bicep/modules/policyDefinitions.bicep'
+import * as myImports from '../bicep/modules/assignment.bicep'
 
 targetScope = 'managementGroup'
 
@@ -12,7 +11,7 @@ param logAnalytics string
 param identityResoruceId string
 param location string
 
-param initiatives definitions.setDefinitionsType = [
+param initiatives myImports.setDefinitionsType = [
     {
       policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/818719e5-1338-4776-9a9d-3c31e4df5986'
       policyDefinitionReferenceId: 'logAnalytics'
