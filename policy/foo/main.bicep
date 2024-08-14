@@ -1,7 +1,7 @@
 targetScope = 'managementGroup'
 
-param policyName string = ''
-param displayName string = 'allowed Locations'
+param policyName string = 'foo'
+param displayName string = 'foo'
 param favPolicyValue string
 param laEffect string
 param diagnosticSettingName string
@@ -15,7 +15,7 @@ var shortenPolicyName = take(policyName, 24)
 var randomCucstomDfinition = loadJsonContent('customDefinitions/st_vnetAclrRules.json')
 
 module customDefinition '../bicep/modules/policyDefinitions.bicep' = {
-  name: 'custom-policy-definition'
+  name: 'definition-${policyName}-vnetRules'
   params: {
     policyName: randomCucstomDfinition.name
     policyProperties: randomCucstomDfinition.properties
@@ -23,7 +23,7 @@ module customDefinition '../bicep/modules/policyDefinitions.bicep' = {
 }
 
 module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
-  name: 'random-setDefinition'
+  name: 'setDefinition-${policyName}'
   params: {
     policyName: shortenPolicyName
     displayName: displayName
@@ -60,7 +60,7 @@ module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
 }
 
 module assignment '../bicep/modules/policyAssignments.bicep' = {
-  name: 'random-assignment'
+  name: 'assignment-${policyName}'
   params: {
     policyName: shortenPolicyName
     displayName: displayName

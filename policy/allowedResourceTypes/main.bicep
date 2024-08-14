@@ -28,7 +28,7 @@ module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
 }
 
 module assignment '../bicep/modules/policyAssignments.bicep' = {
-  name: 'assignment-allowedResources'
+  name: 'assignment-${policyName}'
   params: {
     policyName: shortenPolicyName
     displayName: displayName
