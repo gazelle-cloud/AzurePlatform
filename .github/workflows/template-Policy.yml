@@ -12,7 +12,7 @@ jobs:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}
         strategy:
-          max-parallel: 1
+          max-parallel: 2
           fail-fast: false
           matrix:
             policy:
