@@ -28,7 +28,7 @@ jobs:
           with:
               inlineScript: |
                 deployment=$(az stack mg create \
-                --name policy-customDefinitions \
+                --name policy-definitions \
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ./policy/customDefinitions/main.bicep \
