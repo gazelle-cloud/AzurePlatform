@@ -9,6 +9,7 @@
         }
     },
     "experimentalFeaturesEnabled": {
-        "extensibility": true
+        "extensibility": true,
+        "optionalModuleNames": true
     }
 }

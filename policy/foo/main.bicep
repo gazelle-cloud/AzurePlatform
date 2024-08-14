@@ -13,7 +13,6 @@ var favoriteCustomPolicy = loadJsonContent('customDefinitions/st_vnetAclrRules.j
 // var anotherCoolPolicy = loadJsonContent('../parameters/customDefinitions/st_corssTenantReplication.json')
 
 module favortitePolicy '../bicep/modules/policyDefinitions.bicep' = {
-  name: 'my-favorite-custom-policy'
   params: {
     policyName: favoriteCustomPolicy.name
     policyProperties: favoriteCustomPolicy.properties
@@ -29,7 +28,6 @@ module favortitePolicy '../bicep/modules/policyDefinitions.bicep' = {
 // }
 
 module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
-  name: 'my-custom-init'
   params: {
     policyName: 'something-cool'
     setDeinitions: [
@@ -74,7 +72,6 @@ module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
 }
 
 module assignment '../bicep/modules/policyAssignments.bicep' = {
-  name: 'my-facorite-policy'
   params: {
     policyName: setDefinition.outputs.name
     displayName: setDefinition.outputs.name

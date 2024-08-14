@@ -5,7 +5,6 @@ param identityResoruceId string
 param location string
 
 module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
-  name: 'policy-allowed-Resource-Types'
   params: {
     policyName: 'allowed-resource-types'
     setDeinitions: [
@@ -23,7 +22,6 @@ module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
 }
 
 module assignment '../bicep/modules/policyAssignments.bicep' = {
-  name: 'my-facorite-policy'
   params: {
     policyName: setDefinition.outputs.name
     displayName: setDefinition.outputs.name
