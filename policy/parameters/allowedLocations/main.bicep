@@ -6,7 +6,11 @@ param policyName string = 'allowedLocations'
 param displayName string = 'allowed locations'
 param location string
 param identityResoruceId string
-param listOfAllowedLocations array
+param listOfAllowedLocations array = [
+  'franceCentral'
+]
+#disable-next-line no-unused-params
+param topLevelManagementGroupName string
 
 param initiatives definitions.setDefinitionsType = [
   {

@@ -6,6 +6,8 @@ param policyName string = 'allowedResourceTypes'
 param displayName string = 'allowed resource types'
 param location string
 param identityResoruceId string
+#disable-next-line no-unused-params
+param topLevelManagementGroupName string
 param listOfResourceTypesAllowed array = [
   'Microsoft.ManagedIdentity/userAssignedIdentities'
   'Microsoft.ManagedIdentity/userAssignedIdentities/federatedIdentityCredentials'
