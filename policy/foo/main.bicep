@@ -1,5 +1,7 @@
 targetScope = 'managementGroup'
 
+param policyName string = ''
+param displayName string = 'allowed Locations'
 param favPolicyValue string
 param laEffect string
 param diagnosticSettingName string
@@ -7,6 +9,8 @@ param categoryGroup string
 param logAnalytics string
 param identityResoruceId string
 param location string
+
+var shortenPolicyName = take(policyName, 24)
 
 var randomCucstomDfinition = loadJsonContent('customDefinitions/st_vnetAclrRules.json')
 
@@ -21,8 +25,9 @@ module customDefinition '../bicep/modules/policyDefinitions.bicep' = {
 module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
   name: 'random-setDefinition'
   params: {
-    policyName: 'something-cool'
-    setDeinitions: [
+    policyName: shortenPolicyName
+    displayName: displayName
+    setDefinitions: [
       {
         policyDefinitionId: customDefinition.outputs.resourcrId
         policyDefinitionReferenceId: customDefinition.outputs.name
@@ -57,8 +62,8 @@ module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
 module assignment '../bicep/modules/policyAssignments.bicep' = {
   name: 'random-assignment'
   params: {
-    policyName: setDefinition.outputs.name
-    displayName: setDefinition.outputs.name
+    policyName: shortenPolicyName
+    displayName: displayName
     location: location
     identityResourceId: identityResoruceId
     setDefinitionId: setDefinition.outputs.resourceId
