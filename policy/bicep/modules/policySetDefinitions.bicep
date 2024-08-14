@@ -2,7 +2,7 @@ targetScope = 'managementGroup'
 
 param policyName string
 param displayName string
-param setDefinitions setDefinitionsType
+param setDefinitions array
 
 resource initiative 'Microsoft.Authorization/policySetDefinitions@2023-04-01' = {
   name: policyName
@@ -12,12 +12,7 @@ resource initiative 'Microsoft.Authorization/policySetDefinitions@2023-04-01' = 
   }
 }
 
-@export()
-type setDefinitionsType = {
-    policyDefinitionId: string
-    policyDefinitionReferenceId: string
-    parameters: object
-  }[]
+
 
 output resourceId string = initiative.id
 output name string = initiative.name

@@ -4,7 +4,7 @@ param policyName string = 'allowedLocations'
 param displayName string = 'allowed Locations'
 param identityResoruceId string
 param location string
-param setDefinitions {}[]
+param setDef setDefinitionsType
 
 var shortenPolicyName = take(policyName, 24)
 
@@ -13,7 +13,7 @@ module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
   params: {
     policyName: shortenPolicyName
     displayName: displayName
-    setDefinitions: setDefinitions
+    setDefinitions: setDef
   }
 }
 
@@ -27,3 +27,10 @@ module assignment '../bicep/modules/policyAssignments.bicep' = {
     setDefinitionId: setDefinition.outputs.resourceId
   }
 }
+
+@export()
+type setDefinitionsType = {
+    policyDefinitionId: string
+    policyDefinitionReferenceId: string
+    parameters: object
+  }[]

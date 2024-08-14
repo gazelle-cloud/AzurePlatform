@@ -1,4 +1,4 @@
-import * as definitions from '../bicep/modules/policySetDefinitions.bicep'
+import * as definitions from '../allowedLocations/module.bicep'
 
 targetScope = 'managementGroup'
 
@@ -6,7 +6,7 @@ param location string
 param identityResoruceId string
 param listOfResourceTypesAllowed array
 
-param setDefinitions definitions.setDefinitionsType = [
+param initiative definitions.setDefinitionsType = [
   {
     policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/a08ec900-254a-4555-9bf5-e42af04b5c5c'
     policyDefinitionReferenceId: 'allowedResources'
@@ -23,7 +23,7 @@ module done '../allowedLocations/module.bicep' = {
   params: {
     location: location
     identityResoruceId: identityResoruceId
-    setDefinitions: setDefinitions
+    setDef: initiative
     policyName: 'v2'
     displayName: 'lot of potential - cool'
   }

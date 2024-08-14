@@ -1,4 +1,4 @@
-import * as definitions from '../bicep/modules/policySetDefinitions.bicep'
+import * as definitions from 'module.bicep'
 
 targetScope = 'managementGroup'
 
@@ -6,7 +6,7 @@ param location string
 param identityResoruceId string
 param listOfAllowedLocations array
 
-param setDefinitions definitions.setDefinitionsType = [
+param setDefini definitions.setDefinitionsType = [
   {
     policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c'
     policyDefinitionReferenceId: 'allowedResourceLocations'
@@ -32,7 +32,7 @@ module done 'module.bicep' = {
   params: {
     location: location
     identityResoruceId: identityResoruceId
-    setDefinitions: setDefinitions
+    setDef: setDefini
     policyName: 'refactor'
     displayName: 'lot of potential'
   }
