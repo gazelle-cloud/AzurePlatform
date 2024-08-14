@@ -12,6 +12,7 @@ resource initiative 'Microsoft.Authorization/policySetDefinitions@2023-04-01' = 
   }
 }
 
+@export()
 type setDefinitionsType = {
     policyDefinitionId: string
     policyDefinitionReferenceId: string
