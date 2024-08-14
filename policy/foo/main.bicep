@@ -12,16 +12,6 @@ param logAnalytics string
 param identityResoruceId string
 param location string
 
-param randomCucstomDfinition object = loadJsonContent('customDefinitions/st_vnetAclrRules.json')
-
-module fooo '../bicep/modules/policyDefinitions.bicep' = {
-  name: 'st-something'
-  params: {
-    policyName: randomCucstomDfinition.name
-    policyProperties: randomCucstomDfinition.properties
-  }
-}
-
 param initiatives definitions.setDefinitionsType = [
     {
       policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/818719e5-1338-4776-9a9d-3c31e4df5986'
