@@ -6,7 +6,14 @@ param policyName string = 'allowedResourceTypes'
 param displayName string = 'allowed resource types'
 param location string
 param identityResoruceId string
-param listOfResourceTypesAllowed array
+param listOfResourceTypesAllowed array = [
+  'Microsoft.ManagedIdentity/userAssignedIdentities'
+  'Microsoft.ManagedIdentity/userAssignedIdentities/federatedIdentityCredentials'
+  'Microsoft.OperationalInsights/workspaces'
+  'Microsoft.Resources/deploymentStacks'
+  'Microsoft.Resources/resourceGroups'
+  'Microsoft.Resources/tags'
+]
 
 param initiative definitions.setDefinitionsType = [
   {
@@ -20,7 +27,7 @@ param initiative definitions.setDefinitionsType = [
   }
 ]
 
-module done '../bicep/modules/assignment.bicep' = {
+module assignment '../bicep/modules/assignment.bicep' = {
   name: 'policy-${policyName}'
   params: {
     location: location

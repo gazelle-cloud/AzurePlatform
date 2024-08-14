@@ -29,7 +29,7 @@ param initiatives definitions.setDefinitionsType = [
   }
 ]
 
-module done '../bicep/modules/assignment.bicep' = {
+module assignment '../bicep/modules/assignment.bicep' = {
   name: 'policy-${policyName}'
   params: {
     policyName: policyName

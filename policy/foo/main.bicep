@@ -1,10 +1,10 @@
 import * as definitions from '../bicep/modules/assignment.bicep'
+import * as customPolicy from '../bicep/modules/policyDefinitions.bicep'
 
 targetScope = 'managementGroup'
 
 param policyName string = 'foo'
 param displayName string = 'foo bar'
-param favPolicyValue string
 param laEffect string
 param diagnosticSettingName string
 param categoryGroup string
@@ -12,10 +12,10 @@ param logAnalytics string
 param identityResoruceId string
 param location string
 
-var randomCucstomDfinition = loadJsonContent('customDefinitions/st_vnetAclrRules.json')
+param randomCucstomDfinition object = loadJsonContent('customDefinitions/st_vnetAclrRules.json')
 
-module customDefinition '../bicep/modules/policyDefinitions.bicep' = {
-  name: 'definition-${policyName}-vnetRules'
+module fooo '../bicep/modules/policyDefinitions.bicep' = {
+  name: 'st-something'
   params: {
     policyName: randomCucstomDfinition.name
     policyProperties: randomCucstomDfinition.properties
@@ -23,15 +23,6 @@ module customDefinition '../bicep/modules/policyDefinitions.bicep' = {
 }
 
 param initiatives definitions.setDefinitionsType = [
-    // {
-    //   policyDefinitionId: customDefinition.outputs.resourcrId
-    //   policyDefinitionReferenceId: customDefinition.outputs.name
-    //   parameters: {
-    //     effect: {
-    //       value: favPolicyValue
-    //     }
-    //   }
-    // }
     {
       policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/818719e5-1338-4776-9a9d-3c31e4df5986'
       policyDefinitionReferenceId: 'logAnalytics'
