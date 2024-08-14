@@ -10,7 +10,10 @@ param listOfAllowedLocations array
 
 param initiatives definitions.setDefinitionsType = [
   {
-    policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c'
+    policyDefinitionId: tenantResourceId(
+      '/Microsoft.Authorization/policyDefinitions',
+      'e56962a6-4747-49cd-b67b-bf8b01975c4c'
+    )
     policyDefinitionReferenceId: 'allowedResourceLocations'
     parameters: {
       listOfAllowedLocations: {
@@ -19,7 +22,10 @@ param initiatives definitions.setDefinitionsType = [
     }
   }
   {
-    policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/e765b5de-1225-4ba3-bd56-1ac6695af988'
+    policyDefinitionId: tenantResourceId(
+      '/Microsoft.Authorization/policyDefinitions',
+      'e765b5de-1225-4ba3-bd56-1ac6695af988'
+    )
     policyDefinitionReferenceId: 'allowedResourceGroupLocations'
     parameters: {
       listOfAllowedLocations: {
