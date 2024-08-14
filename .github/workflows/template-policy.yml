@@ -31,7 +31,7 @@ jobs:
                 --name policy-customDefinitions \
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --template-file ./policy/customDefinitions/main.bicep \
+                --template-file ./policy/parameters/customDefinitions/main.bicep \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
@@ -40,7 +40,6 @@ jobs:
         runs-on: ubuntu-latest
         needs: definitions
         environment: ${{ inputs.managementGroupHierarchy }}
-        name: definitions
         strategy:
           fail-fast: false
           matrix:
@@ -90,8 +89,8 @@ jobs:
                 --name policy-${{ matrix.policy }} \
                 --management-group-id ${{ matrix.scope }}-${{ inputs.managementGroupHierarchy }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --template-file ./policy/${{ matrix.policy }}/main.bicep \
-                --parameters ./policy/${{ matrix.policy }}/${{ matrix.scope }}.bicepparam \
+                --template-file ./policy/parameters/${{ matrix.policy }}/main.bicep \
+                --parameters ./policy/parameters/${{ matrix.policy }}/${{ matrix.scope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
                 --parameters logAnalytics=${{ vars.LOGANALYTICS_RESOURCE_ID }} \
