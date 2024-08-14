@@ -1,7 +1,6 @@
 targetScope = 'managementGroup'
 
 param favPolicyValue string
-// param anotherPolicyValue string
 param laEffect string
 param diagnosticSettingName string
 param categoryGroup string
