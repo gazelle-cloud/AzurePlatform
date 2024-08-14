@@ -2,7 +2,7 @@ import * as myImports from '../../bicep/modules/assignment.bicep'
 
 targetScope = 'managementGroup'
 
-param policyName string = 'foo'
+param policyName string = 'foobar'
 param displayName string = 'foo bar'
 param laEffect string
 param st_allowCrossTenantReplicationEffect string = 'Audit'
@@ -11,11 +11,12 @@ param categoryGroup string
 param logAnalytics string
 param identityResoruceId string
 param location string
-param topLevelManagementGroupName string = 'asdf'
+param topLevelManagementGroupName string
+param mgScope string = tenantResourceId('Microsoft.Management/managementGroups',topLevelManagementGroupName)
 
 param initiatives myImports.setDefinitionsType = [
     {
-      policyDefinitionId: extensionResourceId('Microsoft.Management/managementGroups/${topLevelManagementGroupName}','Microsoft.Authorization/policyDefinitions', 'st_allowCrossTenantReplication')
+      policyDefinitionId: extensionResourceId(mgScope,'Microsoft.Authorization/policyDefinitions', 'st_allowCrossTenantReplication')
       policyDefinitionReferenceId: 'st_allowCrossTenantReplication'
       parameters: {
         effect: {
@@ -43,7 +44,7 @@ param initiatives myImports.setDefinitionsType = [
     }
 ]
 
-module goHome '../../bicep/modules/assignment.bicep' = {
+module assignment '../../bicep/modules/assignment.bicep' = {
   name: 'policy-${policyName}'
   params: {
     policyName: policyName
