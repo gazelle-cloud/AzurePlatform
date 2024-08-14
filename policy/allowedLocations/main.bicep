@@ -5,6 +5,7 @@ param identityResoruceId string
 param location string
 
 module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
+  name: 'initiative-allowed-locations'
   params: {
     policyName: 'allowed-location'
     setDeinitions: [
@@ -31,6 +32,7 @@ module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
 }
 
 module assignment '../bicep/modules/policyAssignments.bicep' = {
+  name: 'assignment-allowedLocations'
   params: {
     policyName: setDefinition.outputs.name
     displayName: setDefinition.outputs.name
