@@ -12,11 +12,12 @@ param logAnalytics string
 param identityResoruceId string
 param location string
 param topLevelManagementGroupName string
+param mgScope string = tenantResourceId('Microsoft.Management/managementGroups', topLevelManagementGroupName)
 
 param initiatives myImports.setDefinitionsType = [
   {
     policyDefinitionId: extensionResourceId(
-      tenantResourceId('Microsoft.Management/managementGroups', topLevelManagementGroupName),
+      mgScope,
       'Microsoft.Authorization/policyDefinitions',
       'st_allowCrossTenantReplication'
     )
@@ -28,10 +29,7 @@ param initiatives myImports.setDefinitionsType = [
     }
   }
   {
-    policyDefinitionId: tenantResourceId(
-      '/Microsoft.Authorization/policyDefinitions',
-      '818719e5-1338-4776-9a9d-3c31e4df598'
-    )
+    policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/818719e5-1338-4776-9a9d-3c31e4df5986'
     policyDefinitionReferenceId: 'logAnalytics'
     parameters: {
       effect: {
