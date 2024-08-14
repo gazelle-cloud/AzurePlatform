@@ -1,3 +1,5 @@
+import * as definitions from '../bicep/modules/assignment.bicep'
+
 targetScope = 'managementGroup'
 
 param policyName string = 'foo'
@@ -10,7 +12,6 @@ param logAnalytics string
 param identityResoruceId string
 param location string
 
-var shortenPolicyName = take(policyName, 24)
 
 var randomCucstomDfinition = loadJsonContent('customDefinitions/st_vnetAclrRules.json')
 
@@ -22,50 +23,43 @@ module customDefinition '../bicep/modules/policyDefinitions.bicep' = {
   }
 }
 
-module setDefinition '../bicep/modules/policySetDefinitions.bicep' = {
-  name: 'setDefinition-${policyName}'
-  params: {
-    policyName: shortenPolicyName
-    displayName: displayName
-    setDefinitions: [
-      {
-        policyDefinitionId: customDefinition.outputs.resourcrId
-        policyDefinitionReferenceId: customDefinition.outputs.name
-        parameters: {
-          effect: {
-            value: favPolicyValue
-          }
+param initiatives definitions.setDefinitionsType = [
+    {
+      policyDefinitionId: customDefinition.outputs.resourcrId
+      policyDefinitionReferenceId: customDefinition.outputs.name
+      parameters: {
+        effect: {
+          value: favPolicyValue
         }
       }
-      {
-        policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/818719e5-1338-4776-9a9d-3c31e4df5986'
-        policyDefinitionReferenceId: 'logAnalytics'
-        parameters: {
-          effect: {
-            value: laEffect
-          }
-          diagnosticSettingName: {
-            value: diagnosticSettingName
-          }
-          categoryGroup: {
-            value: categoryGroup
-          }
-          logAnalytics: {
-            value: logAnalytics
-          }
+    }
+    {
+      policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/818719e5-1338-4776-9a9d-3c31e4df5986'
+      policyDefinitionReferenceId: 'logAnalytics'
+      parameters: {
+        effect: {
+          value: laEffect
+        }
+        diagnosticSettingName: {
+          value: diagnosticSettingName
+        }
+        categoryGroup: {
+          value: categoryGroup
+        }
+        logAnalytics: {
+          value: logAnalytics
         }
       }
-    ]
-  }
-}
+    }
+]
 
-module assignment '../bicep/modules/policyAssignments.bicep' = {
-  name: 'assignment-${policyName}'
+module goHome '../bicep/modules/assignment.bicep' = {
+  name: 'go-home-edition'
   params: {
-    policyName: shortenPolicyName
+    policyName: policyName
     displayName: displayName
     location: location
     identityResourceId: identityResoruceId
-    setDefinitionId: setDefinition.outputs.resourceId
+    setDefinitions: 
   }
 }

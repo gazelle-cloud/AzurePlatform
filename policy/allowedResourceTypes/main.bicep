@@ -1,4 +1,4 @@
-import * as definitions from '../allowedLocations/module.bicep'
+import * as definitions from '../bicep/modules/assignment.bicep'
 
 targetScope = 'managementGroup'
 
@@ -18,12 +18,12 @@ param initiative definitions.setDefinitionsType = [
   }
 ]
 
-module done '../allowedLocations/module.bicep' = {
+module done '../bicep/modules/assignment.bicep' = {
   name: 'bicep-on-fire'
   params: {
     location: location
-    identityResoruceId: identityResoruceId
-    setDef: initiative
+    identityResourceId: identityResoruceId
+    setDefinitions: initiative
     policyName: 'v2'
     displayName: 'lot of potential - cool'
   }
