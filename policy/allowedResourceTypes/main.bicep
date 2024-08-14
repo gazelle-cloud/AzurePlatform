@@ -2,6 +2,8 @@ import * as definitions from '../bicep/modules/assignment.bicep'
 
 targetScope = 'managementGroup'
 
+param policyName string = 'allowedResourceTypes'
+param displayName string = 'allowed resource types'
 param location string
 param identityResoruceId string
 param listOfResourceTypesAllowed array
@@ -19,12 +21,12 @@ param initiative definitions.setDefinitionsType = [
 ]
 
 module done '../bicep/modules/assignment.bicep' = {
-  name: 'bicep-on-fire'
+  name: 'policy-${policyName}'
   params: {
     location: location
     identityResourceId: identityResoruceId
     setDefinitions: initiative
-    policyName: 'v2'
-    displayName: 'lot of potential - cool'
+    policyName: policyName
+    displayName: displayName
   }
 }

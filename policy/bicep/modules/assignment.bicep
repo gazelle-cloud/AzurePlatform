@@ -1,6 +1,5 @@
 targetScope = 'managementGroup'
 
-
 param policyName string
 param displayName string
 param location string
@@ -31,11 +30,9 @@ resource assignment 'Microsoft.Authorization/policyAssignments@2024-04-01' = {
     displayName: displayName
   }
 }
-
-
 @export()
 type setDefinitionsType = {
-    policyDefinitionId: string
-    policyDefinitionReferenceId: string
-    parameters: object
-  }[]
+  policyDefinitionId: string
+  policyDefinitionReferenceId: string
+  parameters: object
+}[]

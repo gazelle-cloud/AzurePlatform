@@ -2,6 +2,8 @@ import * as definitions from '../bicep/modules/assignment.bicep'
 
 targetScope = 'managementGroup'
 
+param policyName string = 'allowedLocations'
+param displayName string = 'allowed locations'
 param location string
 param identityResoruceId string
 param listOfAllowedLocations array
@@ -28,10 +30,10 @@ param initiatives definitions.setDefinitionsType = [
 ]
 
 module done '../bicep/modules/assignment.bicep' = {
-  name: 'fooBar'
+  name: 'policy-${policyName}'
   params: {
-    policyName: 'refactor'
-    displayName: 'lot of potential'
+    policyName: policyName
+    displayName: displayName
     location: location
     identityResourceId: identityResoruceId
     setDefinitions: initiatives
