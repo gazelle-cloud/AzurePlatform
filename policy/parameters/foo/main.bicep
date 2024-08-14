@@ -5,7 +5,7 @@ targetScope = 'managementGroup'
 param policyName string = 'foobar'
 param displayName string = 'foo bar'
 param laEffect string
-param st_allowCrossTenantReplicationEffect string = 'Audit'
+param st_allowCrossTenantReplicationEffect string = 'Modify'
 param diagnosticSettingName string
 param categoryGroup string
 param logAnalytics string
