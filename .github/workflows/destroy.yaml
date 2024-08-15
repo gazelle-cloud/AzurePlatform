@@ -15,7 +15,7 @@ permissions:
   contents: read
   
 jobs:
-  cancel-landingzone:
+  destroy:
     runs-on: ubuntu-latest
     environment: test
     steps:
@@ -37,7 +37,6 @@ jobs:
         inlineScript: |
           $params = @{
             managementGroup = '${{ inputs.topLevelManagementGroup }}'
-            managementSubscriptionId = '${{ inputs.managementSubscriptionId }}'
           }
           write-output $params
           ./.github/pwsh/move-subscriptions.ps1 @params
