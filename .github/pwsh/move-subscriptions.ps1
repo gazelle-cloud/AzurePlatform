@@ -5,7 +5,6 @@ param (
 
 $query = "resourcecontainers
       | where type == 'microsoft.resources/subscriptions'
-      | where properties['managementGroupAncestorsChain'] contains '$managementGroup'
       | project subscriptionId"
 
 $subscriptions = Search-AzGraph -Query $query -ManagementGroup $managementGroup
