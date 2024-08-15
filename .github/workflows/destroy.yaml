@@ -36,7 +36,7 @@ jobs:
         azPSVersion: "latest"
         inlineScript: |
           $params = @{
-            topLevelManagementGroup = '${{ inputs.topLevelManagementGroup }}'
+            managementGroup = '${{ inputs.topLevelManagementGroup }}'
             managementSubscriptionId = '${{ inputs.managementSubscriptionId }}'
           }
           write-output $params
