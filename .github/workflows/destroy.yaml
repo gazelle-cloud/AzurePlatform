@@ -34,5 +34,4 @@ jobs:
       uses: azure/powershell@v2
       with:
         azPSVersion: "latest"
-        inlineScript: ./github/pwsh/move-subscriptions.ps1
-          move-subscriptions -managementGroup ${{ inputs.topLevelManagementGroup }} -managementSubscription ${{ inputs.managementSubscriptionId }}
+        inlineScript: ./github/pwsh/move-subscriptions.ps1 -managementGroup ${{ inputs.topLevelManagementGroup }} -managementSubscription ${{ inputs.managementSubscriptionId }}
