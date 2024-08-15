@@ -35,4 +35,4 @@ jobs:
       with:
         azPSVersion: "latest"
         inlineScript: |
-          ./github/pwsh/move-subscriptions.ps1 -managementGroup ${{ inputs.topLevelManagementGroup }} -managementSubscription ${{ inputs.managementSubscriptionId }}
+          ./.github/pwsh/move-subscriptions.ps1 -managementGroup ${{ inputs.topLevelManagementGroup }} -managementSubscription ${{ inputs.managementSubscriptionId }}
