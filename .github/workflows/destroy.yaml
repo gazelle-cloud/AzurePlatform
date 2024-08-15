@@ -36,8 +36,8 @@ jobs:
         azPSVersion: "latest"
         inlineScript: |
           $params = @{
-            topLevelManagementGroup = ${{ inputs.topLevelManagementGroup }}
-            managementSubscriptionId = ${{ inputs.managementSubscriptionId }}
+            topLevelManagementGroup = '${{ inputs.topLevelManagementGroup }}'
+            managementSubscriptionId = '${{ inputs.managementSubscriptionId }}'
           }
           write-output $params
           ./.github/pwsh/move-subscriptions.ps1 @params
