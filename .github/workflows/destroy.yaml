@@ -34,32 +34,9 @@ jobs:
       uses: azure/powershell@v2
       with:
         azPSVersion: "latest"
-        inlineScript: |
-          function move-subscriptions {
-            param (
-                [Parameter(Mandatory = $true)]
-                [string]$managementGroup
-                [Parameter(Mandatory = $true)]
-                [string]$managementSubscriptionId
-            )
-            select-azsubscription -SubscriptionId $managementSubscriptionId
-
-            $query = "resourcecontainers
-              | where type == 'microsoft.resources/subscriptions'
-              | where properties['managementGroupAncestorsChain'] contains '$managementGroup'
-              | project subscriptionId"
-
-            $subscriptions = Search-AzGraph -Query $query
-
-            foreach ($item in $subscriptions) {
-                $id = [string]$item.subscriptionId
-                New-AzManagementGroupSubscription -GroupName $managementGroup -SubscriptionId $id -WhatIf
-                Write-Output "----------------"
-            }
-          }
+        inlineScript: ./github/pwsh/move-subscriptions.ps1
           $params = @{
-            topLevelManagementGroup = ${{ inputs.topLevelManagementGroup }}
-            managementSubscription = ${{ inputs.managementSubscriptionId }}
-          }
-
+            managementGroup = ${{ inputs.topLevelManagementGroup }}
+            managementSubscription  =  ${{ inputs.managementSubscriptionId }} }
+          
           move-subscriptions @params
