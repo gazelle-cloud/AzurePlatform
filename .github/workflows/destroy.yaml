@@ -6,6 +6,9 @@ on:
       topLevelManagementGroup:
         required: true
         default: 'gazelle-test'
+      managementSubscriptionId:
+        required: true
+        default: 'ca29cb06-f5f6-4116-9061-493426c4d70e'
 
 permissions:
   id-token: write
@@ -27,7 +30,7 @@ jobs:
         allow-no-subscriptions: true
         enable-AzPSSession: true
 
-    - name: Run Azure PowerShell inline script
+    - name: move subscriptions
       uses: azure/powershell@v2
       with:
         azPSVersion: "latest"
@@ -36,7 +39,10 @@ jobs:
             param (
                 [Parameter(Mandatory = $true)]
                 [string]$managementGroup
+                [Parameter(Mandatory = $true)]
+                [string]$managementSubscriptionId
             )
+            select-azsubscription -SubscriptionId $managementSubscriptionId
 
             $query = "resourcecontainers
               | where type == 'microsoft.resources/subscriptions'
@@ -51,5 +57,9 @@ jobs:
                 Write-Output "----------------"
             }
           }
-          
-          move-subscriptions -managementGroup ${{ inputs.topLevelManagementGroup }}
+          $params = @{
+            topLevelManagementGroup = ${{ inputs.topLevelManagementGroup }}
+            managementSubscription = ${{ inputs.managementSubscriptionId }}
+          }
+
+          move-subscriptions @params
