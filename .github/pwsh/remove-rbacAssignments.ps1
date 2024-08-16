@@ -3,6 +3,7 @@ param (
     [string]$managementGroup
 )
 
+
 $query = "authorizationresources
     | where type == 'microsoft.authorization/roleassignments'
     | where properties.scope contains '$managementGroup'
@@ -13,9 +14,12 @@ $rbacAssignments = Search-AzGraph -Query $query -ManagementGroup $managementGrou
 $rbacAssignments.Count
 
 foreach ($item in $rbacAssignments) {
-    $principalId = [string]$item.properties_principalId
-    $name = [string]$item.name
-    Remove-AzRoleAssignment -ObjectId $principalId -RoleDefinitionId $name
+    $params = @{
+        ObjectId = [string]$item.properties_principalId
+        RoleDefinitionId = [string]$item.name
+        scope = "/providers/Microsoft.Management/managementGroups/$managementGroup"
+    }
+    Remove-AzRoleAssignment @params -WhatIf
     Write-Output "----------------"
 }
 
