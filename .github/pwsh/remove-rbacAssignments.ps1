@@ -19,7 +19,7 @@ foreach ($item in $rbacAssignments) {
         RoleDefinitionId = [string]$item.name
         scope = "/providers/Microsoft.Management/managementGroups/$managementGroup"
     }
-    Remove-AzRoleAssignment @params -WhatIf
+    Remove-AzRoleAssignment @params
     Write-Output "----------------"
 }
 
