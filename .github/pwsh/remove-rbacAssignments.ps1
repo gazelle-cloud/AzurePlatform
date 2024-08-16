@@ -1,6 +1,6 @@
 param (
     [Parameter(Mandatory = $true)]
-    [string]$managementGroup = "gazelle-test"
+    [string]$managementGroup
 )
 
 $getRoles = Get-AzRoleAssignment -scope '/providers/Microsoft.Management/managementGroups/$managementGroup' `
