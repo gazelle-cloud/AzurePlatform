@@ -59,3 +59,17 @@ jobs:
           $deploymants | foreach-object -ThrottleLimit 25 -Parallel {
               Remove-AzManagementGroupDeployment -Id $_.Id -verbose
           }
+
+    - name: remove RBAC
+      uses: azure/powershell@v2
+      with:
+        azPSVersion: "latest"
+        inlineScript: |
+          $getRoles = Get-AzRoleAssignment -scope '/providers/Microsoft.Management/managementGroups/'${{ inputs.topLevelManagementGroup }}' `
+          | Where-Object { $_.RoleAssignmentId -like '*'${{ inputs.topLevelManagementGroup }}*' `
+                  -and $_.RoleDefinitionName -ne 'User Access Administrator' }
+
+          $getRoles | ForEach-Object {
+              $role = $_
+              $role | Remove-AzRoleAssignment -Force
+          }
