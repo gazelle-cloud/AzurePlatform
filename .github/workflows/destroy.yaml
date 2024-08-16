@@ -68,7 +68,7 @@ jobs:
           $getRoles = Get-AzRoleAssignment -scope '/providers/Microsoft.Management/managementGroups/'${{ inputs.topLevelManagementGroup }}' `
           | Where-Object { $_.RoleAssignmentId -like '*'${{ inputs.topLevelManagementGroup }}*' `
                   -and $_.RoleDefinitionName -ne 'User Access Administrator'
-                  }
+          }
 
           $getRoles.Count
 
