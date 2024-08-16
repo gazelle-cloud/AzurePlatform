@@ -65,6 +65,7 @@ jobs:
       with:
         azPSVersion: "latest"
         inlineScript: |
+          get-AzRoleAssignment -scope '/providers/Microsoft.Management/managementGroups/gazelle-test'
           $params = @{
             managementGroup = '${{ inputs.topLevelManagementGroup }}'
           }
