@@ -48,3 +48,14 @@ jobs:
           }
           write-output $params
           ./.github/pwsh/remove-managementGroups.ps1 @params
+
+    - name: remove deployment
+      uses: azure/powershell@v2
+      with:
+        azPSVersion: "latest"
+        inlineScript: |
+          $deploymants =Get-AzManagementGroupDeployment -ManagementGroupId '${{ inputs.topLevelManagementGroup }}'
+          $deploymants.Count
+          $deploymants | foreach-object -ThrottleLimit 25 -Parallel {
+              Remove-AzManagementGroupDeployment -Id $_.Id -verbose
+          }

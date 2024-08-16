@@ -14,7 +14,7 @@ $mgmtGroups.Count
     
 foreach ($item in $mgmtGroups) {
     $name = [string]$item.name
-    Remove-AzManagementGroup -GroupName $name -WhatIf
+    Remove-AzManagementGroup -GroupName $name
     Write-Output "----------------"
 }
 

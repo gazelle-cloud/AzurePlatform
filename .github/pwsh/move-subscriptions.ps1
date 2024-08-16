@@ -12,7 +12,7 @@ $subscriptions.Count
     
 foreach ($item in $subscriptions) {
     $id = [string]$item.subscriptionId
-    New-AzManagementGroupSubscription -GroupName $managementGroup -SubscriptionId $id -WhatIf
+    New-AzManagementGroupSubscription -GroupName $managementGroup -SubscriptionId $id
     Write-Output "----------------"
 }
 
