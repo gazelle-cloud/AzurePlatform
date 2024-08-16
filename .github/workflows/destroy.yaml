@@ -6,6 +6,10 @@ on:
       environment:
         required: true
         default: 'test'
+        type: choice
+        options:
+          - test
+          - prod
 
 env:
   topLevelManagementGroup: ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
