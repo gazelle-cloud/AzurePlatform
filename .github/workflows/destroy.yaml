@@ -65,14 +65,8 @@ jobs:
       with:
         azPSVersion: "latest"
         inlineScript: |
-          $getRoles = Get-AzRoleAssignment -scope '/providers/Microsoft.Management/managementGroups/'${{ inputs.topLevelManagementGroup }}' `
-          | Where-Object { $_.RoleAssignmentId -like '*'${{ inputs.topLevelManagementGroup }}*' `
-                  -and $_.RoleDefinitionName -ne 'User Access Administrator'
+          $params = @{
+            managementGroup = '${{ inputs.topLevelManagementGroup }}'
           }
-
-          $getRoles.Count
-
-          $getRoles | ForEach-Object {
-              $role = $_
-              $role | Remove-AzRoleAssignment -Force
-          }
+          write-output $params
+          ./.github/pwsh/remove-rbacAssignments.ps1 @params
