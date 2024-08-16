@@ -6,9 +6,6 @@ on:
       topLevelManagementGroup:
         required: true
         default: 'gazelle-test'
-      managementSubscriptionId:
-        required: true
-        default: 'ca29cb06-f5f6-4116-9061-493426c4d70e'
 
 permissions:
   id-token: write
@@ -40,3 +37,14 @@ jobs:
           }
           write-output $params
           ./.github/pwsh/move-subscriptions.ps1 @params
+
+    - name: remove management group
+      uses: azure/powershell@v2
+      with:
+        azPSVersion: "latest"
+        inlineScript: |
+          $params = @{
+            managementGroup = '${{ inputs.topLevelManagementGroup }}'
+          }
+          write-output $params
+          ./.github/pwsh/remove-managementGroups.ps1 @params
