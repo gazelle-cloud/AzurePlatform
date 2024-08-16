@@ -3,23 +3,17 @@ param (
     [string]$managementGroup
 )
 
-
-$query = "authorizationresources
-    | where type == 'microsoft.authorization/roleassignments'
-    | where properties.scope contains '$managementGroup'
-    | where properties.roleDefinitionId !contains '18d7d88d-d35e-4fb5-a5c3-7773c20a72d9'
-    | project properties.principalId, name"
-
-$rbacAssignments = Search-AzGraph -Query $query -ManagementGroup $managementGroup
-$rbacAssignments.Count
+$scope = "/providers/Microsoft.Management/managementGroups/$managementGroup"
+$rbacAssignments = Get-AzRoleAssignment -scope $scope `
+| Where-Object { $_.scope -eq $scope `
+        -and $_.RoleDefinitionName -ne 'User Access Administrator' }
 
 foreach ($item in $rbacAssignments) {
     $params = @{
-        ObjectId = [string]$item.properties_principalId
-        RoleDefinitionId = [string]$item.name
-        scope = "/providers/Microsoft.Management/managementGroups/$managementGroup"
+        ObjectId           = $item.ObjectId
+        RoleDefinitionName = $item.RoleDefinitionName
+        scope              = $item.scope
     }
     Remove-AzRoleAssignment @params
     Write-Output "----------------"
 }
-
