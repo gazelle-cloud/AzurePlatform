@@ -1,11 +1,14 @@
-name: Destory test environment
+name: Destory Azure platform
 
 on:
   workflow_dispatch:
     inputs:
-      topLevelManagementGroup:
+      environment:
         required: true
-        default: 'gazelle-test'
+        default: 'test'
+
+env:
+  topLevelManagementGroup: ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
 
 permissions:
   id-token: write
@@ -33,7 +36,7 @@ jobs:
         azPSVersion: "latest"
         inlineScript: |
           $params = @{
-            managementGroup = '${{ inputs.topLevelManagementGroup }}'
+            managementGroup = '${{ env.topLevelManagementGroup }}'
           }
           write-output $params
           ./.github/pwsh/move-subscriptions.ps1 @params
@@ -44,7 +47,7 @@ jobs:
         azPSVersion: "latest"
         inlineScript: |
           $params = @{
-            managementGroup = '${{ inputs.topLevelManagementGroup }}'
+            managementGroup = '${{ env.topLevelManagementGroup }}'
           }
           write-output $params
           ./.github/pwsh/remove-managementGroups.ps1 @params
@@ -54,7 +57,7 @@ jobs:
       with:
         azPSVersion: "latest"
         inlineScript: |
-          $deploymants =Get-AzManagementGroupDeployment -ManagementGroupId '${{ inputs.topLevelManagementGroup }}'
+          $deploymants =Get-AzManagementGroupDeployment -ManagementGroupId '${{ env.topLevelManagementGroup }}'
           $deploymants.Count
           $deploymants | foreach-object -ThrottleLimit 25 -Parallel {
               Remove-AzManagementGroupDeployment -Id $_.Id -verbose
@@ -67,7 +70,7 @@ jobs:
         inlineScript: |
           get-AzRoleAssignment -scope '/providers/Microsoft.Management/managementGroups/gazelle-test'
           $params = @{
-            managementGroup = '${{ inputs.topLevelManagementGroup }}'
+            managementGroup = '${{ env.topLevelManagementGroup }}'
           }
           write-output $params
           ./.github/pwsh/remove-rbacAssignments.ps1 @params
