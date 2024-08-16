@@ -69,6 +69,8 @@ jobs:
           | Where-Object { $_.RoleAssignmentId -like '*'${{ inputs.topLevelManagementGroup }}*' `
                   -and $_.RoleDefinitionName -ne 'User Access Administrator' }
 
+          $getRoles.Count
+          
           $getRoles | ForEach-Object {
               $role = $_
               $role | Remove-AzRoleAssignment -Force
