@@ -15,7 +15,7 @@ $rbacAssignments.Count
 foreach ($item in $rbacAssignments) {
     $principalId = [string]$item.properties_principalId
     $name = [string]$item.name
-    Remove-AzRoleAssignment -ObjectId $principalId -RoleDefinitionId $name -WhatIf
+    Remove-AzRoleAssignment -ObjectId $principalId -RoleDefinitionId $name
     Write-Output "----------------"
 }
 
