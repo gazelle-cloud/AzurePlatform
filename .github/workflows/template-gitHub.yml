@@ -68,4 +68,4 @@ jobs:
           run: |
               gh variable set AZURE_PLATFORM_CLIENT_ID \
               --body ${{ vars.INIT_AZURE_PLATFORM_CLIENT_ID_PROD }} \
-              -R "${{ github.repository_owner }}/AzurePlatform"
+              -R "${{ github.repository_owner }}/landingzones"
