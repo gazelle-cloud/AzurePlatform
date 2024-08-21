@@ -1,4 +1,4 @@
-using '../bicep/managedIdentities.bicep'
+using '../bicep/workloadIdentities.bicep'
 
 param workloadName = 'identity'
 param location = readEnvironmentVariable('AZURE_DEFAULT_LOCATION', '')

@@ -41,8 +41,8 @@ jobs:
                 --name identity \
                 --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
-                --template-file './Identity/bicep/managedIdentities.bicep' \
-                --parameters './Identity/parameters/AzureIdentity.bicepparam' \
+                --template-file './Identity/bicep/workloadIdentities.bicep' \
+                --parameters './Identity/parameters/workloadIdentities.bicepparam' \
                 --parameters subscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
                 --parameters environment=${{ inputs.managementGroupHierarchy }} \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
