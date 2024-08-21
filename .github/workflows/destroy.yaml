@@ -40,7 +40,7 @@ jobs:
         azPSVersion: "latest"
         inlineScript: |
           $params = @{
-            managementGroup             = '${{ env.topLevelManagementGroup }}'
+            managementSubscscriptionId  = '${{ env.managementSubscscriptionId }}'
             topLevelManagementGroupName = '${{ env.topLevelManagementGroup }}'
             workloadIdentityStackName   = "identity"
           }
