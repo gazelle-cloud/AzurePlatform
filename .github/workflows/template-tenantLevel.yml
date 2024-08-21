@@ -51,6 +51,20 @@ jobs:
                --parameters environment=${{ inputs.managementGroupHierarchy }} \
                --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }}
 
+        - name: management group hierarchy
+          if: failure() && fromJSON(github.run_attempt) < 3
+          uses: azure/cli@v2
+          with:
+            inlineScript: |
+              az deployment mg create \
+               --name managementGroups \
+               --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
+               --template-file ./tenantLevel/bicep/managementGroups.bicep \
+               --parameters ./tenantLevel/parameters/managementGroups.bicepparam \
+               --parameters environment=${{ inputs.managementGroupHierarchy }} \
+               --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }}
+
     Billing:
         if: ${{ inputs.managementGroupHierarchy == 'prod' }}
         runs-on: ubuntu-latest
