@@ -20,5 +20,5 @@ $managementGroupStacks = Get-AzManagementGroupDeploymentStack -ManagementGroupId
 Write-Output "deployment stacks to be deleted:"
 $managementGroupStacks.name
 $managementGroupStacks | foreach-object -ThrottleLimit 5 -Parallel {
-    Remove-AzSubscriptionDeploymentStack -ResourceId $_.id -ActionOnUnmanage DeleteAll -Force
+    Remove-AzManagementGroupDeploymentStack -ResourceId $_.id -ActionOnUnmanage DeleteAll -Force
 }
