@@ -8,7 +8,7 @@ param (
 )
 
 
-Select-AzSubscription -subscriptionId '${{ env.managementSubscscriptionId }}'
+Select-AzSubscription -subscriptionId $managementSubscscriptionId
 
 $subscriptionStacks =  Get-AzSubscriptionDeploymentStack 
 Write-Output "deployment stacks to be deleted:"
