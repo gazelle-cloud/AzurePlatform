@@ -34,19 +34,6 @@ jobs:
         allow-no-subscriptions: true
         enable-AzPSSession: true
 
-    - name: delete deploymen stacks
-      uses: azure/powershell@v2
-      with:
-        azPSVersion: "latest"
-        inlineScript: |
-          $params = @{
-            managementSubscscriptionId  = '${{ env.managementSubscscriptionId }}'
-            topLevelManagementGroupName = '${{ env.topLevelManagementGroup }}'
-            workloadIdentityStackName   = "identity"
-          }
-          write-output $params
-          ./.github/destoryPlatform/remove-deploymentStacks.ps1 @params
-
     - name: move subscriptions
       uses: azure/powershell@v2
       with:
@@ -69,7 +56,7 @@ jobs:
           write-output $params
           ./.github/destoryPlatform/remove-managementGroups.ps1 @params
 
-    - name: remove deployment
+    - name: cleanup deployment history
       uses: azure/powershell@v2
       with:
         azPSVersion: "latest"
@@ -79,6 +66,19 @@ jobs:
           $deploymants | foreach-object -ThrottleLimit 25 -Parallel {
               Remove-AzManagementGroupDeployment -Id $_.Id -verbose
           }
+
+    - name: delete deployment stacks
+      uses: azure/powershell@v2
+      with:
+        azPSVersion: "latest"
+        inlineScript: |
+          $params = @{
+            managementSubscscriptionId  = '${{ env.managementSubscscriptionId }}'
+            topLevelManagementGroupName = '${{ env.topLevelManagementGroup }}'
+          }
+          write-output $params
+          ./.github/destoryPlatform/remove-deploymentStacks.ps1 @params
+    
 
     - name: remove RBAC
       uses: azure/powershell@v2

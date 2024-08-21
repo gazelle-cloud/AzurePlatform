@@ -18,5 +18,9 @@ $subscriptionStacks | foreach-object -ThrottleLimit 5 -Parallel {
 }
 
 
-$IdentityStack = Get-AzManagementGroupDeploymentStack -ManagementGroupId $topLevelManagementGroupName -Name $workloadIdentityStackName
-Remove-AzManagementGroupDeploymentStack -ResourceId $IdentityStack.id -ActionOnUnmanage DeleteAll -Force
+$managementGroupStacks = Get-AzManagementGroupDeploymentStack -ManagementGroupId $topLevelManagementGroupName
+Write-Output "deployment stacks to be deleted:"
+$managementGroupStacks.name
+$subscriptionStacks | foreach-object -ThrottleLimit 5 -Parallel {
+    Remove-AzSubscriptionDeploymentStack -ResourceId $_.id -ActionOnUnmanage DeleteAll -Force
+}
