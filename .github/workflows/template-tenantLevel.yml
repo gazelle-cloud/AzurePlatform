@@ -43,6 +43,17 @@ jobs:
         needs: Identity
         environment: ${{ inputs.managementGroupHierarchy }}
         steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Azure login
+          uses: azure/login@v2
+          with:
+            client-id: ${{ vars.AZURE_PLATFORM_CLIENT_ID }}
+            tenant-id: ${{ vars.AZURE_TENANT_ID}}
+            allow-no-subscriptions: true
+            enable-AzPSSession: false
+
         - name: management group hierarchy
           uses: azure/cli@v2
           with:
