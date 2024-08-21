@@ -38,8 +38,8 @@ jobs:
                --role "Azure Deployment Stack Owner" \
                --scope ${{ env.topLevelManagementGroupId }}
 
-        - name: wait 10s
-          run: sleep 10s
+        - name: wait 20s
+          run: sleep 20s
                  
         - name: management group hierarchy
           uses: azure/cli@v2
