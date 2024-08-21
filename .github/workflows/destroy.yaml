@@ -45,7 +45,7 @@ jobs:
             workloadIdentityStackName   = "identity"
           }
           write-output $params
-          ./.github/destoryPlatform/move-subscriptions.ps1 @params
+          ./.github/destoryPlatform/remove-deploymentStacks.ps1 @params
 
     - name: move subscriptions
       uses: azure/powershell@v2
