@@ -21,6 +21,7 @@ jobs:
     environment: ${{ inputs.environment }}
     env:
       topLevelManagementGroup: ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
+      managementSubscscriptionId: ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -33,6 +34,20 @@ jobs:
         allow-no-subscriptions: true
         enable-AzPSSession: true
 
+    - name: delete deploymen stacks
+      uses: azure/powershell@v2
+      with:
+        azPSVersion: "latest"
+        inlineScript: |
+          Select-AzSubscription -subscriptionId '${{ env.managementSubscscriptionId }}'
+
+          $stacks =  Get-AzSubscriptionDeploymentStack 
+          Write-Output "deployment stacks to be deleted:"
+          $stacks.name
+          $stacks | foreach-object -ThrottleLimit 5 -Parallel {
+              Remove-AzSubscriptionDeploymentStack -ResourceId $_.id -ActionOnUnmanage DeleteAll -Force
+          }
+
     - name: move subscriptions
       uses: azure/powershell@v2
       with:
@@ -42,7 +57,7 @@ jobs:
             managementGroup = '${{ env.topLevelManagementGroup }}'
           }
           write-output $params
-          ./.github/pwsh/move-subscriptions.ps1 @params
+          ./.github/destoryPlatform/move-subscriptions.ps1 @params
 
     - name: remove management group
       uses: azure/powershell@v2
@@ -53,7 +68,7 @@ jobs:
             managementGroup = '${{ env.topLevelManagementGroup }}'
           }
           write-output $params
-          ./.github/pwsh/remove-managementGroups.ps1 @params
+          ./.github/destoryPlatform/remove-managementGroups.ps1 @params
 
     - name: remove deployment
       uses: azure/powershell@v2
@@ -76,4 +91,4 @@ jobs:
             managementGroup = '${{ env.topLevelManagementGroup }}'
           }
           write-output $params
-          ./.github/pwsh/remove-rbacAssignments.ps1 @params
+          ./.github/destoryPlatform/remove-rbacAssignments.ps1 @params
