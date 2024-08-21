@@ -2,10 +2,7 @@ param (
     [Parameter(Mandatory = $true)]
     [string]$managementSubscscriptionId,
     [Parameter(Mandatory = $true)]
-    [string]$topLevelManagementGroupName,
-    [Parameter(Mandatory = $true)]
-    [string]$workloadIdentityStackName
-)
+    [string]$topLevelManagementGroupName
 
 
 Select-AzSubscription -subscriptionId $managementSubscscriptionId
