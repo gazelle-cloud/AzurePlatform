@@ -39,14 +39,13 @@ jobs:
       with:
         azPSVersion: "latest"
         inlineScript: |
-          Select-AzSubscription -subscriptionId '${{ env.managementSubscscriptionId }}'
-
-          $stacks =  Get-AzSubscriptionDeploymentStack 
-          Write-Output "deployment stacks to be deleted:"
-          $stacks.name
-          $stacks | foreach-object -ThrottleLimit 5 -Parallel {
-              Remove-AzSubscriptionDeploymentStack -ResourceId $_.id -ActionOnUnmanage DeleteAll -Force
+          $params = @{
+            managementGroup             = '${{ env.topLevelManagementGroup }}'
+            topLevelManagementGroupName = '${{ env.topLevelManagementGroup }}'
+            workloadIdentityStackName   = "identity"
           }
+          write-output $params
+          ./.github/destoryPlatform/move-subscriptions.ps1 @params
 
     - name: move subscriptions
       uses: azure/powershell@v2
