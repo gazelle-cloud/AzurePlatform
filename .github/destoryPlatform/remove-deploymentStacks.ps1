@@ -3,6 +3,7 @@ param (
     [string]$managementSubscscriptionId,
     [Parameter(Mandatory = $true)]
     [string]$topLevelManagementGroupName
+)
 
 
 Select-AzSubscription -subscriptionId $managementSubscscriptionId
