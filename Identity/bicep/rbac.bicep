@@ -2,6 +2,7 @@ targetScope = 'managementGroup'
 
 param environment string
 param entraIdGroupOwners array
+param topLevelManagementGroupName string
 
 module entraIdGroupReaders 'modules/groups.bicep' = {
   name: 'entra-readers'
@@ -12,13 +13,13 @@ module entraIdGroupReaders 'modules/groups.bicep' = {
 }
 
 
-param azurePlatformTestPrincipalId string
+param azurePlatformProdPrincipalId string
 
 module rbac 'modules/roleAssignment.bicep' = {
   name: 'rbac-to-move-subscription'
-  scope: managementGroup('playground-${environment}')
+  scope: managementGroup(topLevelManagementGroupName)
   params: {
-    principlesId: azurePlatformTestPrincipalId
+    principlesId: azurePlatformProdPrincipalId
     roleDefinitions: [
       '/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c'
       '/providers/Microsoft.Authorization/roleDefinitions/adb29209-aa1d-457b-a786-c913953d2891'
