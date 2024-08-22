@@ -15,7 +15,7 @@ module entraIdGroupReaders 'modules/groups.bicep' = {
 param azurePlatformProdPrincipalId string
 
 module rbac 'modules/roleAssignment.bicep' = {
-  name: 'azurePlatform-prod'
+  name: 'rbac-AzureManagementProd'
   scope: managementGroup(topLevelManagementGroupName)
   params: {
     principlesId: azurePlatformProdPrincipalId
