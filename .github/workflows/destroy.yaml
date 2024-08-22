@@ -46,7 +46,7 @@ jobs:
             Authorization = $false
           }
           write-output $params
-          ew-azManagementGroupHierarchySetting @params
+          new-azManagementGroupHierarchySetting @params
 
     - name: move subscriptions
       uses: azure/powershell@v2
