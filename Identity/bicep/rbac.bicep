@@ -20,7 +20,8 @@ module rbac 'modules/roleAssignment.bicep' = {
   params: {
     principlesId: azurePlatformTestPrincipalId
     roleDefinitions: [
-      '/providers/Microsoft.Authorization/roleDefinitions/5d58bcaf-24a5-4b20-bdb6-eed9f69fbe4c'
+      '/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c'
+      '/providers/Microsoft.Authorization/roleDefinitions/adb29209-aa1d-457b-a786-c913953d2891'
     ]
   }
 }
