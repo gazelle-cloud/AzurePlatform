@@ -98,8 +98,9 @@ jobs:
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --template-file './Identity/bicep/rbac.bicep' \
                 --parameters './Identity/parameters/rbac.bicepparam' \
-                --parameters azurePlatformTestPrincipalId=${{ vars.AZURE_PLATFORM_TEST_PRINCIPAL_ID }} \
-                --parameters environment=${{ inputs.managementGroupHierarchy }})
+                --parameters environment=${{ inputs.managementGroupHierarchy }}) \
+                --parameters azurePlatformProdPrincipalId=${{ vars.AZURE_PLATFORM_PROD_PRINCIPAL_ID }} \
+                --parameters topLevelManagementGroupName=${{  vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
 
               envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
               echo "Deployment Outputs: $envVariables"
