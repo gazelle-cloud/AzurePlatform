@@ -14,7 +14,7 @@ module child 'modules/managementGroups.bicep' = [
   }
 ]
 
-module defaultSettings 'modules/managementGroupSettings.bicep' = if (environment == 'test') {
+module defaultSettings 'modules/managementGroupSettings.bicep' = if (environment == 'prod') {
   name: 'default-managementGroup-settings'
   dependsOn: [
     child
