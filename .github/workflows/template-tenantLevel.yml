@@ -36,7 +36,7 @@ jobs:
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ./tenantLevel/bicep/identity.bicep \
                 --parameters ./tenantLevel/parameters/identity.bicepparam \
-                --parameters azurePlatformPrincipalId=${{ vars.AZURE_PLATFORM_PRINCIPAL_ID }}
+                --parameters azurePlatformPrincipalId=${{ vars.AZURE_PLATFORM_PRINCIPAL_ID }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
                 --yes)
