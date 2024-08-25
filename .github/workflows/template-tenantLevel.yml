@@ -30,15 +30,13 @@ jobs:
           uses: azure/cli@v2
           with:
             inlineScript: |
-              deployment=$(az stack mg create \
+              az deployment mg create \
                 --name identity-initial \
                 --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file ./tenantLevel/bicep/identity.bicep \
                 --parameters ./tenantLevel/parameters/identity.bicepparam \
-                --deny-settings-mode None \
-                --action-on-unmanage deleteAll \
-                --yes)
+                --parameters azurePlatformPrincipalId=${{ vars.AZURE_PLATFORM_PRINCIPAL_ID }}
 
     ManagementGroups:
         runs-on: ubuntu-latest
