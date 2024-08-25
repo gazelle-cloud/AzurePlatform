@@ -61,17 +61,14 @@ jobs:
           uses: azure/cli@v2
           with:
             inlineScript: |
-              deployment=$(az stack mg create \
-              --name managementGroups \
+              az deployment mg create \
+              --name tennatLevel-managementGroups \
               --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
               --template-file ./tenantLevel/bicep/managementGroups.bicep \
               --parameters ./tenantLevel/parameters/managementGroups.bicepparam \
               --parameters environment=${{ inputs.managementGroupHierarchy }} \
-              --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }} \
-              --deny-settings-mode None \
-              --action-on-unmanage deleteAll \
-              --yes)
+              --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }}
 
     Billing:
         if: ${{ inputs.managementGroupHierarchy == 'prod' }}
