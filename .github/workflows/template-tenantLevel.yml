@@ -30,13 +30,15 @@ jobs:
           uses: azure/cli@v2
           with:
             inlineScript: |
-              az role assignment create --assignee ${{ vars.AZURE_PLATFORM_PRINCIPAL_ID }} \
-               --role "Contributor" \
-               --scope ${{ env.topLevelManagementGroupId }}
-
-              az role assignment create --assignee ${{ vars.AZURE_PLATFORM_PRINCIPAL_ID }} \
-               --role "Azure Deployment Stack Owner" \
-               --scope ${{ env.topLevelManagementGroupId }}
+              deployment=$(az stack mg create \
+                --name identity-initial \
+                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
+                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --template-file ./tenantLevel/bicep/identity.bicep \
+                --parameters ./tenantLevel/parameters/identity.bicepparam \
+                --deny-settings-mode None \
+                --action-on-unmanage deleteAll \
+                --yes)
 
     ManagementGroups:
         runs-on: ubuntu-latest
