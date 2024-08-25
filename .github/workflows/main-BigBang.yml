@@ -53,13 +53,13 @@ jobs:
       managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
     secrets: inherit
 
-  lz:
-    needs: 
-      - policy
-    uses: ./.github/workflows/template-Landingzone.yml
-    with:
-      managementGroupName : platform
-      managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
-      location: FranceCentral
-      parameterFile: gazelle-cloud/landingzones/parameters/platform-management-${{ github.event.inputs.managementGroupHierarchy }}.json@main
-    secrets: inherit
+  # lz:
+  #   needs: 
+  #     - policy
+  #   uses: ./.github/workflows/template-Landingzone.yml
+  #   with:
+  #     managementGroupName : platform
+  #     managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
+  #     location: FranceCentral
+  #     parameterFile: gazelle-cloud/landingzones/parameters/platform-management-${{ github.event.inputs.managementGroupHierarchy }}.json@main
+  #   secrets: inherit
