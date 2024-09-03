@@ -8,7 +8,7 @@ on:
           type: string
 
 jobs:
-    definitions:
+    prepare:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}
         steps:
@@ -59,17 +59,26 @@ jobs:
               deploymentOutputs=$(echo $policyIdentity | jq .)
               echo "Deployment Outputs: $deploymentOutputs"
               
-              objects=$(echo $deploymentOutputs | jq -c '.[]')
-              for obj in $objects; do
-                keys=$(echo $obj | jq -r 'keys[]')
-                for key in $keys; do
-                  value=$(echo $obj | jq --arg k "$key" -r '.[$k]')
-                  gh variable set $key \
-                    --body "$value" \
-                    --env ${{ inputs.managementGroupHierarchy }} \
-                    -R "${{ github.repository_owner }}/AzurePlatform"
-                done
+              keys=$(echo $deploymentOutputs | jq -r 'keys[]')
+              for key in $keys; do
+                value=$(echo $deploymentOutputs | jq --arg k "$key" -r '.[$k]')
+                gh variable set $key \
+                  --body "$value" \
+                  --env ${{ inputs.managementGroupHierarchy }} \
+                  -R "${{ github.repository_owner }}/AzurePlatform"
               done
+
+              # objects=$(echo $deploymentOutputs | jq -c '.[]')
+              # for obj in $objects; do
+              #   keys=$(echo $obj | jq -r 'keys[]')
+              #   for key in $keys; do
+              #     value=$(echo $obj | jq --arg k "$key" -r '.[$k]')
+              #     gh variable set $key \
+              #       --body "$value" \
+              #       --env ${{ inputs.managementGroupHierarchy }} \
+              #       -R "${{ github.repository_owner }}/AzurePlatform"
+              #   done
+              # done
 
         - name: custom definitions
           uses: azure/cli@v2
