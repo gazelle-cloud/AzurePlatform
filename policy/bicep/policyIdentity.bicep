@@ -34,4 +34,6 @@ module rbac 'modules/roleAssignment.bicep' = {
   }
 }
 
-output identityResoruceId string = uami.outputs.resourceId
+output identityResoruceId object = {
+  POLICY_RESOURCE_ID: uami.outputs.resourceId
+}
