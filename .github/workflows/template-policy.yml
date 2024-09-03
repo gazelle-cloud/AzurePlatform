@@ -95,7 +95,7 @@ jobs:
 
     assignments:
         runs-on: ubuntu-latest
-        needs: definitions
+        needs: prepare
         environment: ${{ inputs.managementGroupHierarchy }}
         strategy:
           fail-fast: false
