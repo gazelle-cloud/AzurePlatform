@@ -11,19 +11,20 @@ env:
   topLevelManagementGroupId: /providers/Microsoft.Management/managementGroups/${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }}
 
 jobs:
-    Identity:
+    FetchRoleDefinitions:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}
         steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-
         - name: get github token
           id: github-token
           uses: actions/create-github-app-token@v1
           with:
             app-id: ${{ vars.APP_GITHUB_NEWLANDINGZONES_ID }}
             private-key: ${{ secrets.APP_GITHUB_NEWLANDINGZONES_KEY }}   
+
+        - uses: actions/checkout@v4
+          with:
+            token: ${{ steps.github-token.outputs.token }}
 
         - name: Azure login
           uses: azure/login@v2
