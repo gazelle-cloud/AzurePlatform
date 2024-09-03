@@ -34,6 +34,6 @@ module rbac 'modules/roleAssignment.bicep' = {
   }
 }
 
-output identityResoruceId object = {
+output gitHubEnviromentVariables object = {
   POLICY_RESOURCE_ID: uami.outputs.resourceId
 }
