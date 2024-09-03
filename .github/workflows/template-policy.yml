@@ -42,7 +42,7 @@ jobs:
 
                 envVariables=$(echo $deployment | jq '.outputs.identityResoruceId.value')
                 echo "Deployment Outputs: $envVariables"
-                echo "$envVariables" >> $GITHUB_ENV
+                echo $envVariables >> $GITHUB_ENV
 
         - name: custom definitions
           uses: azure/cli@v2
