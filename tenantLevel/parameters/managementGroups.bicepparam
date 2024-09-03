@@ -5,4 +5,5 @@ param environment = readEnvironmentVariable('managementGroupHierarchy', '')
 param childManagementGroupNames = [
   'platform'
   'playground'
+  'online'
 ]
