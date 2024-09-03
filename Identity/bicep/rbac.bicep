@@ -20,6 +20,7 @@ module rbac 'modules/roleAssignment.bicep' = {
   scope: managementGroup(topLevelManagementGroupName)
   params: {
     principlesId: entraIdGroupReaders.outputs.groupObjectId
+    principalType: 'Group'
     roleDefinitions: [
       rbacMapping.Reader
     ]
