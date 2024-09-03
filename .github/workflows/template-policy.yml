@@ -23,6 +23,27 @@ jobs:
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
+        - name: identity
+          uses: azure/cli@v2
+          with:
+              inlineScript: |
+                deployment=$(az stack mg create \
+                --name policy-Identity \
+                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
+                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --template-file ./policy/bicep/policyIdentity.bicep \
+                --parameters './policy/parameters/policyIdentity.bicepparam' \
+                --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
+                --parameters environment=${{ inputs.managementGroupHierarchy }} \
+                --parameters subscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
+                --deny-settings-mode None \
+                --action-on-unmanage deleteAll \
+                --yes)
+
+                envVariables=$(echo $deployment | jq '.outputs.identityResoruceId.value')
+                echo "Deployment Outputs: $envVariables"
+                echo "$envVariables" >> $GITHUB_ENV
+
         - name: custom definitions
           uses: azure/cli@v2
           with:
