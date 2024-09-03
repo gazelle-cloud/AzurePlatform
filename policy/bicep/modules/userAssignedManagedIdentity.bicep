@@ -1,6 +1,6 @@
 param workloadName string
 param environment string
-param location string = resourceGroup().location
+param location string
 
 var name = 'id-${workloadName}-${environment}'
 

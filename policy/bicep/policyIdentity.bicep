@@ -8,7 +8,7 @@ param roleDefinitions array
 
 var policyIdentityResourceGroupName = 'Identity-${workloadName}-${environment}'
 
-module rg 'modules/resourceGroup.bicep' = {
+module IdentityResourceGroup 'modules/resourceGroup.bicep' = {
   scope: subscription(subscriptionId)
   name: 'rg-identity-${workloadName}'
   params: {
@@ -19,10 +19,14 @@ module rg 'modules/resourceGroup.bicep' = {
 
 module uami 'modules/userAssignedManagedIdentity.bicep' = {
   scope: resourceGroup(subscriptionId, policyIdentityResourceGroupName)
+  dependsOn: [
+    IdentityResourceGroup
+  ]
   name: 'uami-${workloadName}'
   params: {
     environment: environment
     workloadName: workloadName
+    location: location
   }
 }
 
