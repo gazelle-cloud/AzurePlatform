@@ -137,7 +137,7 @@ jobs:
                 --template-file ./policy/parameters/${{ matrix.policy }}/main.bicep \
                 --parameters ./policy/parameters/${{ matrix.policy }}/${{ matrix.scope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
+                --parameters identityResoruceId=${{  vars.POLICY_IDENTITY_RESOURCE_ID }} \
                 --parameters topLevelManagementGroupName=${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
@@ -155,7 +155,7 @@ jobs:
                 --template-file ./policy/parameters/${{ matrix.policy }}/main.bicep \
                 --parameters ./policy/parameters/${{ matrix.policy }}/${{ matrix.scope }}.bicepparam \
                 --parameters location=${{  vars.AZURE_DEFAULT_LOCATION }} \
-                --parameters identityResoruceId=${{  vars.POLICY_RESOURCE_ID }} \
+                --parameters identityResoruceId=${{  vars.POLICY_IDENTITY_RESOURCE_ID }} \
                 --parameters logAnalytics=${{ vars.LOGANALYTICS_RESOURCE_ID }} \
                 --parameters topLevelManagementGroupName=${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
                 --deny-settings-mode None \
