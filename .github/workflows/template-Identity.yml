@@ -34,7 +34,6 @@ jobs:
               --template-file './Identity/bicep/rbac.bicep' \
               --parameters './Identity/parameters/rbac.bicepparam' \
               --parameters environment=${{ inputs.managementGroupHierarchy }} \
-              --parameters azurePlatformProdPrincipalId=${{ vars.AZURE_PLATFORM_PROD_PRINCIPAL_ID }} \
               --parameters topLevelManagementGroupName=${{  vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }})
 
             envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
