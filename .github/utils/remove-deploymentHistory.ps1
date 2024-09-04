@@ -13,8 +13,8 @@ $deploymants | foreach-object -ThrottleLimit 25 -Parallel {
 }
 
 
-$deploymants = Get-AzSubscriptionDeployment -Id $managementSubscscriptionId
+$deploymants = Get-AzSubscriptionDeployment -Id ca29cb06-f5f6-4116-9061-493426c4d70e
 write-output "subscription deployment: $($deploymants.Count)"
-$deploymants | foreach-object -ThrottleLimit 25 -Parallel {
+$deploymants | foreach-object -ThrottleLimit 50 -Parallel {
     Remove-AzSubscriptionDeployment -id $_.id -verbose -WhatIf
 }
