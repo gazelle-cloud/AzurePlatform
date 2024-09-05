@@ -12,7 +12,7 @@ $MgDeployment | foreach-object -ThrottleLimit 25 -Parallel {
     Remove-AzManagementGroupDeployment -Id $_.Id -verbose
 }
 
-Select-AzSubscription - $managementSubscscriptionId
+Select-AzSubscription $managementSubscscriptionId
 
 $SubscriptionDeployment = Get-AzSubscriptionDeployment -Id $managementSubscscriptionId
 write-output "subscription deployment: $($SubscriptionDeployment.Count)"
