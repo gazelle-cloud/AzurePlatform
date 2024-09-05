@@ -12,9 +12,10 @@ $MgDeployment | foreach-object -ThrottleLimit 25 -Parallel {
     Remove-AzManagementGroupDeployment -Id $_.Id -verbose
 }
 
+Select-AzSubscription - $managementSubscscriptionId
 
-$SubscriptionDeploymants = Get-AzSubscriptionDeployment -Id $managementSubscscriptionId
-write-output "subscription deployment: $($SubscriptionDeploymants.Count)"
-$SubscriptionDeploymants | foreach-object -ThrottleLimit 50 -Parallel {
-    Remove-AzSubscriptionDeployment -id $_.id -verbose
+$SubscriptionDeployment = Get-AzSubscriptionDeployment -Id $managementSubscscriptionId
+write-output "subscription deployment: $($SubscriptionDeployment.Count)"
+$SubscriptionDeployment | foreach-object -ThrottleLimit 50 -Parallel {
+    Remove-AzSubscriptionDeployment -Id $_.id -verbose
 }
