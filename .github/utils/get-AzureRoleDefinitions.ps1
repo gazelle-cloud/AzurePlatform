@@ -21,13 +21,10 @@ function Format-BuildInRoles {
 $totalBuildInRoles = (Format-BuildInRoles).count
 $totalExistingRoles = ($existingRoles | Get-Member -MemberType NoteProperty).Count
 
-
-$buildInRolesJson = Format-BuildInRoles | ConvertTo-Json -Depth 5
-
 $compare = $totalBuildInRoles - $totalExistingRoles
 if ($compare -ne 0) {
     Write-Output "update role definitions: $compare"
-    $buildInRolesJson | Out-File "AzureRoleDefinitions.json"
+    Format-BuildInRoles | ConvertTo-Json -Depth 5 | Out-File "AzureRoleDefinitions.json"
 } else {
     Write-Output "No updates on role definitions"
 }
