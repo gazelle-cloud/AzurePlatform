@@ -8,7 +8,7 @@ on:
             type: string
 
 jobs:
-  Prepare:
+  Utils:
     runs-on: ubuntu-latest
     environment: ${{ inputs.managementGroupHierarchy }}
     steps:
