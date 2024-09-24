@@ -27,7 +27,7 @@ $buildInRolesJson = Format-BuildInRoles | ConvertTo-Json -Depth 5
 $compare = $totalBuildInRoles - $totalExistingRoles
 if ($compare -ne 0) {
     Write-Output "update role definitions: $compare"
-    $buildInRolesJson | Out-File "AzureRoleDefinitions-a.json"
+    $buildInRolesJson | Out-File "AzureRoleDefinitionsjson"
 } else {
     Write-Output "No updates on role definitions"
 }
