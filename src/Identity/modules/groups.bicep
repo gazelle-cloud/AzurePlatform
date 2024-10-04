@@ -2,9 +2,8 @@ extension microsoftGraph
 
 targetScope = 'managementGroup'
 
-param displayName string 
+param displayName string
 param owners array
-
 
 resource group 'Microsoft.Graph/groups@v1.0' = {
   displayName: displayName
@@ -12,7 +11,7 @@ resource group 'Microsoft.Graph/groups@v1.0' = {
   mailNickname: displayName
   securityEnabled: true
   uniqueName: displayName
-  owners:  owners
+  owners: owners
 }
 
 output groupObjectId string = group.id
