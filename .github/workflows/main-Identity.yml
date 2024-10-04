@@ -5,7 +5,7 @@ on:
     branches-ignore:
       - main
     paths:
-        - 'Identity/**'
+        - 'identity/**'
         - '.github/workflows/template-Identity.yml'
         - '.github/workflows/main-Identity.yml'
 
@@ -13,7 +13,8 @@ on:
     types:
       - closed
     paths:
-      - 'Idenitity/**'
+      - 'src/idenitity/**'
+      - 'parameters/idenitity/**'
   
   workflow_dispatch:
 
@@ -26,7 +27,7 @@ jobs:
   test:
     if: (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main') ||
         github.ref != 'refs/heads/main'
-    uses: ./.github/workflows/template-Identity.yml
+    uses: ./.github/workflows/template-identity.yml
     with:
       managementGroupHierarchy: test
     secrets: inherit
@@ -34,7 +35,7 @@ jobs:
   prod:
     if: (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
          github.event.pull_request.merged == true
-    uses: ./.github/workflows/template-Identity.yml
+    uses: ./.github/workflows/template-identity.yml
     with:
       managementGroupHierarchy: prod
     secrets: inherit
