@@ -1,4 +1,4 @@
-using '../../src/Identity/rbac.bicep'
+using '../../src/identity/rbac.bicep'
 
 param environment = readEnvironmentVariable('managementGroupHierarchy', '')
 param topLevelManagementGroupName = readEnvironmentVariable('TOP_LEVEL_MANAGEMENTGROUP_NAME', '')
