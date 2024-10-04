@@ -5,7 +5,8 @@ on:
     branches-ignore:
       - main
     paths:
-        - 'identity/**'
+        - 'src/identity/**'
+        - 'parameters/identity/**'
         - '.github/workflows/template-identity.yml'
         - '.github/workflows/main-identity.yml'
 
