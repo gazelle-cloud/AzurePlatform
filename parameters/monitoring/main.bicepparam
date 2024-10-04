@@ -1,3 +1,3 @@
-using '../bicep/main.bicep'
+using '../../src/monitoring/main.bicep'
 
 param environment = readEnvironmentVariable('managementGroupHierarchy', '')

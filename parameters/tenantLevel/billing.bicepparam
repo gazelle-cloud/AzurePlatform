@@ -1,4 +1,4 @@
-using '../bicep/billing.bicep'
+using '../../src/tenantLevel/billing.bicep'
 
 
 param billingAccountName = '32b4d9dc-1c92-51df-adb3-f41a27e34168:39e00ade-d1e2-4447-ba05-81383d79706b_2018-09-30'
