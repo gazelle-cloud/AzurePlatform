@@ -13,7 +13,8 @@ on:
     types:
       - closed
     paths:
-      - 'tenantLevel/**'
+      - 'src/tenantLevel/**'
+      - 'parameters/tenantLevel/**'
   
   workflow_dispatch:
 
