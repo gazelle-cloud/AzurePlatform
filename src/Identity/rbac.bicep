@@ -1,7 +1,7 @@
 targetScope = 'managementGroup'
 
 param environment string
-param entraIdGroupOwners array
+// param entraIdGroupOwners array
 param topLevelManagementGroupName string
 
 // module entraIdGroupReaders 'modules/groups.bicep' = {
