@@ -33,7 +33,7 @@ jobs:
               --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
               --template-file './src/identity/rbac.bicep' \
-              --parameters './parameters/identity/rbac.bicepparam' \
+              # --parameters './parameters/identity/rbac.bicepparam' \
               --parameters environment=${{ inputs.managementGroupHierarchy }} \
               --parameters topLevelManagementGroupName=${{  vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }})
 
