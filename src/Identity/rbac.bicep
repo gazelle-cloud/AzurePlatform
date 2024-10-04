@@ -4,7 +4,6 @@ param environment string
 param entraIdGroupOwners array
 param topLevelManagementGroupName string
 
-
 module entraIdGroupReaders 'modules/groups.bicep' = {
   name: 'entra-readers'
   params: {
