@@ -1,4 +1,4 @@
-using '../bicep/identity.bicep'
+using '../../src/tenantLevel/identity.bicep'
 
 param azurePlatformPrincipalId = readEnvironmentVariable('AZURE_PLATFORM_PRINCIPAL_ID', '')
 param roleDefinitions = [

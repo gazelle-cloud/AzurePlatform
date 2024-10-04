@@ -1,4 +1,4 @@
-using '../bicep/managementGroups.bicep'
+using '../../src/tenantLevel/managementGroups.bicep'
 
 param topLevelManagementGroupName = readEnvironmentVariable('TOP_LEVEL_MANAGEMENTGROUP_NAME', '')
 param environment = readEnvironmentVariable('managementGroupHierarchy', '')

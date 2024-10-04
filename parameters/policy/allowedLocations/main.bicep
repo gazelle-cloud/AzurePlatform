@@ -1,4 +1,4 @@
-import * as definitions from '../../bicep/modules/assignment.bicep'
+import * as definitions from '../../../src/policy/modules/assignment.bicep'
 
 targetScope = 'managementGroup'
 
@@ -33,7 +33,7 @@ param initiatives definitions.setDefinitionsType = [
   }
 ]
 
-module assignment '../../bicep/modules/assignment.bicep' = {
+module assignment '../../../src/policy/modules/assignment.bicep' = {
   name: 'policy-${policyName}'
   params: {
     policyName: policyName

@@ -35,8 +35,8 @@ jobs:
               --name tennatLevel-managementGroups \
               --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
-              --template-file ./tenantLevel/bicep/managementGroups.bicep \
-              --parameters ./tenantLevel/parameters/managementGroups.bicepparam \
+              --template-file ./src/tenantLevel/managementGroups.bicep \
+              --parameters ./parameters/tenantLevel/managementGroups.bicepparam \
               --parameters environment=${{ inputs.managementGroupHierarchy }} \
               --parameters topLevelManagementGroupName=${{ env.topLevelManagementGroupId }} \
               --deny-settings-mode None \
@@ -76,8 +76,8 @@ jobs:
                --name InvoiceSections \
                --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
                --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
-               --template-file ./tenantLevel/bicep/billing.bicep \
-               --parameters ./tenantLevel/parameters/billing.bicepparam)
+               --template-file ./src/tenantLevel/billing.bicep \
+               --parameters ./parameters/tenantLevel/billing.bicepparam)
 
               envVariables=$(echo $deployment | jq '.properties.outputs.gitHubEnviromentVariables.value')
               echo "Deployment Outputs: $envVariables"

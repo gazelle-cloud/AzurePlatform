@@ -1,4 +1,4 @@
-using '../bicep/policyIdentity.bicep'
+using '../../src/policy/policyIdentity.bicep'
 
 param workloadName = 'policy'
 param environment = readEnvironmentVariable('managementGroupHierarchy', '')

@@ -5,7 +5,8 @@ on:
     branches-ignore:
       - main
     paths:
-        - 'tenantLevel/**'
+        - 'src/tenantLevel/**'
+        - 'parameters/tenantLevel/**'
         - '.github/workflows/template-tenantLevel.yml'
         - '.github/workflows/main-tenantLevel.yml'
 
@@ -13,7 +14,8 @@ on:
     types:
       - closed
     paths:
-      - 'tenantLevel/**'
+      - 'src/tenantLevel/**'
+      - 'parameters/tenantLevel/**'
   
   workflow_dispatch:
 

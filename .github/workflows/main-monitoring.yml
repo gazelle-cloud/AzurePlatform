@@ -5,7 +5,8 @@ on:
     branches-ignore:
       - main
     paths:
-        - 'monitoring/**'
+        - 'src/monitoring/**'
+        - 'parameters/monitoring/**'
         - '.github/workflows/template-monitoring.yml'
         - '.github/workflows/main-monitoring.yml'
 

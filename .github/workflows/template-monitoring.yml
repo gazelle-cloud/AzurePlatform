@@ -42,8 +42,8 @@ jobs:
               deployment=$(az stack sub create \
                 --name monitoring \
                 --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
-                --template-file './monitoring/bicep/main.bicep' \
-                --parameters './monitoring/parameters/main.bicepparam' \
+                --template-file './src/monitoring/main.bicep' \
+                --parameters './parameters/monitoring/main.bicepparam' \
                 --parameters environment=${{ inputs.managementGroupHierarchy }} \
                 --deny-settings-mode None \
                 --action-on-unmanage deleteAll \
