@@ -32,7 +32,7 @@ jobs:
 
   identity:
     needs: tenantLevel
-    uses: ./.github/workflows/template-Identity.yml
+    uses: ./.github/workflows/template-identity.yml
     with:
       managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
     secrets: inherit
