@@ -6,8 +6,8 @@ on:
       - main
     paths:
         - 'identity/**'
-        - '.github/workflows/template-Identity.yml'
-        - '.github/workflows/main-Identity.yml'
+        - '.github/workflows/template-identity.yml'
+        - '.github/workflows/main-identity.yml'
 
   pull_request_target:
     types:
