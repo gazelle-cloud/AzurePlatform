@@ -5,7 +5,8 @@ on:
     branches-ignore:
       - main
     paths:
-        - 'policy/**'
+        - 'src/policy/**'
+        - 'parameters/policy/**'
         - '.github/workflows/template-policy.yml'
         - '.github/workflows/main-policy.yml'
 
@@ -13,7 +14,8 @@ on:
     types:
       - closed
     paths:
-      - 'policy/**'
+      - 'src/policy/**'
+      - 'parameters/policy/**'
   
   workflow_dispatch:
 

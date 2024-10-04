@@ -1,4 +1,4 @@
-import * as myImports from '../../bicep/modules/assignment.bicep'
+import * as definitions from '../../../src/policy/modules/assignment.bicep'
 
 targetScope = 'managementGroup'
 
@@ -13,7 +13,7 @@ param identityResoruceId string
 param location string = deployment().location
 param topLevelManagementGroupName string
 
-param initiatives myImports.setDefinitionsType = [
+param initiatives definitions.setDefinitionsType = [
   {
     policyDefinitionId: extensionResourceId(
       tenantResourceId('Microsoft.Management/managementGroups', topLevelManagementGroupName),
@@ -47,7 +47,7 @@ param initiatives myImports.setDefinitionsType = [
   }
 ]
 
-module assignment '../../bicep/modules/assignment.bicep' = {
+module assignment '../../../src/policy/modules/assignment.bicep' = {
   name: 'policy-${policyName}'
   params: {
     policyName: policyName
