@@ -34,8 +34,8 @@ jobs:
               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
               --template-file './src/identity/rbac.bicep' \
               --parameters './parameters/identity/rbac.bicepparam' \
-              --parameters environment=${{ inputs.managementGroupHierarchy }} \
-              --parameters topLevelManagementGroupName=${{  vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }})
+              --parameters environment=${{ inputs.managementGroupHierarchy }})
+              # --parameters topLevelManagementGroupName=${{  vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }})
 
             envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
             echo "Deployment Outputs: $envVariables"
