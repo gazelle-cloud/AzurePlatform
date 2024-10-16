@@ -124,8 +124,8 @@ jobs:
               --name policy-assignments \
               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
               --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
-              --template-file './src/policy/policyAssignments.bicep' \
-              --parameters './parameters/policy/policyAssignments.bicepparam' \
+              --template-file './src/policy/assignments.bicep' \
+              --parameters './parameters/policy/assignments.bicepparam' \
               --parameters environment=${{ inputs.managementGroupHierarchy }} \
               --parameters identityResoruceId=${{  vars.POLICY_IDENTITY_RESOURCE_ID }} \
               --deny-settings-mode None \
