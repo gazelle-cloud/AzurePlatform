@@ -4,7 +4,7 @@ param policyName string
 param displayName string
 param location string
 param identityResourceId string
-param setDefinitions setDefinitionsType
+param setDefinitions array
 
 var shortenPolicyName = take(policyName, 24)
 
@@ -30,9 +30,3 @@ resource assignment 'Microsoft.Authorization/policyAssignments@2024-04-01' = {
     displayName: displayName
   }
 }
-@export()
-type setDefinitionsType = {
-  policyDefinitionId: string
-  policyDefinitionReferenceId: string
-  parameters: object
-}[]

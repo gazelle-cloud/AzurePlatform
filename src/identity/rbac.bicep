@@ -12,7 +12,7 @@ module entraIdGroupReaders 'modules/groups.bicep' = {
   }
 }
 
-var rbacMapping = loadJsonContent('../../AzureRoleDefinitions.json')
+var rbacMapping = loadJsonContent('../../parameters/AzureRoleDefinitions.json')
 
 module rbac 'modules/roleAssignment.bicep' = {
   name: 'rbac-AzureManagementProd'
