@@ -1,4 +1,4 @@
-using '../../src/policy/policyAssignments.bicep'
+using '../../src/policy/assignments.bicep'
 
 param identityResoruceId = readEnvironmentVariable('POLICY_RESOURCE_ID', '')
 param environment = readEnvironmentVariable('managementGroupHierarchy', '')

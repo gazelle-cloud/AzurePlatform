@@ -1,4 +1,4 @@
-$existingRoles = Get-Content "AzureRoleDefinitions.json" -Raw | ConvertFrom-Json
+$existingRoles = Get-Content "parameters/AzureRoleDefinitions.json" -Raw | ConvertFrom-Json
 
 
 $BuildInRoles = Get-AzRoleDefinition | Where-Object { $_.IsCustom -like 'False' } 
