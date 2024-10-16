@@ -115,7 +115,7 @@ jobs:
             allow-no-subscriptions: true
             enable-AzPSSession: false
 
-        - name: custom definitions
+        - name: set definitions and assignments
           uses: azure/cli@v2
           with:
             azcliversion: ${{ vars.AZURE_CLI_VERSION }}
@@ -126,6 +126,8 @@ jobs:
               --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
               --template-file './src/policy/policyAssignments.bicep' \
               --parameters './parameters/policy/policyAssignments.bicepparam' \
+              --parameters environment=${{ inputs.managementGroupHierarchy }} \
+              --parameters identityResoruceId=${{  vars.POLICY_IDENTITY_RESOURCE_ID }} \
               --deny-settings-mode None \
               --action-on-unmanage deleteAll \
               --yes)
