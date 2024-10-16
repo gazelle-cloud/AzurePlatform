@@ -40,8 +40,8 @@ jobs:
               --name policy-Identity \
               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
               --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
-              --template-file ./src/policy/policyIdentity.bicep \
-              --parameters './parameters/policy/policyIdentity.bicepparam' \
+              --template-file ./src/policy/identity.bicep \
+              --parameters './parameters/policy/identity.bicepparam' \
               --parameters environment=${{ inputs.managementGroupHierarchy }} \
               --parameters subscriptionId=${{ vars.MANAGEMENT_SUBSCRIPTION_ID }} \
               --deny-settings-mode None \
