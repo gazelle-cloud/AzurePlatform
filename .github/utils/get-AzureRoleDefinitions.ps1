@@ -1,7 +1,8 @@
 $jsonFilePath = "parameters/AzureRoleDefinitions.json"
+$BuildInRoles = Get-AzRoleDefinition | Where-Object { $_.IsCustom -like 'False' } 
 
 $existingRoles = Get-Content $jsonFilePath -Raw | ConvertFrom-Json
-$BuildInRoles = Get-AzRoleDefinition | Where-Object { $_.IsCustom -like 'False' } 
+$totalExistingRoles = ($existingRoles | Get-Member -MemberType NoteProperty).Count
 
 function Format-BuildInRoles {
     $roleMappings = @{}
@@ -18,7 +19,6 @@ function Format-BuildInRoles {
 }
 
 $totalBuildInRoles = (Format-BuildInRoles).count
-$totalExistingRoles = ($existingRoles | Get-Member -MemberType NoteProperty).Count
 
 $compare = $totalBuildInRoles - $totalExistingRoles
 if ($compare -ne 0) {
