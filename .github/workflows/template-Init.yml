@@ -8,7 +8,7 @@ on:
             type: string
 
 jobs:
-  GitHubEnvironment:
+  setGitHubEnvironment:
     runs-on: ubuntu-latest
     environment: ${{ inputs.managementGroupHierarchy }}
     steps:
@@ -66,10 +66,10 @@ jobs:
           --body ${{ vars.INIT_AZURE_PLATFORM_PRINCIPAL_ID_PROD }} \
           -R "${{ github.repository_owner }}/landingzones"
 
-  FetchRoleDefinitions:
+  FetchEntraRoleDefinitions:
     runs-on: ubuntu-latest
     needs: 
-      - GitHubEnvironment
+      - setGitHubEnvironment
     environment: ${{ inputs.managementGroupHierarchy }}
     steps:
     - name: get github token
