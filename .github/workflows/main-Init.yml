@@ -5,8 +5,8 @@ on:
     branches-ignore:
       - main
     paths:
-        - '.github/workflows/template-inits.yml'
-        - '.github/workflows/main-inits.yml'
+        - '.github/workflows/template-init.yml'
+        - '.github/workflows/main-init.yml'
 
   pull_request_target:
     types:
@@ -23,7 +23,7 @@ jobs:
   test:
     if: (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main') ||
         github.ref != 'refs/heads/main'
-    uses: ./.github/workflows/template-inits.yml
+    uses: ./.github/workflows/template-init.yml
     with:
       managementGroupHierarchy: test
     secrets: inherit
@@ -31,7 +31,7 @@ jobs:
   prod:
     if: (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
          github.event.pull_request.merged == true
-    uses: ./.github/workflows/template-inits.yml
+    uses: ./.github/workflows/template-init.yml
     with:
       managementGroupHierarchy: prod
     secrets: inherit
