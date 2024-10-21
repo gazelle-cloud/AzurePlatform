@@ -54,6 +54,11 @@ jobs:
           --env ${{ inputs.managementGroupHierarchy }} \
           -R "${{ github.repository_owner }}/AzurePlatform"
 
+          gh variable set ENTRA_LANDINGZONE_ENGINEERS  \
+          --body "${{ vars.INIT_ENTRA_LANDINGZONE_ENGINEERS }}-${{ inputs.managementGroupHierarchy}}" \
+          --env ${{ inputs.managementGroupHierarchy }} \
+          -R "${{ github.repository_owner }}/AzurePlatform"
+
     - name: set env variables - landingzones
       env:
         GH_TOKEN: ${{ steps.github-token.outputs.token }}
