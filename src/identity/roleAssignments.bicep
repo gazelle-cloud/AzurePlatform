@@ -8,8 +8,8 @@ module rbac 'modules/roleAssignment.bicep' = [
     name: 'roleAssignment'
     params: {
       principalType: 'Group'
-      principlesId: item.value.groupid
-      roleDefinitions: item.value.roleName
+      principlesId: item.groupid
+      roleDefinitions: item.roleName
     }
   }
 ]
