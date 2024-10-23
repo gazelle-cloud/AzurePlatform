@@ -5,7 +5,7 @@ param roles array
 
 module rbac 'modules/roleAssignment.bicep' = [
   for item in roles: {
-    name: 'roleAssignment-${item.roleName}'
+    name: 'roleAssignment'
     params: {
       principalType: 'Group'
       principlesId: item.value.groupid
