@@ -15,4 +15,19 @@ param roles = [
     groupid: landingzoneEngineersGroupId
     roleId: rbacMapping.Contributor
   }
+  {
+    scope: 'playground-${environment}'
+    groupid: landingzoneEngineersGroupId
+    roleId: rbacMapping.AzureKubernetesServiceArcClusterAdminRole
+  }
+  {
+    scope: 'playground-${environment}'
+    groupid: landingzoneEngineersGroupId
+    roleId: rbacMapping.StorageBlobDataContributor
+  }
+  {
+    scope: 'playground-${environment}'
+    groupid: landingzoneEngineersGroupId
+    roleId: rbacMapping.AcrImageSigner
+  }
 ]
