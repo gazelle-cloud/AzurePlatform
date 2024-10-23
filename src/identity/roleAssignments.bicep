@@ -1,15 +1,16 @@
 targetScope = 'managementGroup'
 
-param landingzoneEngineersGroupId string
+param environment string
+param roles object
 
-var rbacMapping = loadJsonContent('../../parameters/AzureRoleDefinitions.json')
-
-module rbac 'modules/roleAssignment.bicep' = {
-  name: 'rbac-AzureManagementProd'
-  params: {
-    principlesId: landingzoneEngineersGroupId
-    principalType: 'Group'
-    roleDefinitions: [
-    ]
+module rbac 'modules/roleAssignment.bicep' = [
+  for item in items(roles): {
+    name: '${item.key}-ass'
+    scope: managementGroup('${item.key}-${environment}')
+    params: {
+      principalType: 'Group'
+      principlesId: item.value.groupid
+      roleDefinitions: item.value.role
+    }
   }
-}
+]
