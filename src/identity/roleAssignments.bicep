@@ -1,16 +1,16 @@
 targetScope = 'managementGroup'
 
 param environment string
-param roles object
+param roles array
 
 module rbac 'modules/roleAssignment.bicep' = [
-  for item in items(roles): {
-    name: '${item.key}-ass'
-    scope: managementGroup('${item.key}-${environment}')
+  for item in roles: {
+    name: 'roleAssignment-${item.roleName}'
+    scope: managementGroup('${item.scope}-${environment}')
     params: {
       principalType: 'Group'
       principlesId: item.value.groupid
-      roleDefinitions: item.value.role
+      roleDefinitions: item.value.roleName
     }
   }
 ]
