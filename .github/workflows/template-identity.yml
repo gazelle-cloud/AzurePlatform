@@ -33,7 +33,7 @@ jobs:
               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
               --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
               --template-file ./src/identity/roleAssignments.bicep \
-              --parameters './parameters/identity/roleAssignments.bicepparam' \
+              --parameters './parameters/identity/roleAssignments-${{ inputs.managementGroupHierarchy }}.bicepparam' \
               --parameters environment=${{ inputs.managementGroupHierarchy }} \
               --parameters landingzoneEngineersGroupId=${{ vars.ENTRA_LANDINGZONE_ENGINEERS_GROUP_ID }} \
               --deny-settings-mode None \
