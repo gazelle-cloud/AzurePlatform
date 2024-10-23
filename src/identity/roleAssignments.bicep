@@ -1,6 +1,7 @@
 targetScope = 'managementGroup'
 
 param environment string
+param landingzoneEngineersGroupId string = ''
 param roles object
 
 module rbac 'modules/roleAssignment.bicep' = [
