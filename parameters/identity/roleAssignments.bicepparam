@@ -3,13 +3,11 @@ using '../../src/identity/roleAssignments.bicep'
 param environment = readEnvironmentVariable('managementGroupHierarchy', '')
 
 var rbacMapping = loadJsonContent('../AzureRoleDefinitions.json')
-param landingzoneEngineersGroupId = readEnvironmentVariable('ENTRA_LANDINGZONE_ENGINEERS_GROUP_ID', '')
+var landingzoneEngineersGroupId = readEnvironmentVariable('ENTRA_LANDINGZONE_ENGINEERS_GROUP_ID', '')
 
 param roles = {
-  platform: [
-    {
-      role: rbacMapping.Reader
-      groupid: landingzoneEngineersGroupId
-    }
-  ]
+  platform: {
+    role: rbacMapping.Reader
+    groupid: landingzoneEngineersGroupId
+  }
 }
