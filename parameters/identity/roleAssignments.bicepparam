@@ -8,7 +8,7 @@ param roles = [
   {
     scope: 'platform-${environment}'
     groupid: landingzoneEngineersGroupId
-    roleName: [
+    roleId: [
       rbacMapping.Reader
     ]
   }
