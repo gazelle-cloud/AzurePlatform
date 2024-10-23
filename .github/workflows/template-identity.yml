@@ -28,15 +28,17 @@ jobs:
         with:
           azcliversion: ${{ vars.AZURE_CLI_VERSION }}
           inlineScript: |
-            deployment=$(az deployment mg create \
-              --name RBAC \
-              --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
+              deployment=$(az stack mg create \
+              --name identity-roleAssignments \
               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
-              --template-file './src/identity/rbac.bicep' \
-              --parameters './parameters/identity/rbac.bicepparam' \
+              --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
+              --template-file ./src/identity/roleAssignments.bicep \
+              --parameters './parameters/identity/roleAssignments.bicepparam' \
               --parameters environment=${{ inputs.managementGroupHierarchy }} \
-              --parameters topLevelManagementGroupName=${{  vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }})
+              --deny-settings-mode None \
+              --action-on-unmanage deleteAll \
+              --yes)
 
-            envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
-            echo "Deployment Outputs: $envVariables"
-            echo "RBAC=$(echo $envVariables | jq -c .)" >> $GITHUB_ENV
+              envVariables=$(echo $deployment | jq '.outputs.gitHubEnviromentVariables.value')
+              echo "Deployment Outputs: $envVariables"
+              echo "policyIdentity=$(echo $envVariables | jq -c .)" >> $GITHUB_ENV

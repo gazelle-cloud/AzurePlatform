@@ -1,24 +1,16 @@
 targetScope = 'managementGroup'
 
 param environment string
-param entraIdGroupOwners array
 param topLevelManagementGroupName string
-
-module entraIdGroupReaders 'modules/groups.bicep' = {
-  name: 'entra-readers'
-  params: {
-    displayName: 'azurePlatform-readers-${environment}'
-    owners: entraIdGroupOwners
-  }
-}
+param landingzoneEngineersGroupId string
 
 var rbacMapping = loadJsonContent('../../parameters/AzureRoleDefinitions.json')
 
 module rbac 'modules/roleAssignment.bicep' = {
   name: 'rbac-AzureManagementProd'
-  scope: managementGroup(topLevelManagementGroupName)
+  scope: managementGroup('${topLevelManagementGroupName}-${environment}')
   params: {
-    principlesId: '682960f7-aade-477f-80d9-abb9774d7242'
+    principlesId: landingzoneEngineersGroupId
     principalType: 'Group'
     roleDefinitions: [
       rbacMapping.Reader
