@@ -1,17 +1,13 @@
 targetScope = 'managementGroup'
 
 param principlesId string
-param roleDefinitions array
-@allowed(['Group', 'ServicePrincipal', 'User'])
-param principalType string
+param roleDefinition string
 
-resource rbacAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = [
-  for item in roleDefinitions: {
-    name: guid(item, managementGroup().name, principlesId)
-    properties: {
-      principalId: principlesId
-      roleDefinitionId: item
-      principalType: principalType
-    }
+resource rbacAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(roleDefinition, managementGroup().name, principlesId)
+  properties: {
+    principalId: principlesId
+    roleDefinitionId: roleDefinition
+    principalType: 'Group'
   }
-]
+}
