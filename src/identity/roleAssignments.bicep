@@ -6,7 +6,7 @@ param roles array
 
 module rbac 'modules/roleAssignment.bicep' = [
   for item in roles: {
-    name: 'roleAssignment'
+    name: 'roleAssignment-${take(split(item.roleDefinitions,'/'),4)}'
     scope: managementGroup(item.scope)
     params: {
       principalType: 'Group'
@@ -15,3 +15,9 @@ module rbac 'modules/roleAssignment.bicep' = [
     }
   }
 ]
+
+// output abc array = [
+//   for item in roles: {
+//     foo: take(split(item.roleDefinitions, '/'), 4)
+//   }
+// ]
