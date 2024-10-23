@@ -34,7 +34,6 @@ jobs:
               --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
               --template-file ./src/identity/roleAssignments.bicep \
               --parameters './parameters/identity/roleAssignments.bicepparam' \
-              --parameters environment=${{ inputs.managementGroupHierarchy }} \
               --parameters landingzoneEngineersGroupId=${{ vars.ENTRA_LANDINGZONE_ENGINEERS_GROUP_ID }} \
               --deny-settings-mode None \
               --action-on-unmanage deleteAll \
