@@ -10,7 +10,6 @@ module rbac 'modules/roleAssignment.bicep' = {
     principlesId: landingzoneEngineersGroupId
     principalType: 'Group'
     roleDefinitions: [
-      rbacMapping.Reader
     ]
   }
 }
