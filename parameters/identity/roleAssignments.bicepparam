@@ -12,4 +12,11 @@ param roles = [
       rbacMapping.Reader
     ]
   }
+  {
+    scope: 'playground-${environment}'
+    groupid: landingzoneEngineersGroupId
+    roleId: [
+      rbacMapping.Contributor
+    ]
+  }
 ]
