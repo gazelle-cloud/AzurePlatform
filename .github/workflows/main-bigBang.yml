@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   gitHub:
-    uses: ./.github/workflows/template-in.yml
+    uses: ./.github/workflows/template-init.yml
     with:
       managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
     secrets: inherit

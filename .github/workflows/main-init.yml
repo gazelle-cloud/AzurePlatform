@@ -5,8 +5,8 @@ on:
     branches-ignore:
       - main
     paths:
-        - '.github/workflows/template-in.yml'
-        - '.github/workflows/main-in.yml'
+        - '.github/workflows/template-init.yml'
+        - '.github/workflows/main-init.yml'
 
   pull_request_target:
     types:
