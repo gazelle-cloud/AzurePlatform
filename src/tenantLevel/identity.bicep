@@ -4,7 +4,7 @@ param azurePlatformPrincipalId string
 param roleDefinitions array
 
 module rbac 'modules/roleAssignments.bicep' = {
-  name: 'init-rbac'
+  name: 'tenantLevel-identity-rbac'
   params: {
     principlesId: azurePlatformPrincipalId
     roleDefinitions: roleDefinitions

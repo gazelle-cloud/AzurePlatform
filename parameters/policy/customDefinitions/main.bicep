@@ -7,7 +7,7 @@ var customDefinitions = [
 
 @batchSize(10)
 module abc '../../../src/policy/modules/policyDefinitions.bicep' = [for item in customDefinitions: {
-  name: 'definition-${item.name}'
+  name: 'policy-definition-${item.name}'
   params: {
     policyName: item.name
     policyProperties: item.properties
