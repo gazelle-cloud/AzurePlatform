@@ -1,4 +1,4 @@
-name: gazelle - monitoring
+name: gazelle - monitor
 
 on:
   push:

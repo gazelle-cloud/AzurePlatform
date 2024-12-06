@@ -39,7 +39,7 @@ jobs:
 
   monitoring:
     needs: tenantLevel
-    uses: ./.github/workflows/template-monitoring.yml
+    uses: ./.github/workflows/template-monitor.yml
     with:
       managementGroupHierarchy: ${{ github.event.inputs.managementGroupHierarchy }}
     secrets: inherit

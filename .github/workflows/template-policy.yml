@@ -37,7 +37,7 @@ jobs:
             azcliversion: ${{ vars.AZURE_CLI_VERSION }}
             inlineScript: |
               deployment=$(az stack mg create \
-              --name policy-Identity \
+              --name policy-identity \
               --management-group-id ${{ vars.TOP_LEVEL_MANAGEMENTGROUP_NAME }} \
               --location ${{  vars.AZURE_DEFAULT_LOCATION }} \
               --template-file ./src/policy/identity.bicep \
