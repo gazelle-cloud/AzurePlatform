@@ -1,4 +1,4 @@
-name: az - Init
+name: gazelle - init
 
 on:
   push:

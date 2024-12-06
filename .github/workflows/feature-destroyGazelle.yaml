@@ -1,4 +1,4 @@
-name: Destory Azure platform
+name: feature - destory gazelle
 
 on:
   workflow_dispatch:

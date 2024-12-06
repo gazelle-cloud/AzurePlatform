@@ -1,4 +1,4 @@
-name: az - tenant level deployment
+name: gazelle - tenant level
 
 on:
   push:

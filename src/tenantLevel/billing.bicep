@@ -7,7 +7,7 @@ param invoiceSections array
 
 module invoice 'modules/invoice.bicep' = [
   for item in invoiceSections: {
-    name: 'invoiceSection-${item}'
+    name: 'tenantLevel-invoiceSection-${item}'
     params: {
       billingAccountName: billingAccountName
       billingProfileName: billingProfileName

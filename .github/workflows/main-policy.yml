@@ -1,4 +1,4 @@
-name: az - policy
+name: gazelle - policy
 
 on:
   push:

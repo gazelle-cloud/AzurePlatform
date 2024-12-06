@@ -8,7 +8,7 @@ on:
           type: string
 
 jobs:
-    central-logAnalytics:
+    logAnalytics:
         runs-on: ubuntu-latest
         environment: ${{ inputs.managementGroupHierarchy }}
         steps:
@@ -27,7 +27,7 @@ jobs:
         - name: Azure login
           uses: azure/login@v2
           with:
-            client-id: ${{ vars.AZURE_PLATFORM_CLIENT_ID }}
+            client-id: ${{ vars.GAZELLE_CLIENT_ID }}
             tenant-id: ${{ vars.AZURE_TENANT_ID}}
             allow-no-subscriptions: true
             enable-AzPSSession: false
@@ -40,7 +40,7 @@ jobs:
               az account set --subscription ${{ vars.MANAGEMENT_SUBSCRIPTION_ID }}
 
               deployment=$(az stack sub create \
-                --name monitoring \
+                --name monitor-logAnalytics \
                 --location ${{ vars.AZURE_DEFAULT_LOCATION }} \
                 --template-file './src/monitoring/main.bicep' \
                 --parameters './parameters/monitoring/main.bicepparam' \

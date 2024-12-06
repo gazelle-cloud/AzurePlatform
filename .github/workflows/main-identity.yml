@@ -1,4 +1,4 @@
-name: az - Identity
+name: gazelle - identity
 
 on:
   push:

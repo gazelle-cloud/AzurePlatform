@@ -1,6 +1,6 @@
 targetScope = 'managementGroup'
 
-param workloadName string
+param workloadName string = 'policy'
 param environment string
 param location string = deployment().location
 param subscriptionId string
@@ -10,7 +10,7 @@ var policyIdentityResourceGroupName = '${workloadName}-identity-${environment}'
 
 module IdentityResourceGroup 'modules/resourceGroup.bicep' = {
   scope: subscription(subscriptionId)
-  name: 'rg-${workloadName}-identity'
+  name: 'identity-rg-${workloadName}'
   params: {
     location: location
     resourceGroupName: policyIdentityResourceGroupName
@@ -22,7 +22,7 @@ module uami 'modules/userAssignedManagedIdentity.bicep' = {
   dependsOn: [
     IdentityResourceGroup
   ]
-  name: 'uami-${workloadName}'
+  name: 'identity-uami-${workloadName}'
   params: {
     environment: environment
     workloadName: workloadName
@@ -31,7 +31,7 @@ module uami 'modules/userAssignedManagedIdentity.bicep' = {
 }
 
 module rbac 'modules/roleAssignment.bicep' = {
-  name: 'rbac-${workloadName}'
+  name: 'policy-identity-rbac'
   params: {
     principlesId: uami.outputs.principalId
     roleDefinitions: roleDefinitions

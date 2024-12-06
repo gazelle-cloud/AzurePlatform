@@ -13,7 +13,7 @@ resource monitoringResourceGroup 'Microsoft.Resources/resourceGroups@2024-03-01'
 
 module la 'br/public:avm/res/operational-insights/workspace:0.4.0' = {
   scope: monitoringResourceGroup
-  name: 'la-deployment'
+  name: 'monitor-logAnalytics'
   params: {
     name: name
   }

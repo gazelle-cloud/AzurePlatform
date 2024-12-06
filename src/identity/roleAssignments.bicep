@@ -1,12 +1,14 @@
 targetScope = 'managementGroup'
 
+#disable-next-line no-unused-params
 param environment string
-param landingzoneEngineersGroupId string
+#disable-next-line no-unused-params
+param gazelleAdminGroupId string
 param roles array
 
 module rbac 'modules/roleAssignment.bicep' = [
   for item in roles: {
-    name: 'roleAssignment-${split(item.roleId,'/')[4]}'
+    name: 'identity-roleAssignment-${split(item.roleId,'/')[4]}'
     scope: managementGroup(item.scope)
     params: {
       principlesId: item.groupid
