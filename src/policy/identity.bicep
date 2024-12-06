@@ -1,6 +1,6 @@
 targetScope = 'managementGroup'
 
-param workloadName string
+param workloadName string = 'policy'
 param environment string
 param location string = deployment().location
 param subscriptionId string

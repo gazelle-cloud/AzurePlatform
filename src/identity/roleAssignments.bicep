@@ -1,7 +1,9 @@
 targetScope = 'managementGroup'
 
+#disable-next-line no-unused-params
 param environment string
-param landingzoneEngineersGroupId string
+#disable-next-line no-unused-params
+param gazelleAdminGroupId string
 param roles array
 
 module rbac 'modules/roleAssignment.bicep' = [
