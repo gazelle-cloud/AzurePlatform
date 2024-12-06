@@ -31,7 +31,7 @@ module uami 'modules/userAssignedManagedIdentity.bicep' = {
 }
 
 module rbac 'modules/roleAssignment.bicep' = {
-  name: 'identity-rbac-${workloadName}'
+  name: 'policy-identity-rbac'
   params: {
     principlesId: uami.outputs.principalId
     roleDefinitions: roleDefinitions

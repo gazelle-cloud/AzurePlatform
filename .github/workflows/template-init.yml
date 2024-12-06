@@ -35,19 +35,19 @@ jobs:
           repos/${{ github.repository_owner }}/AzurePlatform/environments/${{ inputs.managementGroupHierarchy }}
 
           gh variable set MANAGEMENT_SUBSCRIPTION_ID \
-            --body ${{ vars[env.MANAGEMENT_SUBSCRIPTION_ID] }} \
-            --env ${{ inputs.managementGroupHierarchy }} \
-            -R "${{ github.repository_owner }}/AzurePlatform"
+          --body ${{ vars[env.MANAGEMENT_SUBSCRIPTION_ID] }} \
+          --env ${{ inputs.managementGroupHierarchy }} \
+          -R "${{ github.repository_owner }}/AzurePlatform"
 
           gh variable set GAZELLE_CLIENT_ID \
-            --body ${{ vars[env.GAZELLE_CLIENT_ID] }} \
-            --env ${{ inputs.managementGroupHierarchy }} \
-            -R "${{ github.repository_owner }}/AzurePlatform"
+          --body ${{ vars[env.GAZELLE_CLIENT_ID] }} \
+          --env ${{ inputs.managementGroupHierarchy }} \
+          -R "${{ github.repository_owner }}/AzurePlatform"
 
           gh variable set GAZELLE_PRINCIPAL_ID \
-            --body ${{ vars[env.GAZELLE_PRINCIPAL_ID ]}} \
-            --env ${{ inputs.managementGroupHierarchy }} \
-            -R "${{ github.repository_owner }}/AzurePlatform"
+          --body ${{ vars[env.GAZELLE_PRINCIPAL_ID ]}} \
+          --env ${{ inputs.managementGroupHierarchy }} \
+          -R "${{ github.repository_owner }}/AzurePlatform"
 
           gh variable set TOP_LEVEL_MANAGEMENTGROUP_NAME \
           --body "${{ vars.MANAGEMENTGROUP_HIERARCHY_NAME }}-${{ inputs.managementGroupHierarchy}}" \
