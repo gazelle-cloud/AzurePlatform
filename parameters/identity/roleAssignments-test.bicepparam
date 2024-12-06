@@ -1,7 +1,7 @@
 using '../../src/identity/roleAssignments.bicep'
 
 param environment = readEnvironmentVariable('managementGroupHierarchy', '')
-param gazelleAdminGroupId = readEnvironmentVariable('ENTRA_LANDINGZONE_ENGINEERS_GROUP_ID', '')
+param gazelleAdminGroupId = readEnvironmentVariable('GAZELLE_GROUP_ID', '')
 
 var azureRoles = loadJsonContent('../AzureRoleDefinitions.json')
 
