@@ -1,4 +1,4 @@
-name: template - Identity
+name: template - identity
 
 on:
   workflow_call:

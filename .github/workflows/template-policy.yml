@@ -1,4 +1,4 @@
-name: template - Policy
+name: template - policy
 
 on:
   workflow_call:

@@ -1,4 +1,4 @@
-name: template - tenant level deployment
+name: template - tenant level
 
 on:
   workflow_call:

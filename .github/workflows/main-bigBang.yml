@@ -1,4 +1,4 @@
-name: az - BigBang
+name: gazelle - bigBang
 
 on:
   workflow_dispatch:
