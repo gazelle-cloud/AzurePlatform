@@ -35,7 +35,7 @@ jobs:
               --template-file ./src/identity/roleAssignments.bicep \
               --parameters './parameters/identity/roleAssignments-${{ inputs.managementGroupHierarchy }}.bicepparam' \
               --parameters environment=${{ inputs.managementGroupHierarchy }} \
-              --parameters landingzoneEngineersGroupId=${{ vars.ENTRA_LANDINGZONE_ENGINEERS_GROUP_ID }} \
+              --parameters gazelleAdminGroupId=${{ vars.GAZELLE_ADMIN_GROUP_ID }} \
               --deny-settings-mode None \
               --action-on-unmanage deleteAll \
               --yes)
