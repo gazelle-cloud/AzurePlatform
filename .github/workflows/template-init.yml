@@ -9,7 +9,7 @@ on:
 
 jobs:
   setGitHubEnvironmentVariables:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_IMAGE }}
     environment: ${{ inputs.managementGroupHierarchy }}
     steps:
     - name: Checkout
@@ -67,7 +67,7 @@ jobs:
           -R "${{ github.repository_owner }}/landingzones"
 
   FetchAzureRoleDefinitions:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_IMAGE }}
     needs: 
       - setGitHubEnvironmentVariables
     environment: ${{ inputs.managementGroupHierarchy }}

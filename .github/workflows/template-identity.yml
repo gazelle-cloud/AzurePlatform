@@ -9,7 +9,7 @@ on:
 
 jobs:
     roleAssignments:
-      runs-on: ubuntu-latest
+      runs-on: ${{ vars.RUNNER_IMAGE }}
       environment: ${{ inputs.managementGroupHierarchy }}
       steps:
       - name: Checkout

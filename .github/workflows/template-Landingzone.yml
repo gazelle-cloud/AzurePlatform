@@ -22,7 +22,7 @@ on:
 
 jobs:
     create-landingzone:
-        runs-on: ubuntu-latest
+        runs-on: ${{ vars.RUNNER_IMAGE }}
         environment: prod
         steps:
         - name: Checkout local
