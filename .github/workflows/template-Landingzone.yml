@@ -24,6 +24,13 @@ jobs:
     create-landingzone:
         runs-on: ${{ vars.RUNNER_IMAGE }}
         environment: prod
+        env:
+          EXCLUDED_PRINCIPALS: |
+            ${{ vars.AZURE_PLATFORM_PRINCIPAL_ID }}
+            ${{ vars.ENTRA_LANDINGZONE_ENGINEERS_GROUP_ID }}
+          EXCLUDED_ACTIONS: |
+            Microsoft.ManagedIdentity/userAssignedIdentities/*/assign/action
+            Microsoft.Network/virtualNetworks/subnets/write
         steps:
         - name: Checkout local
           uses: actions/checkout@v4
@@ -130,12 +137,8 @@ jobs:
               --parameters params=$params \
               --deny-settings-mode 'denyWriteAndDelete' \
               --action-on-unmanage 'deleteAll' \
-              --deny-settings-excluded-principals \
-              "${{ vars.AZURE_PLATFORM_PRINCIPAL_ID }}" \
-              "${{ vars.ENTRA_LANDINGZONE_ENGINEERS_GROUP_ID }}" \
-              --deny-settings-excluded-actions \
-              'Microsoft.ManagedIdentity/userAssignedIdentities/*/assign/action' \
-              'Microsoft.Network/virtualNetworks/subnets/write' \
+              --deny-settings-excluded-principals ${{ env.EXCLUDED_PRINCIPALS }} \
+              --deny-settings-excluded-actions ${{ env.EXCLUDED_ACTIONS }} \
               --deny-settings-apply-to-child-scopes $true \
               --yes)
 
