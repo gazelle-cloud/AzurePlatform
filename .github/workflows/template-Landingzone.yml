@@ -132,7 +132,8 @@ jobs:
               --action-on-unmanage 'deleteAll' \
               --deny-settings-excluded-principals "${{ vars.AZURE_PLATFORM_PRINCIPAL_ID }} \
                  ${{ vars.ENTRA_LANDINGZONE_ENGINEERS_GROUP_ID }}" \
-              --deny-settings-excluded-actions 'Microsoft.ManagedIdentity/userAssignedIdentities/*/assign/action Microsoft.Network/virtualNetworks/subnets/write' \
+              --deny-settings-excluded-actions 'Microsoft.ManagedIdentity/userAssignedIdentities/*/assign/action \
+                 Microsoft.Network/virtualNetworks/subnets/write' \
               --deny-settings-apply-to-child-scopes $true \
               --yes)
 
